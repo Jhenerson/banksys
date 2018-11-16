@@ -22,5 +22,8 @@ public interface IConta {
 
     public void alterar(Conta conta) throws Exception;
 
-    public void excluir(int parametro) throws Exception;
+    public void excluir(int numeroConta) throws Exception;
+
+    public Conta consultar(int numeroConta) throws Exception;
+
 }

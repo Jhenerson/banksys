@@ -5,7 +5,8 @@
  */
 package entidades;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 /**
  *

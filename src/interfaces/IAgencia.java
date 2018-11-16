@@ -20,5 +20,7 @@ public interface IAgencia {
 
     public void alterar(Agencia agencia) throws Exception;
 
-    public void excluir(int parametro) throws Exception;
+    public void excluir(int numeroAgencia) throws Exception;
+    
+    public Agencia consultar(int numeroAgencia) throws Exception;
 }

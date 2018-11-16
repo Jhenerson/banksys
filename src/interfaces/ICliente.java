@@ -21,6 +21,8 @@ public interface ICliente {
 
     public void alterar(Cliente cliente) throws Exception;
 
-    public void excluir(int parametro) throws Exception;
+    public void excluir(long cpf) throws Exception;
+
+    public Cliente consultar(long cpf) throws Exception;
 
 }
