@@ -7,9 +7,11 @@ import java.sql.Date;
  * @author jhene
  */
 public class Conta {
+    private int id;
     private int numConta;
     private Agencia numAgencia;
     private Cliente titular;
+    private Cliente segundoTitular;
     private float saldo;
     private Date dataAberturaConta;
 
@@ -51,5 +53,13 @@ public class Conta {
 
     public void setDataAberturaConta(Date dataAberturaConta) {
         this.dataAberturaConta = dataAberturaConta;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

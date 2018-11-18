@@ -5,8 +5,7 @@
  */
 package interfaces;
 
-import entidades.Agencia;
-import entidades.Cliente;
+
 import entidades.Conta;
 import java.util.ArrayList;
 

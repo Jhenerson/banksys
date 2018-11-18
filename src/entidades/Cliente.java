@@ -13,6 +13,7 @@ import java.sql.Date;
  * @author jhene
  */
 public class Cliente {
+    private int id;
     private long cpf;
     private String nome;
     private Date dataNascimento;
@@ -57,6 +58,14 @@ public class Cliente {
 
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
 }

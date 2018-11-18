@@ -11,6 +11,7 @@ package entidades;
  */
 public class Agencia {
 
+    private int id;
     private int numAgencia;
     private String endereco;
     private String telefone;
@@ -37,5 +38,13 @@ public class Agencia {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

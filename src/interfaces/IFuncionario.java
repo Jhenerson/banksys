@@ -5,22 +5,23 @@
  */
 package interfaces;
 
-import entidades.Agencia;
+
+import entidades.Funcionario;
 import java.util.ArrayList;
 
 /**
  *
  * @author jhene
  */
-public interface IAgencia {
+public interface IFuncionario {
 
-    public void incluir(Agencia agencia) throws Exception;
+    public void incluir(Funcionario funcionario) throws Exception;
 
-    public ArrayList<Agencia> listar() throws Exception;
+    public ArrayList<Funcionario> listar() throws Exception;
 
-    public void alterar(Agencia agencia) throws Exception;
+    public void alterar(Funcionario funcionario) throws Exception;
 
-    public void excluir(int numeroAgencia) throws Exception;
+    public void excluir(long cpf) throws Exception;
     
-    public Agencia consultar(int numeroAgencia) throws Exception;
+    public Funcionario consultar(long cpf) throws Exception;
 }
