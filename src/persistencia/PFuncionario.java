@@ -22,15 +22,16 @@ public class PFuncionario implements IFuncionario{
 
     @Override
     public void incluir(Funcionario funcionario) throws Exception {
-         String sql = "INSERT INTO funcionario (cpf,nome,data_de_nascimento,telefone,endereco) VALUES (?,?,?,?,?);";
+        String sql = "INSERT INTO funcionario "
+                + "(nome,login,senha,endereco,telefone,email,data_contratacao,e_gerente,id_agencia,id_cidade)"
+                + " VALUES (?,?,?,?,?,?,?,?,?);";
         Connection cnn = util.Conexao.getConexao();
-
         PreparedStatement prd = cnn.prepareStatement(sql);
-        prd.setLong(1, cliente.getCpf());
-        prd.setString(2, cliente.getNome());
-        prd.setDate(3, cliente.getDataNascimento());
-        prd.setString(4, cliente.getTelefone());
-        prd.setString(5, cliente.getEndereco());
+        prd.setString(1, funcionario.getNome());
+        prd.setString(2, funcionario.getLogin());
+        prd.setString(3, funcionario.getSenha());
+        prd.setString(4, funcionario.getTelefone());
+        prd.setString(5, funcionario.getEndereco());
 
         prd.execute();
         cnn.close();
