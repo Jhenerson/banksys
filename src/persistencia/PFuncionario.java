@@ -48,7 +48,7 @@ public class PFuncionario implements IFuncionario{
         ArrayList<Funcionario> retorno = new ArrayList();
 
         while (rs.next()) {
-            Cliente cliente = new Cliente();
+            Funcionario cliente = new Funcionario();
             cliente.setCpf(rs.getInt("cpf"));
             cliente.setNome(rs.getString("nome"));
             cliente.setDataNascimento(rs.getDate("data_de_nascimento"));
