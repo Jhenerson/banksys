@@ -24,9 +24,7 @@ public class Conexao {
         
         try {
             Class.forName("org.postgresql.Driver");
-            
             return DriverManager.getConnection("jdbc:postgresql://localhost:5432/banksys","postgres","199209");
-            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Driver JDB não encontrado! Verifique as bibliotecas da aplicação.");
@@ -41,7 +39,6 @@ public class Conexao {
         try {
             while(conexao == null || conexao.isClosed()){
                 conexao = Conexao.connect();
-                System.out.println("tentando conectar");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);

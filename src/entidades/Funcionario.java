@@ -5,7 +5,8 @@
  */
 package entidades;
 
-import java.sql.Time;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -20,12 +21,10 @@ public class Funcionario {
     private String endereco;
     private String telefone;
     private String email;
-    private Time data_contratacao;
+    private Timestamp data_contratacao;
     private boolean e_gerente;
     private Agencia agencia;
-    private Cidade cidade;
-
-
+    
     public int getId() {
         return id;
     }
@@ -59,14 +58,14 @@ public class Funcionario {
     /**
      * @return the data_contratacao
      */
-    public Time getData_contratacao() {
+    public Timestamp getData_contratacao() {
         return data_contratacao;
     }
 
     /**
      * @param data_contratacao the data_contratacao to set
      */
-    public void setData_contratacao(Time data_contratacao) {
+    public void setData_contratacao(Timestamp data_contratacao) {
         this.data_contratacao = data_contratacao;
     }
 
@@ -96,20 +95,6 @@ public class Funcionario {
      */
     public void setAgencia(Agencia agencia) {
         this.agencia = agencia;
-    }
-
-    /**
-     * @return the cidade
-     */
-    public Cidade getCidade() {
-        return cidade;
-    }
-
-    /**
-     * @param cidade the cidade to set
-     */
-    public void setCidade(Cidade cidade) {
-        this.cidade = cidade;
     }
 
     /**
