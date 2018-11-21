@@ -13,7 +13,7 @@ import java.sql.Timestamp;
  * @author jhene
  */
 public class Funcionario {
-    
+
     private int id;
     private String nome;
     private String login;
@@ -24,7 +24,11 @@ public class Funcionario {
     private Timestamp data_contratacao;
     private boolean e_gerente;
     private Agencia agencia;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 0b35d9b2d9938c601c625536b77ebb267a26e47e
     public int getId() {
         return id;
     }
@@ -54,7 +58,7 @@ public class Funcionario {
     public void setLogin(String login) {
         this.login = login;
     }
-    
+
     /**
      * @return the data_contratacao
      */
@@ -152,5 +156,5 @@ public class Funcionario {
     public void setEmail(String email) {
         this.email = email;
     }
-        
+
 }
