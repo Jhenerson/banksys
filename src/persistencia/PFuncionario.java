@@ -5,6 +5,7 @@
  */
 package persistencia;
 
+import entidades.Agencia;
 import entidades.Funcionario;
 import interfaces.IFuncionario;
 import java.sql.Connection;
@@ -79,8 +80,10 @@ public class PFuncionario implements IFuncionario{
         prd.setTimestamp(4, funcionario.getData_contratacao());
         prd.setString(5, funcionario.getEndereco());
         prd.setString(6, funcionario.getSenha());
+        prd.setString(7, funcionario.getLogin());
+        prd.setInt(8, funcionario.getAgencia().getId());
+        prd.setInt(9, funcionario.getId());
 
-        //executa todo o comando e grava no banco de dados
         prd.execute();
         cnn.close();
     }
@@ -115,8 +118,10 @@ public class PFuncionario implements IFuncionario{
             retorno.setSenha(rs.getString("senha"));
             retorno.setLogin(rs.getString("login"));
             
-            //TODO
-            //Acrescentar objeto de agencia
+            PAgencia pa = new PAgencia();
+            Agencia agencia = pa.consultar(rs.getInt("id_agencia"));
+            
+            retorno.setAgencia(agencia);
         }
         prd.execute();
         cnn.close();

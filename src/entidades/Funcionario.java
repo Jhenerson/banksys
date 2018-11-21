@@ -24,11 +24,7 @@ public class Funcionario {
     private Timestamp data_contratacao;
     private boolean e_gerente;
     private Agencia agencia;
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 0b35d9b2d9938c601c625536b77ebb267a26e47e
     public int getId() {
         return id;
     }
