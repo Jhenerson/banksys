@@ -25,6 +25,10 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
      */
     public FrmCadCliente() {
         initComponents();
+        txtLogradouro.setEnabled(false);
+        txtCidade.setEnabled(false);
+        txtSetor.setEnabled(false);
+        txtUF.setEnabled(false);        
     }
 
     public FrmCadCliente(JDesktopPane painelPrincipal) {
