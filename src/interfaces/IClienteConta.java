@@ -6,19 +6,19 @@
 package interfaces;
 
 import entidades.Agencia;
-import java.util.ArrayList;
+import entidades.ClienteConta;
 import java.util.Iterator;
 
 /**
  *
- * @author jhene
+ * @author repez
  */
-public interface IAgencia {
-
-    public void incluir(Agencia agencia) throws Exception;
+public interface IClienteConta {
+    
+    public void incluir(ClienteConta clienteConta) throws Exception;
     public Iterator listar() throws Exception;
-    public void alterar(Agencia agencia) throws Exception;
+    public void alterar(ClienteConta clienteConta) throws Exception;
     public void excluir(int id) throws Exception;
-    public Agencia consultar(int id) throws Exception;
+    public ClienteConta consultar(int id) throws Exception;
     
 }
