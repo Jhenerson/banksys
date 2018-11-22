@@ -52,7 +52,8 @@ public class BuscaCEP {
                         map.get("complemento"),
                         map.get("bairro"),
                         map.get("localidade"),
-                        map.get("uf")
+                        map.get("uf"),
+                        map.get("cep")
                         );
                           
             } else {
