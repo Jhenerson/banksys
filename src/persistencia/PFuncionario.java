@@ -54,6 +54,15 @@ public class PFuncionario implements IFuncionario{
             funcionario.setData_contratacao(rs.getTimestamp("data_contratacao"));
             funcionario.setEndereco(rs.getString("endereco"));
             funcionario.setTelefone(rs.getString("telefone"));
+            funcionario.setLogin(rs.getString("login"));
+            funcionario.setSenha(rs.getString("senha"));
+            funcionario.setE_gerente(rs.getBoolean("e_gerente"));
+            
+            PAgencia pa = new PAgencia();
+            Agencia agencia = pa.consultar(rs.getInt("id_agencia"));
+            
+            funcionario.setAgencia(agencia);
+            
             retorno.add(funcionario);
         }
         return retorno.iterator();
