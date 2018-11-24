@@ -5,6 +5,7 @@
  */
 package util;
 
+import entidades.Endereco;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -19,10 +20,15 @@ public class TesteCEP {
     public static void main(String[] args) {
         try {
             BuscaCEP busca = new BuscaCEP();
-            String cep = "74415410";
+            String cep = "74370530";
             Endereco retorno = BuscaCEP.buscarCep(cep);
             
-            System.out.println(retorno.getBairro());
+             
+            System.out.println("Logradouro: "+retorno.getLogradouro());            
+            System.out.println("Bairro: "+retorno.getBairro());
+            System.out.println("Cidade: "+retorno.getLocalidade());
+            System.out.println("UF: "+retorno.getUf());
+            
             
         } catch (Exception e) {
             System.out.println(e);

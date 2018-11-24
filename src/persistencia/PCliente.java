@@ -27,11 +27,11 @@ public class PCliente implements ICliente {
         Connection cnn = util.Conexao.getConexao();
 
         PreparedStatement prd = cnn.prepareStatement(sql);
-        prd.setLong(1, cliente.getCpf());
+        prd.setString(1, cliente.getCpf());
         prd.setString(2, cliente.getNome());
         prd.setDate(3, cliente.getDataNascimento());
         prd.setString(4, cliente.getTelefone());
-        prd.setString(5, cliente.getEndereco());
+        prd.setString(5, cliente.getEndereco());       
 
         prd.execute();
         cnn.close();
@@ -49,7 +49,7 @@ public class PCliente implements ICliente {
 
         while (rs.next()) {
             Cliente cliente = new Cliente();
-            cliente.setCpf(rs.getInt("cpf"));
+            cliente.setCpf(rs.getString("cpf"));
             cliente.setNome(rs.getString("nome"));
             cliente.setDataNascimento(rs.getDate("data_de_nascimento"));
             cliente.setEndereco(rs.getString("endereco"));
@@ -66,12 +66,12 @@ public class PCliente implements ICliente {
         Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
 
-        prd.setLong(1, cliente.getCpf());
+        prd.setString(1, cliente.getCpf());
         prd.setString(2, cliente.getNome());
         prd.setDate(3, cliente.getDataNascimento());
         prd.setString(4, cliente.getEndereco());
         prd.setString(5, cliente.getTelefone());
-        prd.setLong(6, cliente.getCpf());
+        prd.setString(6, cliente.getCpf());
 
         //executa todo o comando e grava no banco de dados
         prd.execute();
@@ -100,7 +100,29 @@ public class PCliente implements ICliente {
         Cliente retorno = new Cliente();
 
         if (rs.next()) {
-            retorno.setCpf(rs.getLong("cpf"));
+            retorno.setCpf(rs.getString("cpf"));
+            retorno.setNome(rs.getString("nome"));
+            retorno.setDataNascimento(rs.getDate("data_de_nascimento"));
+            retorno.setEndereco(rs.getString("endereco"));
+            retorno.setTelefone(rs.getString("telefone"));
+        }
+        prd.execute();
+        cnn.close();
+        return retorno;
+    }
+    
+    public Cliente consultar(String nome) throws Exception {
+        String sql = " SELECT * FROM cliente WHERE nome = ?;";
+
+        Connection cnn = util.Conexao.getConexao();
+        PreparedStatement prd = cnn.prepareStatement(sql);
+        prd.setString(1, nome);
+
+        ResultSet rs = prd.executeQuery();
+        Cliente retorno = new Cliente();
+
+        if (rs.next()) {
+            retorno.setCpf(rs.getString("cpf"));
             retorno.setNome(rs.getString("nome"));
             retorno.setDataNascimento(rs.getDate("data_de_nascimento"));
             retorno.setEndereco(rs.getString("endereco"));

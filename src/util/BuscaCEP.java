@@ -5,6 +5,7 @@
  */
 package util;
 
+import entidades.Endereco;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -51,7 +52,8 @@ public class BuscaCEP {
                         map.get("complemento"),
                         map.get("bairro"),
                         map.get("localidade"),
-                        map.get("uf")
+                        map.get("uf"),
+                        map.get("cep")
                         );
                           
             } else {

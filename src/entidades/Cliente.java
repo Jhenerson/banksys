@@ -14,17 +14,18 @@ import java.sql.Date;
  */
 public class Cliente {
     private int id;
-    private long cpf;
+    private String cpf;
     private String nome;
     private Date dataNascimento;
     private String telefone;
     private String endereco;
+    private String email;
 
-    public long getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(long cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -66,6 +67,14 @@ public class Cliente {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
     
 }

@@ -7,21 +7,16 @@ package interfaces;
 
 
 import entidades.Funcionario;
-import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
  * @author jhene
  */
 public interface IFuncionario {
-
     public void incluir(Funcionario funcionario) throws Exception;
-
-    public ArrayList<Funcionario> listar() throws Exception;
-
+    public Iterator listar() throws Exception;
     public void alterar(Funcionario funcionario) throws Exception;
-
-    public void excluir(long cpf) throws Exception;
-    
-    public Funcionario consultar(long cpf) throws Exception;
+    public void excluir(int id) throws Exception;
+    public Funcionario consultar(int id) throws Exception;
 }
