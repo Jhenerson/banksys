@@ -5,10 +5,20 @@
  */
 package negocio;
 
+import entidades.Funcionario;
+
 /**
  *
  * @author rodolpho.repezza
  */
 public class NFuncionario {
+
+    public void salvar(Funcionario f) {
+        
+    }
+
+    public void excluir(int parseInt) {
+        
+    }
     
 }

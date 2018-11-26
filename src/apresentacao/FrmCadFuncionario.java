@@ -6,6 +6,10 @@
 package apresentacao;
 
 import entidades.Endereco;
+import entidades.Funcionario;
+import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
+import negocio.NFuncionario;
 import util.BuscaCEP;
 
 /**
@@ -14,11 +18,18 @@ import util.BuscaCEP;
  */
 public class FrmCadFuncionario extends javax.swing.JInternalFrame {
 
+    JDesktopPane painelPrincipal;
+
     /**
      * Creates new form FrmCadFuncionario
      */
     public FrmCadFuncionario() {
         initComponents();
+    }
+
+    FrmCadFuncionario(JDesktopPane painelPrincipal) {
+        this();
+        this.painelPrincipal = painelPrincipal;
     }
 
     /**
@@ -61,6 +72,10 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
         btnBuscaCep = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         txtSetor = new javax.swing.JTextField();
+        btnSalvar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnLimpar = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setTitle("Cadastro de Funcionário");
@@ -237,6 +252,35 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
+
+        btnExcluir.setText("Excluir");
+        btnExcluir.setEnabled(false);
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
+
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -258,6 +302,16 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalvar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExcluir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLimpar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSair)
+                .addGap(176, 176, 176))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,7 +327,13 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalvar)
+                    .addComponent(btnExcluir)
+                    .addComponent(btnLimpar)
+                    .addComponent(btnSair))
+                .addContainerGap())
         );
 
         pack();
@@ -281,9 +341,8 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
 
     private void btnBuscaCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaCepActionPerformed
         BuscaCEP busca = new BuscaCEP();
-
         String cep = txtCEP.getText();
-        Endereco retorno = BuscaCEP.buscarCep(cep);
+        Endereco retorno = busca.buscarCep(cep);
 
         txtLogradouro.setText(retorno.getLogradouro());
         txtCidade.setText(retorno.getLocalidade());
@@ -292,10 +351,94 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
         txtCEP.setText(retorno.getCep());
     }//GEN-LAST:event_btnBuscaCepActionPerformed
 
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        try {
+
+            if (txtNome.getText().isEmpty()) {
+                throw new Exception("O nome é obrigatório!");
+            }
+
+            if (txtLogradouro.getText().isEmpty()) {
+                throw new Exception("O endereço é obrigatório!");
+            }
+
+            if (txtEmail.getText().isEmpty()) {
+                throw new Exception("O e-mail é obrigatório!");
+            }
+
+            if (txtCidade.getText().isEmpty()) {
+                throw new Exception("A cidade é obrigatória!");
+            }
+
+            if (txtDataContratacao.getText().isEmpty()) {
+                throw new Exception("A Data de contratação é obrigatoria!");
+            }
+
+            if (txtTelefone.getText().isEmpty()) {
+                throw new Exception("O telefone é obrigatório!");
+            }
+
+            Funcionario f = new Funcionario();
+
+            if (!txtID.getText().isEmpty()) {
+                f.setId(Integer.parseInt(txtID.getText()));
+            }
+
+            String endereco = txtLogradouro.getText() + " " + txtComplemento.getText() + ", " + txtCidade.getText() + " - " + txtUF.getText();
+
+            f.setNome(txtNome.getText());
+            f.setTelefone(txtTelefone.getText());
+            f.setEmail(txtEmail.getText());
+            f.setEndereco(endereco);
+            
+
+            NFuncionario nf = new NFuncionario();
+            nf.salvar(f);
+            JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
+
+            limpar();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        try {
+            int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o registro selecionado?", "libraryControl", JOptionPane.YES_NO_OPTION);
+            if (resposta == JOptionPane.YES_OPTION) {
+
+                if (txtID.getText().isEmpty()) {
+                    throw new Exception("ID inválido!");
+                }
+                NFuncionario nf = new NFuncionario();
+                nf.excluir(Integer.parseInt(txtID.getText()));
+                JOptionPane.showMessageDialog(null, "Cliente excluído com sucesso!");
+                limpar();
+
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        limpar();
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscaCep;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnPesquisar;
+    private javax.swing.JButton btnSair;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -326,4 +469,21 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txtTelefone;
     private javax.swing.JTextField txtUF;
     // End of variables declaration//GEN-END:variables
+
+    private void limpar() {
+        txtID.setText("");
+        txtCEP.setText("");
+        txtCidade.setText("");
+        txtEmail.setText("");
+        txtLogradouro.setText("");
+        txtTelefone.setText("");
+        txtNome.setText("");
+        txtDataContratacao.setText("");
+        txtLogin.setText("");
+        txtSenha.setText("");
+        txtSetor.setText("");
+        txtUF.setText("");
+        txtCidade.setText("");
+        txtComplemento.setText("");
+    }
 }
