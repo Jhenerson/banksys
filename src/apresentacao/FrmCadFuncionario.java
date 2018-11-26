@@ -369,6 +369,18 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
             if (txtCidade.getText().isEmpty()) {
                 throw new Exception("A cidade é obrigatória!");
             }
+            
+            if (txtUF.getText().isEmpty()) {
+                throw new Exception("A uf é obrigatória!");
+            }
+            
+            if (txtLogradouro.getText().isEmpty()) {
+                throw new Exception("O logradouro é obrigatório!");
+            }
+            
+            if (txtSetor.getText().isEmpty()) {
+                throw new Exception("O setor é obrigatório!");
+            }
 
             if (txtDataContratacao.getText().isEmpty()) {
                 throw new Exception("A Data de contratação é obrigatoria!");
