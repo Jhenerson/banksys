@@ -8,6 +8,7 @@ package persistencia;
 import entidades.Conta;
 import interfaces.IConta;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -21,7 +22,7 @@ public class PConta implements IConta{
     }
 
     @Override
-    public ArrayList<Conta> listar() throws Exception {
+    public Iterator listar() throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -7,10 +7,12 @@ package apresentacao;
 
 import entidades.Cliente;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import negocio.NCliente;
+import persistencia.PCliente;
 
 /**
  *
@@ -19,16 +21,19 @@ import negocio.NCliente;
 public class FrmPesCliente extends javax.swing.JInternalFrame {
 
     JDesktopPane painelPrincipal;
+    Iterator dados = new PCliente().listar();
+    
+    
 
     /**
      * Creates new form FrmPesCliente
      */
-    public FrmPesCliente() {
-        initComponents();
-        carregaTabela();
+    public FrmPesCliente() throws Exception {
+        initComponents();        
+        imprimirDadosNaGrid(dados);
     }
 
-    public FrmPesCliente(JDesktopPane painelPrincipal) {
+    public FrmPesCliente(JDesktopPane painelPrincipal) throws Exception {
         this();
         this.painelPrincipal = painelPrincipal;
     }
@@ -51,15 +56,32 @@ public class FrmPesCliente extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID", "Nome", "CPF", "E-Mail", "Endereço", "Telefone", "Saldo Devedor", "Tipo Cliente"
+                "ID", "Nome", "CPF", "Data de Nascimento", "E-Mail", "Endereço", "Telefone"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblResultado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tblResultadoMousePressed(evt);
             }
         });
         jScrollPane1.setViewportView(tblResultado);
+        if (tblResultado.getColumnModel().getColumnCount() > 0) {
+            tblResultado.getColumnModel().getColumn(0).setResizable(false);
+            tblResultado.getColumnModel().getColumn(1).setResizable(false);
+            tblResultado.getColumnModel().getColumn(2).setResizable(false);
+            tblResultado.getColumnModel().getColumn(3).setResizable(false);
+            tblResultado.getColumnModel().getColumn(4).setResizable(false);
+            tblResultado.getColumnModel().getColumn(5).setResizable(false);
+            tblResultado.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         btnFechar.setText("Fechar");
         btnFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -119,29 +141,21 @@ public class FrmPesCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTable tblResultado;
     // End of variables declaration//GEN-END:variables
 
-    private void carregaTabela() {
-        try {
+   private void imprimirDadosNaGrid(Iterator conjunto) {
+        DefaultTableModel model = (DefaultTableModel) tblResultado.getModel();
+        model.setNumRows(0);
+        while (conjunto.hasNext()) {
+            String[] linha = new String[5];
+            Cliente cliente = (Cliente) conjunto.next();
+            linha[0] = Integer.toString(cliente.getId());
+            linha[1] = cliente.getNome();
+            linha[2] = cliente.getCpf();
+            linha[3] = cliente.getDataNascimento().toString();
+            linha[4] = cliente.getEmail();
+            linha[5] = cliente.getEndereco();
+            linha[6] = cliente.getTelefone();
 
-            DefaultTableModel modelo = (DefaultTableModel) tblResultado.getModel();
-
-            NCliente nc = new NCliente();
-            ArrayList<Cliente> listaClientes = nc.listar();
-
-            modelo.setNumRows(listaClientes.size());
-
-            for (int i = 0; i < listaClientes.size(); i++) {
-                Cliente c = listaClientes.get(i);
-                modelo.setValueAt(c.getId(), i, 0);
-                modelo.setValueAt(c.getNome(), i, 1);
-                modelo.setValueAt(c.getCpf(), i, 2);
-                modelo.setValueAt(c.getEmail(), i, 3);
-                modelo.setValueAt(c.getEndereco(), i, 4);
-                modelo.setValueAt(c.getTelefone(), i, 5);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            model.addRow(linha);
         }
     }
 }

@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -38,7 +39,7 @@ public class PCliente implements ICliente {
     }
 
     @Override
-    public ArrayList<Cliente> listar() throws Exception {
+    public Iterator listar() throws Exception {
         String sql = "SELECT * FROM cliente";
 
         Connection cnn = util.Conexao.getConexao();
@@ -56,7 +57,7 @@ public class PCliente implements ICliente {
             cliente.setTelefone(rs.getString("telefone"));
             retorno.add(cliente);
         }
-        return retorno;
+        return retorno.iterator();
     }
 
     @Override
