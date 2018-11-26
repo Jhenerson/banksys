@@ -8,7 +8,6 @@ package negocio;
 import entidades.Cliente;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import persistencia.PCliente;
 
 /**
