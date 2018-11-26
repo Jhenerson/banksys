@@ -8,7 +8,6 @@ package negocio;
 import entidades.Cliente;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import persistencia.PCliente;
 
 /**
@@ -37,7 +36,7 @@ public class NCliente {
             throw new Exception("É necessário informar o e-mail");
         }
         
-        if (parametro.getEndereco().isEmpty()) {
+        if (parametro.getEndereco().toString().isEmpty()) {
             throw new Exception("É necessário informar o endereço");
         }
         

@@ -85,4 +85,14 @@ public class Endereco {
         return this;
     }
     
+    @Override
+    public String toString() {
+        String retorno = this.logradouro;
+        if(!this.complemento.isEmpty()) {
+            retorno += " " + this.complemento;
+        }
+        retorno += this.bairro + ", " + this.localidade + "-" + this.uf;
+        return retorno;
+    }
+    
 }

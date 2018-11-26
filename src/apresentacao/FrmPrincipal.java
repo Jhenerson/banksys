@@ -35,6 +35,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         optCliente = new javax.swing.JMenuItem();
+        optFuncionario = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         optSair = new javax.swing.JMenuItem();
 
@@ -70,6 +71,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(optCliente);
+
+        optFuncionario.setText("Funcionário");
+        optFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optFuncionarioActionPerformed(evt);
+            }
+        });
+        jMenu1.add(optFuncionario);
 
         jMenuBar1.add(jMenu1);
 
@@ -125,6 +134,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }        
     }//GEN-LAST:event_optClienteActionPerformed
 
+    private void optFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optFuncionarioActionPerformed
+        try {
+            FrmCadFuncionario frmCadFuncionario = new FrmCadFuncionario(painelPrincipal);
+            painelPrincipal.add(frmCadFuncionario);
+            frmCadFuncionario.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } 
+    }//GEN-LAST:event_optFuncionarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -168,6 +187,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem optCliente;
+    private javax.swing.JMenuItem optFuncionario;
     private javax.swing.JMenuItem optSair;
     private javax.swing.JDesktopPane painelPrincipal;
     // End of variables declaration//GEN-END:variables
