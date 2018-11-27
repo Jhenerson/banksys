@@ -7,6 +7,9 @@ package apresentacao;
 
 import entidades.Cliente;
 import entidades.Endereco;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import negocio.NCliente;
@@ -49,7 +52,7 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
             txtID.setText(String.valueOf(c.getId()));
             txtNome.setText(c.getNome());
             txtCPF.setText(c.getCpf());
-            txtFone1.setText(c.getTelefone());
+            txtFone.setText(c.getTelefone());
             txtEmail.setText(c.getEmail());
 
             String endereco = c.getEndereco();
@@ -93,7 +96,7 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        txtFone1 = new javax.swing.JTextField();
+        txtFone = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -208,9 +211,9 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Telefone:");
 
-        txtFone1.addActionListener(new java.awt.event.ActionListener() {
+        txtFone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFone1ActionPerformed(evt);
+                txtFoneActionPerformed(evt);
             }
         });
 
@@ -222,7 +225,7 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel8)
                 .addGap(34, 34, 34)
-                .addComponent(txtFone1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtFone, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -231,7 +234,7 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(txtFone1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -370,9 +373,9 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtFone1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFone1ActionPerformed
+    private void txtFoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFoneActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtFone1ActionPerformed
+    }//GEN-LAST:event_txtFoneActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose();
@@ -405,26 +408,31 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
                 throw new Exception("A Data de nascimento é obrigatoria!");
             }
 
-            if (txtFone1.getText().isEmpty()) {
+            if (txtFone.getText().isEmpty()) {
                 throw new Exception("O telefone é obrigatório!");
             }
 
-            Cliente c = new Cliente();
+            Cliente cliente = new Cliente();
 
             if (!txtID.getText().isEmpty()) {
-                c.setId(Integer.parseInt(txtID.getText()));
+                cliente.setId(Integer.parseInt(txtID.getText()));
             }
+            
+            DateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            java.sql.Date dataNascimento = new java.sql.Date(formato.parse(txtDataNascimento.getText()).getTime());
+            
 
-            String endereco = txtLogradouro.getText() + " - " + txtCidade.getText() + " - ";
+            String endereco = txtLogradouro.getText() + "," + txtComplemento.getText() + "," + txtSetor.getText() + "," + txtCidade.getText() + "," + txtUF.getText() + "," +txtCEP.getText();
 
-            c.setNome(txtNome.getText());
-            c.setTelefone(txtFone1.getText());
-            c.setEmail(txtEmail.getText());
-            c.setEndereco(endereco);
-            c.setCpf(txtCPF.getText());
+            cliente.setNome(txtNome.getText());
+            cliente.setTelefone(txtFone.getText());
+            cliente.setEmail(txtEmail.getText());
+            cliente.setEndereco(endereco);
+            cliente.setCpf(txtCPF.getText());
+            cliente.setDataNascimento(dataNascimento);
 
             NCliente nc = new NCliente();
-            nc.salvar(c);
+            nc.salvar(cliente);
             JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
 
             limpar();
@@ -529,7 +537,7 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtComplemento;
     private javax.swing.JTextField txtDataNascimento;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtFone1;
+    private javax.swing.JTextField txtFone;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtLogradouro;
     private javax.swing.JTextField txtNome;
@@ -543,8 +551,15 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
         txtCidade.setText("");
         txtEmail.setText("");
         txtLogradouro.setText("");
-        txtFone1.setText("");
+        txtFone.setText("");
         txtNome.setText("");
-
+        txtSetor.setText("");
+        txtUF.setText("");
+        txtComplemento.setText("");
+        txtLogradouro.setEnabled(false);
+        txtCidade.setEnabled(false);
+        txtSetor.setEnabled(false);
+        txtUF.setEnabled(false);     
+        txtComplemento.setEnabled(false);
     }
 }

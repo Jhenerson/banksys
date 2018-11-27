@@ -396,7 +396,7 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
                 f.setId(Integer.parseInt(txtID.getText()));
             }
 
-            String endereco = txtLogradouro.getText() + " " + txtComplemento.getText() + ", " + txtCidade.getText() + " - " + txtUF.getText();
+            String endereco = txtLogradouro.getText() + "," + txtComplemento.getText() + "," + txtCidade.getText() + "," + txtUF.getText();
 
             f.setNome(txtNome.getText());
             f.setTelefone(txtTelefone.getText());
