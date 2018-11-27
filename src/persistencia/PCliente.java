@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -23,7 +24,7 @@ public class PCliente implements ICliente {
 
     @Override
     public void incluir(Cliente cliente) throws Exception {
-        String sql = "INSERT INTO cliente (cpf,nome,data_de_nascimento,telefone,endereco) VALUES (?,?,?,?,?);";
+        String sql = "INSERT INTO cliente (cpf,nome,data_de_nascimento,telefone,endereco,email) VALUES (?,?,?,?,?,?);";
         Connection cnn = util.Conexao.getConexao();
 
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -31,14 +32,15 @@ public class PCliente implements ICliente {
         prd.setString(2, cliente.getNome());
         prd.setDate(3, cliente.getDataNascimento());
         prd.setString(4, cliente.getTelefone());
-        prd.setString(5, cliente.getEndereco());       
+        prd.setString(5, cliente.getEndereco()); 
+        prd.setString(6, cliente.getEmail());
 
         prd.execute();
         cnn.close();
     }
 
     @Override
-    public ArrayList<Cliente> listar() throws Exception {
+    public Iterator listar() throws Exception {
         String sql = "SELECT * FROM cliente";
 
         Connection cnn = util.Conexao.getConexao();
@@ -54,14 +56,15 @@ public class PCliente implements ICliente {
             cliente.setDataNascimento(rs.getDate("data_de_nascimento"));
             cliente.setEndereco(rs.getString("endereco"));
             cliente.setTelefone(rs.getString("telefone"));
+            cliente.setEmail(rs.getString("email"));
             retorno.add(cliente);
         }
-        return retorno;
+        return retorno.iterator();
     }
 
     @Override
     public void alterar(Cliente cliente) throws Exception {
-        String sql = "UPDATE cliente SET cpf = ?, nome = ?, data_de_nascimento = ?, endereco = ?, telefone = ? WHERE cpf = ?";
+        String sql = "UPDATE cliente SET cpf = ?, nome = ?, data_de_nascimento = ?, endereco = ?, telefone = ? email = ? WHERE cpf = ?";
 
         Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -71,7 +74,9 @@ public class PCliente implements ICliente {
         prd.setDate(3, cliente.getDataNascimento());
         prd.setString(4, cliente.getEndereco());
         prd.setString(5, cliente.getTelefone());
-        prd.setString(6, cliente.getCpf());
+        prd.setString(6, cliente.getEmail());
+        prd.setString(7, cliente.getCpf());
+        
 
         //executa todo o comando e grava no banco de dados
         prd.execute();
@@ -105,6 +110,7 @@ public class PCliente implements ICliente {
             retorno.setDataNascimento(rs.getDate("data_de_nascimento"));
             retorno.setEndereco(rs.getString("endereco"));
             retorno.setTelefone(rs.getString("telefone"));
+            retorno.setEmail(rs.getString("email"));
         }
         prd.execute();
         cnn.close();
@@ -127,6 +133,7 @@ public class PCliente implements ICliente {
             retorno.setDataNascimento(rs.getDate("data_de_nascimento"));
             retorno.setEndereco(rs.getString("endereco"));
             retorno.setTelefone(rs.getString("telefone"));
+            retorno.setEmail(rs.getString("email"));
         }
         prd.execute();
         cnn.close();

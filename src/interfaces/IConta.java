@@ -8,6 +8,7 @@ package interfaces;
 
 import entidades.Conta;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -17,7 +18,7 @@ public interface IConta {
 
     public void incluir(Conta conta) throws Exception;
 
-    public ArrayList<Conta> listar() throws Exception;
+    public Iterator listar() throws Exception;
 
     public void alterar(Conta conta) throws Exception;
 

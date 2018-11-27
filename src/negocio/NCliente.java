@@ -8,6 +8,7 @@ package negocio;
 import entidades.Cliente;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import persistencia.PCliente;
 
 /**
@@ -66,7 +67,7 @@ public class NCliente {
         return persistencia.consultar(nome);        
     }
 
-    public ArrayList<Cliente> listar() throws SQLException, Exception {
+    public Iterator listar() throws SQLException, Exception {
         return persistencia.listar();
     }
     

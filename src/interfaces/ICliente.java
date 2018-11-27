@@ -8,6 +8,7 @@ package interfaces;
 
 import entidades.Cliente;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -17,7 +18,7 @@ public interface ICliente {
 
     public void incluir(Cliente cliente) throws Exception;
 
-    public ArrayList<Cliente> listar() throws Exception;
+    public Iterator listar() throws Exception;
 
     public void alterar(Cliente cliente) throws Exception;
 

@@ -7,6 +7,9 @@ package apresentacao;
 
 import entidades.Cliente;
 import entidades.Endereco;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import negocio.NCliente;
@@ -28,7 +31,8 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
         txtLogradouro.setEnabled(false);
         txtCidade.setEnabled(false);
         txtSetor.setEnabled(false);
-        txtUF.setEnabled(false);        
+        txtUF.setEnabled(false);     
+        txtComplemento.setEnabled(false);
     }
 
     public FrmCadCliente(JDesktopPane painelPrincipal) {
@@ -48,7 +52,7 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
             txtID.setText(String.valueOf(c.getId()));
             txtNome.setText(c.getNome());
             txtCPF.setText(c.getCpf());
-            txtFone1.setText(c.getTelefone());
+            txtFone.setText(c.getTelefone());
             txtEmail.setText(c.getEmail());
 
             String endereco = c.getEndereco();
@@ -92,9 +96,7 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        txtFone1 = new javax.swing.JTextField();
-        txtFone2 = new javax.swing.JTextField();
+        txtFone = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -207,13 +209,11 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel8.setText("Fone 1:");
+        jLabel8.setText("Telefone:");
 
-        jLabel10.setText("Fone 2:");
-
-        txtFone1.addActionListener(new java.awt.event.ActionListener() {
+        txtFone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFone1ActionPerformed(evt);
+                txtFoneActionPerformed(evt);
             }
         });
 
@@ -223,14 +223,10 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel10))
-                .addGap(48, 48, 48)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtFone1, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                    .addComponent(txtFone2))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addComponent(jLabel8)
+                .addGap(34, 34, 34)
+                .addComponent(txtFone, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,12 +234,8 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(txtFone1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtFone2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                    .addComponent(txtFone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -330,29 +322,30 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel1)
-                        .addGap(67, 67, 67)
-                        .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel1)
+                                .addGap(67, 67, 67)
+                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnPesquisar))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(178, 178, 178)
+                        .addComponent(btnSalvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPesquisar))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLimpar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSair)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSalvar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnExcluir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLimpar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSair)
-                .addGap(170, 170, 170))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,7 +361,7 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnExcluir)
@@ -380,9 +373,9 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtFone1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFone1ActionPerformed
+    private void txtFoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFoneActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtFone1ActionPerformed
+    }//GEN-LAST:event_txtFoneActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose();
@@ -415,26 +408,31 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
                 throw new Exception("A Data de nascimento é obrigatoria!");
             }
 
-            if (txtFone1.getText().isEmpty()) {
+            if (txtFone.getText().isEmpty()) {
                 throw new Exception("O telefone é obrigatório!");
             }
 
-            Cliente c = new Cliente();
+            Cliente cliente = new Cliente();
 
             if (!txtID.getText().isEmpty()) {
-                c.setId(Integer.parseInt(txtID.getText()));
+                cliente.setId(Integer.parseInt(txtID.getText()));
             }
+            
+            DateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            java.sql.Date dataNascimento = new java.sql.Date(formato.parse(txtDataNascimento.getText()).getTime());
+            
 
-            String endereco = txtLogradouro.getText() + " - " + txtCidade.getText() + " - ";
+            String endereco = txtLogradouro.getText() + "," + txtComplemento.getText() + "," + txtSetor.getText() + "," + txtCidade.getText() + "," + txtUF.getText() + "," +txtCEP.getText();
 
-            c.setNome(txtNome.getText());
-            c.setTelefone(txtFone1.getText());
-            c.setEmail(txtEmail.getText());
-            c.setEndereco(endereco);
-            c.setCpf(txtCPF.getText());
+            cliente.setNome(txtNome.getText());
+            cliente.setTelefone(txtFone.getText());
+            cliente.setEmail(txtEmail.getText());
+            cliente.setEndereco(endereco);
+            cliente.setCpf(txtCPF.getText());
+            cliente.setDataNascimento(dataNascimento);
 
             NCliente nc = new NCliente();
-            nc.salvar(c);
+            nc.salvar(cliente);
             JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
 
             limpar();
@@ -490,6 +488,23 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
         txtSetor.setText(retorno.getBairro());
         txtUF.setText(retorno.getUf());
         txtCEP.setText(retorno.getCep());
+        
+        txtLogradouro.setEnabled(true);
+        txtLogradouro.setEditable(false);
+        txtCidade.setEnabled(true);
+        txtCidade.setEditable(false);
+        txtUF.setEnabled(true);
+        txtUF.setEditable(false);
+        txtSetor.setEnabled(true);
+        txtSetor.setEditable(false);
+        txtComplemento.setEnabled(true);
+        
+        if(txtSetor.getText().isEmpty()){
+            txtSetor.setEditable(true);
+        }
+        if(txtLogradouro.getText().isEmpty()){
+            txtSetor.setEditable(true);
+        }
 
     }//GEN-LAST:event_btnBuscaCepActionPerformed
 
@@ -502,7 +517,6 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -523,8 +537,7 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtComplemento;
     private javax.swing.JTextField txtDataNascimento;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtFone1;
-    private javax.swing.JTextField txtFone2;
+    private javax.swing.JTextField txtFone;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtLogradouro;
     private javax.swing.JTextField txtNome;
@@ -538,8 +551,15 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
         txtCidade.setText("");
         txtEmail.setText("");
         txtLogradouro.setText("");
-        txtFone1.setText("");
+        txtFone.setText("");
         txtNome.setText("");
-
+        txtSetor.setText("");
+        txtUF.setText("");
+        txtComplemento.setText("");
+        txtLogradouro.setEnabled(false);
+        txtCidade.setEnabled(false);
+        txtSetor.setEnabled(false);
+        txtUF.setEnabled(false);     
+        txtComplemento.setEnabled(false);
     }
 }
