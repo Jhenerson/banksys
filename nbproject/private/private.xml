@@ -3,17 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/rodolpho.repezza/Desktop/banksys/src/apresentacao/FrmCadCliente.java</file>
-            <file>file:/C:/Users/rodolpho.repezza/Desktop/banksys/src/persistencia/PFuncionario.java</file>
-            <file>file:/C:/Users/rodolpho.repezza/Desktop/banksys/src/apresentacao/FrmCadFuncionario.java</file>
-            <file>file:/C:/Users/rodolpho.repezza/Desktop/banksys/src/entidades/Funcionario.java</file>
-=======
             <file>file:/I:/Drive/Graduação%20ADS/3SEM/Projeto%20Integrador/banksys/src/apresentacao/FrmCadCliente.java</file>
             <file>file:/I:/Drive/Graduação%20ADS/3SEM/Projeto%20Integrador/banksys/src/negocio/NFuncionario.java</file>
             <file>file:/I:/Drive/Graduação%20ADS/3SEM/Projeto%20Integrador/banksys/src/apresentacao/FrmCadFuncionario.java</file>
+            <file>file:/I:/Drive/Graduação%20ADS/3SEM/Projeto%20Integrador/banksys/src/entidades/Cliente.java</file>
+            <file>file:/I:/Drive/Graduação%20ADS/3SEM/Projeto%20Integrador/banksys/src/entidades/Endereco.java</file>
             <file>file:/I:/Drive/Graduação%20ADS/3SEM/Projeto%20Integrador/banksys/src/negocio/NCliente.java</file>
->>>>>>> 5c99735b80b63a28468f42079f1a6234b3cafdbd
         </group>
     </open-files>
 </project-private>
