@@ -31,7 +31,36 @@ public class FrmCadAgencia extends javax.swing.JInternalFrame {
         this();
         this.painelPrincipal = painelPrincipal;
     }
+    
+    public FrmCadAgencia(JDesktopPane painelPrincipal, String id) {
+        this();
+        this.painelPrincipal = painelPrincipal;
+        
+        try {
+            NAgencia na = new NAgencia();
+            Agencia agencia = na.consultar(Integer.parseInt(id));
 
+            txtID.setText(String.valueOf(agencia.getId()));
+            txtCodigo.setText(agencia.getCodigo());
+           
+            String endereco = agencia.getEndereco();
+            String[] enderecoQuebrado = new String[6];
+            enderecoQuebrado = endereco.split(",");            
+            
+            txtLogradouro.setText(enderecoQuebrado[0]);
+            txtComplemento.setText(enderecoQuebrado[1]);
+            txtSetor.setText(enderecoQuebrado[2]);
+            txtCidade.setText(enderecoQuebrado[3]);
+            txtUF.setText(enderecoQuebrado[4]);
+            txtCEP.setText(enderecoQuebrado[5]);
+
+            btnExcluir.setEnabled(true);
+            
+            txtComplemento.setEditable(true);
+        } catch (Exception e) {
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -281,7 +310,7 @@ public class FrmCadAgencia extends javax.swing.JInternalFrame {
                 agencia.setId(Integer.parseInt(txtID.getText()));
             }
 
-            String endereco = txtLogradouro.getText() + "," + txtComplemento.getText() + "," + txtCidade.getText() + "," + txtUF.getText();
+            String endereco = txtLogradouro.getText() + "," + txtComplemento.getText() + "," + txtSetor.getText() + "," + txtCidade.getText() + "," + txtUF.getText() + "," +txtCEP.getText();
 
             agencia.setCodigo(txtCodigo.getText());
             agencia.setEndereco(endereco);
