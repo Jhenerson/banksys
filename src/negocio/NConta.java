@@ -11,8 +11,8 @@ import persistencia.PConta;
  * @author jhene
  */
 public class NConta {
-    
-     PConta persistencia;
+
+    PConta persistencia;
 
     public NConta() {
         persistencia = new PConta();
@@ -20,28 +20,10 @@ public class NConta {
 
     public void salvar(Conta parametro) throws SQLException, Exception {
 
-        if (parametro.getNome().isEmpty()) {
-            throw new Exception("É necessário informar o nome");
+        if (parametro.getNumAgencia().getId() == 0) {
+            throw new Exception("É necessário informar a agência");
         }
-        
-        if (parametro.getCpf().isEmpty()) {
-            throw new Exception("É necessário informar o CPF");
-        }
-        
-        if (parametro.getEmail().isEmpty()) {
-            throw new Exception("É necessário informar o e-mail");
-        }
-        
-        if (parametro.getEndereco().isEmpty()) {
-            throw new Exception("É necessário informar o endereço");
-        }
-        
-        if (parametro.getTelefone().isEmpty()) {
-            throw new Exception("É necessário informar o telefone");
-        }
-        
-        
-        
+
         if (parametro.getId() == 0) {
             persistencia.incluir(parametro);
         } else {
@@ -55,19 +37,11 @@ public class NConta {
     }
 
     public Conta consultarID(int parametro) throws SQLException, Exception {
-        return persistencia.consultarID(parametro);        
-    }
-    
-    public Conta consultarCPF(long cpf) throws SQLException, Exception {
-        return persistencia.consultarCPF(cpf);        
-    }
-    
-    public Conta consultar(String nome) throws SQLException, Exception {
-        return persistencia.consultar(nome);        
+        return persistencia.consultar(parametro);
     }
 
     public Iterator listar() throws SQLException, Exception {
         return persistencia.listar();
     }
-    
+
 }

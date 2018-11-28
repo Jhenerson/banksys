@@ -56,4 +56,28 @@ public class Conta {
     public void setId(int id) {
         this.id = id;
     }
+
+    public int getTipoConta() {
+        return tipoConta;
+    }
+
+    public void setTipoConta(int tipoConta) {
+        this.tipoConta = tipoConta;
+    }
+
+    public boolean isUsaCheque() {
+        return usaCheque;
+    }
+
+    public void setUsaCheque(boolean usaCheque) {
+        this.usaCheque = usaCheque;
+    }
+
+    public boolean iseConjunta() {
+        return eConjunta;
+    }
+
+    public void seteConjunta(boolean eConjunta) {
+        this.eConjunta = eConjunta;
+    }
 }

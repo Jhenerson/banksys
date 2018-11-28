@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -43,28 +44,42 @@ public class PCliente implements ICliente {
 
     @Override
     public Iterator listar() throws Exception {
-        String sql = "SELECT * FROM cliente";
+        try {
+            String sql = "SELECT * FROM cliente";
 
-        Connection cnn = util.Conexao.getConexao();
-        Statement st = cnn.createStatement();
+            Connection cnn = util.Conexao.getConexao();
+            Statement st = cnn.createStatement();
 
-        ResultSet rs = st.executeQuery(sql);
-        LinkedList<Cliente> retorno = new LinkedList();
+            ResultSet rs = st.executeQuery(sql);
+            LinkedList<Cliente> retorno = new LinkedList();
 
-        while (rs.next()) {
-            Cliente cliente = new Cliente();
-            cliente.setId(rs.getInt("id"));
-            cliente.setCpf(rs.getString("cpf"));
-            cliente.setNome(rs.getString("nome"));
-            cliente.setDataNascimento(rs.getDate("data_de_nascimento"));
-            cliente.setEndereco(rs.getString("endereco"));
-            cliente.setTelefone(rs.getString("telefone"));
-            cliente.setEmail(rs.getString("email"));
+            while (rs.next()) {
+                Cliente cliente = new Cliente();
+                cliente.setId(rs.getInt("id"));
+                cliente.setCpf(rs.getString("cpf"));
+                cliente.setNome(rs.getString("nome"));
+                cliente.setDataNascimento(rs.getDate("data_de_nascimento"));
+                cliente.setEndereco(rs.getString("endereco"));
+                cliente.setTelefone(rs.getString("telefone"));
+                cliente.setEmail(rs.getString("email"));
 
-            retorno.add(cliente);
+                retorno.add(cliente);
+            }
+
+            retorno.sort(new Comparator() {
+                @Override
+                public int compare(Object o1, Object o2) {
+                    Cliente c1 = (Cliente) o1;
+                    Cliente c2 = (Cliente) o2;
+                    return c1.getNome().compareToIgnoreCase(c2.getNome());
+                }
+            });
+            return retorno.iterator();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
         }
-        //retorno.sort();
-        return retorno.iterator();
+
     }
 
     @Override
