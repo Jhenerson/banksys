@@ -7,7 +7,6 @@ package apresentacao;
 
 import entidades.Cliente;
 import entidades.Endereco;
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.JDesktopPane;

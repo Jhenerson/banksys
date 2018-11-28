@@ -22,14 +22,11 @@ public class PAgencia implements IAgencia {
 
     @Override
     public void incluir(Agencia agencia) throws Exception {
-        String sql = "INSERT INTO agencia (numero_agencia,endereco,telefone) VALUES (?,?,?);";
+        String sql = "INSERT INTO agencia (codigo,endereco) VALUES (?,?,?);";
         Connection cnn = util.Conexao.getConexao();
-
         PreparedStatement prd = cnn.prepareStatement(sql);
-        prd.setInt(1, agencia.getNumAgencia());
+        prd.setString(1, agencia.getCodigo());
         prd.setString(2, agencia.getEndereco());
-        prd.setString(3, agencia.getTelefone());
-
         prd.execute();
         cnn.close();
     }
@@ -46,9 +43,8 @@ public class PAgencia implements IAgencia {
 
         while (rs.next()) {
             Agencia ag = new Agencia();
-            ag.setNumAgencia(rs.getInt("numero_agencia"));
+            ag.setCodigo(rs.getString("codigo"));
             ag.setEndereco(rs.getString("endereco"));
-            ag.setTelefone(rs.getString("telefone"));
             retorno.add(ag);
         }
         return retorno.iterator();
@@ -56,23 +52,19 @@ public class PAgencia implements IAgencia {
 
     @Override
     public void alterar(Agencia agencia) throws Exception {
-        String sql = "UPDATE agencia SET numero_agencia = ?, endereco = ?, telefone = ? WHERE id = ?";
-
+        String sql = "UPDATE agencia SET codigo = ?, endereco = ? WHERE id = ?";
         Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
-        
-        prd.setInt(1, agencia.getNumAgencia());
+        prd.setString(1, agencia.getCodigo());
         prd.setString(2, agencia.getEndereco());
-        prd.setString(3, agencia.getTelefone());
-
-        //executa todo o comando e grava no banco de dados
+        prd.setInt(3, agencia.getId());
         prd.execute();
         cnn.close();
     }
 
     @Override
     public void excluir(int parametro) throws Exception {
-        String sql = "DELETE FROM agencia WHERE numero_agencia = ?;";
+        String sql = "DELETE FROM agencia WHERE id = ?;";
         Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
         prd.setInt(1, parametro);
@@ -82,20 +74,15 @@ public class PAgencia implements IAgencia {
 
     @Override
     public Agencia consultar(int parametro) throws Exception {
-       String sql = " SELECT * FROM agencia WHERE numero_agencia = ?;";
-
+        String sql = " SELECT * FROM agencia WHERE id = ?;";
         Connection cnn = util.Conexao.getConexao();
-        
         PreparedStatement prd = cnn.prepareStatement(sql);
-        
         prd.setInt(1, parametro);
-
         ResultSet rs = prd.executeQuery();
         Agencia retorno = new Agencia();
         if (rs.next()) {
-            retorno.setNumAgencia(rs.getInt("numero_agencia"));
+            retorno.setCodigo(rs.getString("codigo"));
             retorno.setEndereco(rs.getString("endereco"));
-            retorno.setTelefone(rs.getString("telefone"));
         }       
         prd.execute();
         cnn.close();

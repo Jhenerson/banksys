@@ -37,7 +37,7 @@ public class NCliente {
             throw new Exception("É necessário informar o e-mail");
         }
         
-        if (parametro.getEndereco().toString().isEmpty()) {
+        if (parametro.getEndereco().isEmpty()) {
             throw new Exception("É necessário informar o endereço");
         }
         
