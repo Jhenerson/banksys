@@ -14,7 +14,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  *
@@ -32,7 +34,7 @@ public class PCliente implements ICliente {
         prd.setString(2, cliente.getNome());
         prd.setDate(3, cliente.getDataNascimento());
         prd.setString(4, cliente.getTelefone());
-        prd.setString(5, cliente.getEndereco()); 
+        prd.setString(5, cliente.getEndereco());
         prd.setString(6, cliente.getEmail());
 
         prd.execute();
@@ -47,7 +49,7 @@ public class PCliente implements ICliente {
         Statement st = cnn.createStatement();
 
         ResultSet rs = st.executeQuery(sql);
-        ArrayList<Cliente> retorno = new ArrayList();
+        LinkedList<Cliente> retorno = new LinkedList();
 
         while (rs.next()) {
             Cliente cliente = new Cliente();
@@ -58,8 +60,10 @@ public class PCliente implements ICliente {
             cliente.setEndereco(rs.getString("endereco"));
             cliente.setTelefone(rs.getString("telefone"));
             cliente.setEmail(rs.getString("email"));
+
             retorno.add(cliente);
         }
+        //retorno.sort();
         return retorno.iterator();
     }
 
@@ -77,7 +81,6 @@ public class PCliente implements ICliente {
         prd.setString(5, cliente.getTelefone());
         prd.setString(6, cliente.getEmail());
         prd.setInt(7, cliente.getId());
-        
 
         //executa todo o comando e grava no banco de dados
         prd.execute();
@@ -117,7 +120,7 @@ public class PCliente implements ICliente {
         cnn.close();
         return retorno;
     }
-    
+
     @Override
     public Cliente consultarID(int id) throws Exception {
         String sql = " SELECT * FROM cliente WHERE id = ?;";
@@ -142,7 +145,7 @@ public class PCliente implements ICliente {
         cnn.close();
         return retorno;
     }
-    
+
     public Cliente consultar(String nome) throws Exception {
         String sql = " SELECT * FROM cliente WHERE nome = ?;";
 
