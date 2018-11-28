@@ -340,15 +340,31 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscaCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaCepActionPerformed
-        BuscaCEP busca = new BuscaCEP();
         String cep = txtCEP.getText();
-        Endereco retorno = busca.buscarCep(cep);
+        Endereco retorno = BuscaCEP.buscarCep(cep);
 
         txtLogradouro.setText(retorno.getLogradouro());
         txtCidade.setText(retorno.getLocalidade());
         txtSetor.setText(retorno.getBairro());
         txtUF.setText(retorno.getUf());
         txtCEP.setText(retorno.getCep());
+        
+        txtLogradouro.setEnabled(true);
+        txtLogradouro.setEditable(false);
+        txtCidade.setEnabled(true);
+        txtCidade.setEditable(false);
+        txtUF.setEnabled(true);
+        txtUF.setEditable(false);
+        txtSetor.setEnabled(true);
+        txtSetor.setEditable(false);
+        txtComplemento.setEnabled(true);
+
+        if(txtSetor.getText().isEmpty()){
+            txtSetor.setEditable(true);
+        }
+        if(txtLogradouro.getText().isEmpty()){
+            txtSetor.setEditable(true);
+        }
     }//GEN-LAST:event_btnBuscaCepActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
