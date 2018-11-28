@@ -22,7 +22,7 @@ public class PAgencia implements IAgencia {
 
     @Override
     public void incluir(Agencia agencia) throws Exception {
-        String sql = "INSERT INTO agencia (codigo,endereco) VALUES (?,?,?);";
+        String sql = "INSERT INTO agencia (codigo,endereco) VALUES (?,?);";
         Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
         prd.setString(1, agencia.getCodigo());

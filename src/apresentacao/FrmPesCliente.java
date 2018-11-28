@@ -8,6 +8,7 @@ package apresentacao;
 import entidades.Cliente;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +22,7 @@ import persistencia.PCliente;
 public class FrmPesCliente extends javax.swing.JInternalFrame {
 
     JDesktopPane painelPrincipal;
-    Iterator dados = new PCliente().listar();
+    Iterator dados = new NCliente().listar();
     
     
 
@@ -145,9 +146,10 @@ public class FrmPesCliente extends javax.swing.JInternalFrame {
         DefaultTableModel model = (DefaultTableModel) tblResultado.getModel();
         model.setNumRows(0);
         while (conjunto.hasNext()) {
-            String[] linha = new String[5];
+            String[] linha = new String[7];
             Cliente cliente = (Cliente) conjunto.next();
-            linha[0] = Integer.toString(cliente.getId());
+            
+            linha[0] = String.valueOf(cliente.getId());            
             linha[1] = cliente.getNome();
             linha[2] = cliente.getCpf();
             linha[3] = cliente.getDataNascimento().toString();
@@ -158,4 +160,14 @@ public class FrmPesCliente extends javax.swing.JInternalFrame {
             model.addRow(linha);
         }
     }
+   
+   private LinkedList<Cliente> ordenar(Iterator conjunto){
+       LinkedList<Cliente> lista = new LinkedList<>();
+       while(conjunto.hasNext()){
+           Cliente cliente = (Cliente) conjunto.next();
+           lista.add(cliente);
+       }     
+           
+       return lista;
+   }
 }

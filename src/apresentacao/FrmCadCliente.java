@@ -5,6 +5,7 @@
  */
 package apresentacao;
 
+import static com.sun.corba.se.impl.util.Utility.printStackTrace;
 import entidades.Cliente;
 import entidades.Endereco;
 import java.text.DateFormat;
@@ -39,28 +40,39 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
         this.painelPrincipal = painelPrincipal;
     }
 
-    public FrmCadCliente(JDesktopPane painelPrincipal, String id) {
+    public FrmCadCliente(JDesktopPane painelPrincipal,String id) {
         this();
         this.painelPrincipal = painelPrincipal;
 
         try {
 
             NCliente nc = new NCliente();
-            Cliente c = nc.consultar(Integer.parseInt(id));
+            Cliente cliente = nc.consultarID(Integer.parseInt(id));
 
-            txtID.setText(String.valueOf(c.getId()));
-            txtNome.setText(c.getNome());
-            txtCPF.setText(c.getCpf());
-            txtFone.setText(c.getTelefone());
-            txtEmail.setText(c.getEmail());
+            txtID.setText(String.valueOf(cliente.getId()));
+            txtNome.setText(cliente.getNome());
+            txtCPF.setText(cliente.getCpf());
+            txtFone.setText(cliente.getTelefone());
+            txtEmail.setText(cliente.getEmail());
+            
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");  
+            String data = dateFormat.format(cliente.getDataNascimento());
+            txtDataNascimento.setText(data);
 
-            String endereco = c.getEndereco();
-            String[] enderecoQuebrado = endereco.split(" - ");
-
-            txtCidade.setText(enderecoQuebrado[1]);
+            String endereco = cliente.getEndereco();
+            String[] enderecoQuebrado = new String[6];
+            enderecoQuebrado = endereco.split(",");            
+            
             txtLogradouro.setText(enderecoQuebrado[0]);
+            txtComplemento.setText(enderecoQuebrado[1]);
+            txtSetor.setText(enderecoQuebrado[2]);
+            txtCidade.setText(enderecoQuebrado[3]);
+            txtUF.setText(enderecoQuebrado[4]);
+            txtCEP.setText(enderecoQuebrado[5]);
 
             btnExcluir.setEnabled(true);
+            
+            txtComplemento.setEditable(true);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -450,6 +462,7 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
             this.dispose();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
+            e.printStackTrace();
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
@@ -459,7 +472,7 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         try {
-            int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o registro selecionado?", "libraryControl", JOptionPane.YES_NO_OPTION);
+            int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o registro selecionado?", "banksys", JOptionPane.YES_NO_OPTION);
             if (resposta == JOptionPane.YES_OPTION) {
 
                 if (txtID.getText().isEmpty()) {
@@ -545,6 +558,8 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void limpar() {
+        
+        
         txtID.setText("");
         txtCPF.setText("");
         txtCidade.setText("");
@@ -555,6 +570,10 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
         txtSetor.setText("");
         txtUF.setText("");
         txtComplemento.setText("");
+        txtDataNascimento.setText("");
+        txtCEP.setText("");
+        
+        
         txtLogradouro.setEnabled(false);
         txtCidade.setEnabled(false);
         txtSetor.setEnabled(false);

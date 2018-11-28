@@ -14,7 +14,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  *
@@ -32,7 +35,7 @@ public class PCliente implements ICliente {
         prd.setString(2, cliente.getNome());
         prd.setDate(3, cliente.getDataNascimento());
         prd.setString(4, cliente.getTelefone());
-        prd.setString(5, cliente.getEndereco()); 
+        prd.setString(5, cliente.getEndereco());
         prd.setString(6, cliente.getEmail());
 
         prd.execute();
@@ -41,30 +44,47 @@ public class PCliente implements ICliente {
 
     @Override
     public Iterator listar() throws Exception {
-        String sql = "SELECT * FROM cliente";
+        try {
+            String sql = "SELECT * FROM cliente";
 
-        Connection cnn = util.Conexao.getConexao();
-        Statement st = cnn.createStatement();
+            Connection cnn = util.Conexao.getConexao();
+            Statement st = cnn.createStatement();
 
-        ResultSet rs = st.executeQuery(sql);
-        ArrayList<Cliente> retorno = new ArrayList();
+            ResultSet rs = st.executeQuery(sql);
+            LinkedList<Cliente> retorno = new LinkedList();
 
-        while (rs.next()) {
-            Cliente cliente = new Cliente();
-            cliente.setCpf(rs.getString("cpf"));
-            cliente.setNome(rs.getString("nome"));
-            cliente.setDataNascimento(rs.getDate("data_de_nascimento"));
-            cliente.setEndereco(rs.getString("endereco"));
-            cliente.setTelefone(rs.getString("telefone"));
-            cliente.setEmail(rs.getString("email"));
-            retorno.add(cliente);
+            while (rs.next()) {
+                Cliente cliente = new Cliente();
+                cliente.setId(rs.getInt("id"));
+                cliente.setCpf(rs.getString("cpf"));
+                cliente.setNome(rs.getString("nome"));
+                cliente.setDataNascimento(rs.getDate("data_de_nascimento"));
+                cliente.setEndereco(rs.getString("endereco"));
+                cliente.setTelefone(rs.getString("telefone"));
+                cliente.setEmail(rs.getString("email"));
+
+                retorno.add(cliente);
+            }
+
+            retorno.sort(new Comparator() {
+                @Override
+                public int compare(Object o1, Object o2) {
+                    Cliente c1 = (Cliente) o1;
+                    Cliente c2 = (Cliente) o2;
+                    return c1.getNome().compareToIgnoreCase(c2.getNome());
+                }
+            });
+            return retorno.iterator();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
         }
-        return retorno.iterator();
+
     }
 
     @Override
     public void alterar(Cliente cliente) throws Exception {
-        String sql = "UPDATE cliente SET cpf = ?, nome = ?, data_de_nascimento = ?, endereco = ?, telefone = ? email = ? WHERE cpf = ?";
+        String sql = "UPDATE cliente SET cpf = ?, nome = ?, data_de_nascimento = ?, endereco = ?, telefone = ?, email = ? WHERE id = ?";
 
         Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -75,8 +95,7 @@ public class PCliente implements ICliente {
         prd.setString(4, cliente.getEndereco());
         prd.setString(5, cliente.getTelefone());
         prd.setString(6, cliente.getEmail());
-        prd.setString(7, cliente.getCpf());
-        
+        prd.setInt(7, cliente.getId());
 
         //executa todo o comando e grava no banco de dados
         prd.execute();
@@ -84,17 +103,17 @@ public class PCliente implements ICliente {
     }
 
     @Override
-    public void excluir(long cpf) throws Exception {
-        String sql = "DELETE FROM cliente WHERE cpf = ?;";
+    public void excluir(int id) throws Exception {
+        String sql = "DELETE FROM cliente WHERE id = ?;";
         Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
-        prd.setLong(1, cpf);
+        prd.setLong(1, id);
         prd.execute();
         cnn.close();
     }
 
     @Override
-    public Cliente consultar(long cpf) throws Exception {
+    public Cliente consultarCPF(long cpf) throws Exception {
         String sql = " SELECT * FROM cliente WHERE cpf = ?;";
 
         Connection cnn = util.Conexao.getConexao();
@@ -116,7 +135,32 @@ public class PCliente implements ICliente {
         cnn.close();
         return retorno;
     }
-    
+
+    @Override
+    public Cliente consultarID(int id) throws Exception {
+        String sql = " SELECT * FROM cliente WHERE id = ?;";
+
+        Connection cnn = util.Conexao.getConexao();
+        PreparedStatement prd = cnn.prepareStatement(sql);
+        prd.setLong(1, id);
+
+        ResultSet rs = prd.executeQuery();
+        Cliente retorno = new Cliente();
+
+        if (rs.next()) {
+            retorno.setId(rs.getInt("id"));
+            retorno.setCpf(rs.getString("cpf"));
+            retorno.setNome(rs.getString("nome"));
+            retorno.setDataNascimento(rs.getDate("data_de_nascimento"));
+            retorno.setEndereco(rs.getString("endereco"));
+            retorno.setTelefone(rs.getString("telefone"));
+            retorno.setEmail(rs.getString("email"));
+        }
+        prd.execute();
+        cnn.close();
+        return retorno;
+    }
+
     public Cliente consultar(String nome) throws Exception {
         String sql = " SELECT * FROM cliente WHERE nome = ?;";
 

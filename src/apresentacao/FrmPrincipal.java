@@ -36,6 +36,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         optCliente = new javax.swing.JMenuItem();
         optFuncionario = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         optSair = new javax.swing.JMenuItem();
 
@@ -54,17 +56,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
         );
         painelPrincipalLayout.setVerticalGroup(
             painelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 532, Short.MAX_VALUE)
+            .addGap(0, 534, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Cadastros");
+        jMenu1.setText("Funcionário");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu1ActionPerformed(evt);
             }
         });
 
-        optCliente.setText("Cliente");
+        optCliente.setText("Cadastro de Cliente");
         optCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 optClienteActionPerformed(evt);
@@ -72,7 +74,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(optCliente);
 
-        optFuncionario.setText("Funcionário");
+        optFuncionario.setText("Cadastro de Funcionário");
         optFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 optFuncionarioActionPerformed(evt);
@@ -81,6 +83,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu1.add(optFuncionario);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Cliente");
+
+        jMenuItem1.setText("Operações bancárias");
+        jMenu2.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Sair");
 
@@ -184,8 +193,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem optCliente;
     private javax.swing.JMenuItem optFuncionario;
     private javax.swing.JMenuItem optSair;
