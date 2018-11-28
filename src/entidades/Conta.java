@@ -7,13 +7,15 @@ import java.sql.Date;
  * @author jhene
  */
 public class Conta {
+
     private int id;
     private int numConta;
     private Agencia numAgencia;
-    private Cliente titular;
-    private Cliente segundoTitular;
     private float saldo;
     private Date dataAberturaConta;
+    private int tipoConta;
+    private boolean usaCheque;
+    private boolean eConjunta;
 
     public int getNumConta() {
         return numConta;
@@ -29,14 +31,6 @@ public class Conta {
 
     public void setNumAgencia(Agencia numAgencia) {
         this.numAgencia = numAgencia;
-    }
-
-    public Cliente getTitular() {
-        return titular;
-    }
-
-    public void setTitular(Cliente titular) {
-        this.titular = titular;
     }
 
     public float getSaldo() {
