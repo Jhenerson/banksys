@@ -67,10 +67,12 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
             txtComplemento.setText(enderecoQuebrado[1]);
             txtSetor.setText(enderecoQuebrado[2]);
             txtCidade.setText(enderecoQuebrado[3]);
-            txtLogradouro.setText(enderecoQuebrado[4]);
+            txtUF.setText(enderecoQuebrado[4]);
             txtCEP.setText(enderecoQuebrado[5]);
 
             btnExcluir.setEnabled(true);
+            
+            txtComplemento.setEditable(true);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -569,6 +571,7 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
         txtUF.setText("");
         txtComplemento.setText("");
         txtDataNascimento.setText("");
+        txtCEP.setText("");
         
         
         txtLogradouro.setEnabled(false);
