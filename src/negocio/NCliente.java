@@ -59,8 +59,12 @@ public class NCliente {
         persistencia.excluir(parametro);
     }
 
-    public Cliente consultar(int parametro) throws SQLException, Exception {
-        return persistencia.consultar(parametro);        
+    public Cliente consultarID(int parametro) throws SQLException, Exception {
+        return persistencia.consultarID(parametro);        
+    }
+    
+    public Cliente consultarCPF(long cpf) throws SQLException, Exception {
+        return persistencia.consultarCPF(cpf);        
     }
     
     public Cliente consultar(String nome) throws SQLException, Exception {
