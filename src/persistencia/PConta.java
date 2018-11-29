@@ -83,7 +83,25 @@ public class PConta implements IConta {
 
     @Override
     public void alterar(Conta conta) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        
+        
+         String sql = "UPDATE conta SET numero = ?, data_abertura = ?, tipo_conta = ?, usa_cheque = ?, e_conjunta = ?,id_agencia = ? WHERE id = ?";
+
+        Connection cnn = util.Conexao.getConexao();
+        PreparedStatement prd = cnn.prepareStatement(sql);
+
+        prd.setInt(1, conta.getNumConta());        
+        prd.setDate(2, conta.getDataAberturaConta());
+        prd.setInt(3, conta.getTipoConta());
+        prd.setBoolean(4, conta.isUsaCheque());
+        prd.setBoolean(5, conta.iseConjunta());
+        prd.setObject(6, conta.getNumAgencia().getId());
+        prd.setInt(7, conta.getId());
+
+        //executa todo o comando e grava no banco de dados
+        prd.execute();
+        cnn.close();
     }
 
     @Override
