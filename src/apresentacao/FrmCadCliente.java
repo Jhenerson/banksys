@@ -14,6 +14,7 @@ import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import negocio.NCliente;
 import util.BuscaCEP;
+import util.ValidaCPF;
 
 /**
  *
@@ -729,6 +730,10 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
 
             if (!txtID.getText().isEmpty()) {
                 cliente.setId(Integer.parseInt(txtID.getText()));
+            }
+            
+            if(!ValidaCPF.isCPF(txtCPF.getText())){
+                throw new Exception ("CPF inválido");
             }
             
             DateFormat formato = new SimpleDateFormat("dd/MM/yyyy");

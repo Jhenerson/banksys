@@ -19,7 +19,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public FrmPrincipal() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
-        
+
     }
 
     /**
@@ -35,8 +35,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         optCliente = new javax.swing.JMenuItem();
         optFuncionario = new javax.swing.JMenuItem();
+        optConta = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -77,6 +79,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jMenuItem2.setText("Cadastro de Agência");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
         optCliente.setText("Cadastro de Cliente");
         optCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,6 +102,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(optFuncionario);
+
+        optConta.setText("Cadastro de Conta");
+        optConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optContaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(optConta);
 
         jMenuBar1.add(jMenu1);
 
@@ -141,7 +159,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        
+
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void optClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optClienteActionPerformed
@@ -151,7 +169,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             frmCadCliente.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
-        }        
+        }
     }//GEN-LAST:event_optClienteActionPerformed
 
     private void optFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optFuncionarioActionPerformed
@@ -161,8 +179,28 @@ public class FrmPrincipal extends javax.swing.JFrame {
             frmCadFuncionario.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
-        } 
+        }
     }//GEN-LAST:event_optFuncionarioActionPerformed
+
+    private void optContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optContaActionPerformed
+        try {
+            FrmCadConta frmCadConta = new FrmCadConta(painelPrincipal);
+            painelPrincipal.add(frmCadConta);
+            frmCadConta.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_optContaActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        try {
+            FrmCadAgencia frmCadAgencia = new FrmCadAgencia(painelPrincipal);
+            painelPrincipal.add(frmCadAgencia);
+            frmCadAgencia.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,7 +247,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem optCliente;
+    private javax.swing.JMenuItem optConta;
     private javax.swing.JMenuItem optFuncionario;
     private javax.swing.JMenuItem optSair;
     private javax.swing.JDesktopPane painelPrincipal;
@@ -218,7 +258,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void sair() {
         try {
             int resposta = JOptionPane.showConfirmDialog(null, "Deseja mesmo sair?", "libraryControl", JOptionPane.YES_NO_OPTION);
-            if(resposta == JOptionPane.YES_OPTION) {
+            if (resposta == JOptionPane.YES_OPTION) {
                 System.exit(0);
             }
         } catch (Exception e) {

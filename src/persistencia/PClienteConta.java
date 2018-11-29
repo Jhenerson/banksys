@@ -5,7 +5,6 @@
  */
 package persistencia;
 
-import entidades.Agencia;
 import entidades.ClienteConta;
 import entidades.Conta;
 import interfaces.IClienteConta;

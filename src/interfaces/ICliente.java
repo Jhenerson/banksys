@@ -24,7 +24,7 @@ public interface ICliente {
 
     public void excluir(int id) throws Exception;
 
-    public Cliente consultarCPF(long cpf) throws Exception;
+    public Cliente consultarCPF(String cpf) throws Exception;
     
     public Cliente consultarID(int id) throws Exception;
 
