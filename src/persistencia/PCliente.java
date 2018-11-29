@@ -113,12 +113,12 @@ public class PCliente implements ICliente {
     }
 
     @Override
-    public Cliente consultarCPF(long cpf) throws Exception {
+    public Cliente consultarCPF(String cpf) throws Exception {
         String sql = " SELECT * FROM cliente WHERE cpf = ?;";
 
         Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
-        prd.setLong(1, cpf);
+        prd.setString(1, cpf);
 
         ResultSet rs = prd.executeQuery();
         Cliente retorno = new Cliente();

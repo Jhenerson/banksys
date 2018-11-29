@@ -5,7 +5,6 @@
  */
 package apresentacao;
 
-
 import entidades.Cliente;
 import entidades.Endereco;
 import java.text.DateFormat;
@@ -14,6 +13,7 @@ import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import negocio.NCliente;
 import util.BuscaCEP;
+import util.ValidaCPF;
 
 /**
  *
@@ -28,11 +28,8 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
      */
     public FrmCadConta() {
         initComponents();
-        txtLogradouro.setEnabled(false);
-        txtCidade.setEnabled(false);
-        txtSetor.setEnabled(false);
-        txtUF.setEnabled(false);     
-        txtComplemento.setEnabled(false);
+        txtNome2Titular.setEditable(false);
+        txtNomeTitular.setEditable(false);
     }
 
     public FrmCadConta(JDesktopPane painelPrincipal) {
@@ -40,7 +37,7 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
         this.painelPrincipal = painelPrincipal;
     }
 
-    public FrmCadConta(JDesktopPane painelPrincipal,String id) {
+    public FrmCadConta(JDesktopPane painelPrincipal, String id) {
         this();
         this.painelPrincipal = painelPrincipal;
 
@@ -49,30 +46,15 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
             NCliente nc = new NCliente();
             Cliente cliente = nc.consultarID(Integer.parseInt(id));
 
-            txtID.setText(String.valueOf(cliente.getId()));
-            txtNome.setText(cliente.getNome());
-            txtCPF.setText(cliente.getCpf());
-            txtFone.setText(cliente.getTelefone());
-            txtEmail.setText(cliente.getEmail());
-            
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");  
-            String data = dateFormat.format(cliente.getDataNascimento());
-            txtDataNascimento.setText(data);
+            txtIDConta.setText(String.valueOf(cliente.getId()));
+            txtNomeTitular.setText(cliente.getNome());
+            txtCPFTitular.setText(cliente.getCpf());
 
             String endereco = cliente.getEndereco();
             String[] enderecoQuebrado = new String[6];
-            enderecoQuebrado = endereco.split(",");            
-            
-            txtLogradouro.setText(enderecoQuebrado[0]);
-            txtComplemento.setText(enderecoQuebrado[1]);
-            txtSetor.setText(enderecoQuebrado[2]);
-            txtCidade.setText(enderecoQuebrado[3]);
-            txtUF.setText(enderecoQuebrado[4]);
-            txtCEP.setText(enderecoQuebrado[5]);
+            enderecoQuebrado = endereco.split(",");
 
             btnExcluir.setEnabled(true);
-            
-            txtComplemento.setEditable(true);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,26 +71,27 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCheckBox1 = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
-        txtID = new javax.swing.JTextField();
-        btnPesquisar = new javax.swing.JButton();
+        txtIDConta = new javax.swing.JTextField();
+        btnPesquisarConta = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
-        txtCPF = new javax.swing.JTextField();
+        txtNomeTitular = new javax.swing.JTextField();
+        txtCPFTitular = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnPesquisarTitular = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        panel2Titular = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        txtCPF2 = new javax.swing.JTextField();
-        txtNome2 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        txtCPF2Titular = new javax.swing.JTextField();
+        txtNome2Titular = new javax.swing.JTextField();
+        btnPesquisar2Titular = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jLabel10 = new javax.swing.JLabel();
@@ -145,18 +128,27 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
         jLabel24 = new javax.swing.JLabel();
         txtSetor1 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        btnPesquisarAgencia = new javax.swing.JButton();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
+
+        jCheckBox1.setText("jCheckBox1");
 
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setTitle("Cadastro de Conta");
 
         jLabel1.setText("ID:");
 
-        txtID.setEditable(false);
+        txtIDConta.setEditable(false);
 
-        btnPesquisar.setText("Pesquisar");
-        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+        btnPesquisarConta.setText("Pesquisar");
+        btnPesquisarConta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisarActionPerformed(evt);
+                btnPesquisarContaActionPerformed(evt);
             }
         });
 
@@ -195,7 +187,12 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
 
         jLabel4.setText("CPF:");
 
-        jButton1.setText("Pesquisar");
+        btnPesquisarTitular.setText("Pesquisar");
+        btnPesquisarTitular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarTitularActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Titular");
 
@@ -213,14 +210,14 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
                         .addGap(49, 49, 49)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtCPFTitular, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1))
-                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnPesquisarTitular))
+                            .addComponent(txtNomeTitular, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(281, 281, 281)
                         .addComponent(jLabel3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,61 +226,66 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
                 .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(txtCPFTitular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesquisarTitular))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNomeTitular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panel2Titular.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel25.setText("CPF:");
 
         jLabel26.setText("Nome:");
 
-        jButton2.setText("Pesquisar");
+        btnPesquisar2Titular.setText("Pesquisar");
+        btnPesquisar2Titular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisar2TitularActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("2º Titular");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout panel2TitularLayout = new javax.swing.GroupLayout(panel2Titular);
+        panel2Titular.setLayout(panel2TitularLayout);
+        panel2TitularLayout.setHorizontalGroup(
+            panel2TitularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel2TitularLayout.createSequentialGroup()
+                .addGroup(panel2TitularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel2TitularLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panel2TitularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel26)
                             .addComponent(jLabel25))
                         .addGap(49, 49, 49)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(txtCPF2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panel2TitularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(panel2TitularLayout.createSequentialGroup()
+                                .addComponent(txtCPF2Titular, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2))
-                            .addComponent(txtNome2, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(btnPesquisar2Titular))
+                            .addComponent(txtNome2Titular, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panel2TitularLayout.createSequentialGroup()
                         .addGap(280, 280, 280)
                         .addComponent(jLabel5)))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        panel2TitularLayout.setVerticalGroup(
+            panel2TitularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel2TitularLayout.createSequentialGroup()
                 .addComponent(jLabel5)
                 .addGap(8, 8, 8)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panel2TitularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
-                    .addComponent(txtCPF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(txtCPF2Titular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesquisar2Titular))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panel2TitularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26)
-                    .addComponent(txtNome2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNome2Titular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -545,16 +547,56 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel7.setText("Agência:");
+
+        jLabel6.setText("Conta:");
+
+        btnPesquisarAgencia.setText("...");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(39, 39, 39)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(30, 30, 30)
+                        .addComponent(jTextField2)))
+                .addGap(18, 18, 18)
+                .addComponent(btnPesquisarAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesquisarAgencia))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jCheckBox2.setText("Conta Conjunta");
+
+        jCheckBox3.setText("Cheque");
+        jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -563,33 +605,35 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(jLabel1)
-                                .addGap(67, 67, 67)
-                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnPesquisar))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(178, 178, 178)
-                                .addComponent(btnSalvar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnExcluir)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnLimpar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSair)))
-                        .addGap(0, 180, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(178, 178, 178)
+                        .addComponent(btnSalvar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLimpar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSair))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(panel2Titular, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(jLabel1)
+                                        .addGap(55, 55, 55)
+                                        .addComponent(txtIDConta, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnPesquisarConta))
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(28, 28, 28)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBox3)
+                                    .addComponent(jCheckBox2))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -602,15 +646,21 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIDConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesquisarConta))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panel2Titular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jCheckBox2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox3)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnExcluir)
@@ -619,9 +669,9 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 191, Short.MAX_VALUE)
                     .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 190, Short.MAX_VALUE)))
         );
 
         pack();
@@ -634,58 +684,36 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         try {
 
-            if (txtNome.getText().isEmpty()) {
+            if (txtNomeTitular.getText().isEmpty()) {
                 throw new Exception("O nome é obrigatório!");
             }
 
-            if (txtCPF.getText().isEmpty()) {
+            if (txtCPFTitular.getText().isEmpty()) {
                 throw new Exception("O CPF é obrigatório!");
-            }
-
-            if (txtLogradouro.getText().isEmpty()) {
-                throw new Exception("O endereço é obrigatório!");
-            }
-
-            if (txtEmail.getText().isEmpty()) {
-                throw new Exception("O e-mail é obrigatório!");
-            }
-
-            if (txtCidade.getText().isEmpty()) {
-                throw new Exception("A cidade é obrigatória!");
-            }
-
-            if (txtDataNascimento.getText().isEmpty()) {
-                throw new Exception("A Data de nascimento é obrigatoria!");
-            }
-
-            if (txtFone.getText().isEmpty()) {
-                throw new Exception("O telefone é obrigatório!");
             }
 
             Cliente cliente = new Cliente();
 
-            if (!txtID.getText().isEmpty()) {
-                cliente.setId(Integer.parseInt(txtID.getText()));
+            if (!txtIDConta.getText().isEmpty()) {
+                cliente.setId(Integer.parseInt(txtIDConta.getText()));
             }
-            
+
             DateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-            java.sql.Date dataNascimento = new java.sql.Date(formato.parse(txtDataNascimento.getText()).getTime());
-            
+            //java.sql.Date dataNascimento = new java.sql.Date(formato.parse(txtDataNascimento.getText()).getTime());
 
-            String endereco = txtLogradouro.getText() + "," + txtComplemento.getText() + "," + txtSetor.getText() + "," + txtCidade.getText() + "," + txtUF.getText() + "," +txtCEP.getText();
-
-            cliente.setNome(txtNome.getText());
-            cliente.setTelefone(txtFone.getText());
-            cliente.setEmail(txtEmail.getText());
-            cliente.setEndereco(endereco);
-            cliente.setCpf(txtCPF.getText());
-            cliente.setDataNascimento(dataNascimento);
+            cliente.setNome(txtNomeTitular.getText());
+            cliente.setCpf(txtCPFTitular.getText());
+//            cliente.setDataNascimento(dataNascimento);
 
             NCliente nc = new NCliente();
             nc.salvar(cliente);
             JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
 
             limpar();
+            if(txtNomeTitular.getText().equals(txtNome2Titular.getText()) 
+                    || txtCPFTitular.getText().equals(txtCPF2Titular)){
+                throw new Exception("Titular e 2º Titular não podem ser iguais.Favor alterar o 2º Titular!");
+            }
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -693,7 +721,7 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+    private void btnPesquisarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarContaActionPerformed
         try {
             FrmPesCliente tlPesquisa = new FrmPesCliente(painelPrincipal);
             painelPrincipal.add(tlPesquisa);
@@ -703,7 +731,7 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
             e.printStackTrace();
         }
-    }//GEN-LAST:event_btnPesquisarActionPerformed
+    }//GEN-LAST:event_btnPesquisarContaActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         limpar();
@@ -714,11 +742,11 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
             int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o registro selecionado?", "banksys", JOptionPane.YES_NO_OPTION);
             if (resposta == JOptionPane.YES_OPTION) {
 
-                if (txtID.getText().isEmpty()) {
+                if (txtIDConta.getText().isEmpty()) {
                     throw new Exception("ID inválido!");
                 }
                 NCliente nc = new NCliente();
-                nc.excluir(Integer.parseInt(txtID.getText()));
+                nc.excluir(Integer.parseInt(txtIDConta.getText()));
                 JOptionPane.showMessageDialog(null, "Cliente excluído com sucesso!");
                 limpar();
 
@@ -756,6 +784,40 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscaCep1ActionPerformed
 
+    private void btnPesquisarTitularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarTitularActionPerformed
+        try {
+
+            NCliente nCliente = new NCliente();
+            if (ValidaCPF.isCPF(txtCPFTitular.getText())) {
+                Cliente cliente = nCliente.consultarCPF(txtCPFTitular.getText());
+                txtNomeTitular.setText(cliente.getNome());
+                txtCPFTitular.setText(cliente.getCpf());
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_btnPesquisarTitularActionPerformed
+
+    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox3ActionPerformed
+
+    private void btnPesquisar2TitularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisar2TitularActionPerformed
+        try {
+
+            NCliente nCliente = new NCliente();
+            if (ValidaCPF.isCPF(txtCPF2Titular.getText())) {
+                Cliente cliente = nCliente.consultarCPF(txtCPF2Titular.getText());
+                txtNome2Titular.setText(cliente.getNome());
+                txtCPF2Titular.setText(cliente.getCpf());
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_btnPesquisar2TitularActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscaCep1;
@@ -763,14 +825,18 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnExcluir1;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnLimpar1;
-    private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnPesquisar1;
+    private javax.swing.JButton btnPesquisar2Titular;
+    private javax.swing.JButton btnPesquisarAgencia;
+    private javax.swing.JButton btnPesquisarConta;
+    private javax.swing.JButton btnPesquisarTitular;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSair1;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnSalvar1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -791,52 +857,40 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JPanel panel2Titular;
     private javax.swing.JTextField txtCEP1;
-    private javax.swing.JTextField txtCPF;
     private javax.swing.JTextField txtCPF1;
-    private javax.swing.JTextField txtCPF2;
+    private javax.swing.JTextField txtCPF2Titular;
+    private javax.swing.JTextField txtCPFTitular;
     private javax.swing.JTextField txtCidade1;
     private javax.swing.JTextField txtComplemento1;
     private javax.swing.JTextField txtDataNascimento1;
     private javax.swing.JTextField txtEmail1;
     private javax.swing.JTextField txtFone1;
-    private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtID1;
+    private javax.swing.JTextField txtIDConta;
     private javax.swing.JTextField txtLogradouro1;
-    private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNome1;
-    private javax.swing.JTextField txtNome2;
+    private javax.swing.JTextField txtNome2Titular;
+    private javax.swing.JTextField txtNomeTitular;
     private javax.swing.JTextField txtSetor1;
     private javax.swing.JTextField txtUF1;
     // End of variables declaration//GEN-END:variables
 
     private void limpar() {
-        
-        
-        txtID.setText("");
-        txtCPF.setText("");
-        txtCidade.setText("");
-        txtEmail.setText("");
-        txtLogradouro.setText("");
-        txtFone.setText("");
-        txtNome.setText("");
-        txtSetor.setText("");
-        txtUF.setText("");
-        txtComplemento.setText("");
-        txtDataNascimento.setText("");
-        txtCEP.setText("");
-        
-        
-        txtLogradouro.setEnabled(false);
-        txtCidade.setEnabled(false);
-        txtSetor.setEnabled(false);
-        txtUF.setEnabled(false);     
-        txtComplemento.setEnabled(false);
+
+        txtIDConta.setText("");
+        txtCPFTitular.setText("");
+        txtNomeTitular.setText("");
+
     }
 }

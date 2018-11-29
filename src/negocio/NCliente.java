@@ -63,7 +63,7 @@ public class NCliente {
         return persistencia.consultarID(parametro);        
     }
     
-    public Cliente consultarCPF(long cpf) throws SQLException, Exception {
+    public Cliente consultarCPF(String cpf) throws SQLException, Exception {
         return persistencia.consultarCPF(cpf);        
     }
     
