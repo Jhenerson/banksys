@@ -35,6 +35,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         optCliente = new javax.swing.JMenuItem();
         optFuncionario = new javax.swing.JMenuItem();
         optConta = new javax.swing.JMenuItem();
@@ -78,6 +79,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jMenuItem2.setText("Cadastro de Agência");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
         optCliente.setText("Cadastro de Cliente");
         optCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +103,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(optFuncionario);
 
-        optConta.setText("Cadasto de Conta");
+        optConta.setText("Cadastro de Conta");
         optConta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 optContaActionPerformed(evt);
@@ -183,6 +192,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_optContaActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        try {
+            FrmCadAgencia frmCadAgencia = new FrmCadAgencia(painelPrincipal);
+            painelPrincipal.add(frmCadAgencia);
+            frmCadAgencia.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -228,6 +247,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem optCliente;
     private javax.swing.JMenuItem optConta;
     private javax.swing.JMenuItem optFuncionario;

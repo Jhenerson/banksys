@@ -43,6 +43,7 @@ public class PAgencia implements IAgencia {
 
         while (rs.next()) {
             Agencia ag = new Agencia();
+            ag.setId(rs.getInt("id"));
             ag.setCodigo(rs.getString("codigo"));
             ag.setEndereco(rs.getString("endereco"));
             retorno.add(ag);

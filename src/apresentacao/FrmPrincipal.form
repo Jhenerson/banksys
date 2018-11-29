@@ -12,6 +12,14 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenu1ActionPerformed"/>
           </Events>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cadastro de Ag&#xea;ncia"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="optCliente">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastro de Cliente"/>
@@ -30,7 +38,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="optConta">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cadasto de Conta"/>
+                <Property name="text" type="java.lang.String" value="Cadastro de Conta"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="optContaActionPerformed"/>
