@@ -5,7 +5,6 @@
  */
 package persistencia;
 
-import entidades.Agencia;
 import entidades.Cliente;
 import entidades.Conta;
 import entidades.Movimentacao;
@@ -13,7 +12,6 @@ import interfaces.IMovimentacao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -38,13 +36,14 @@ public class PMovimentacao implements IMovimentacao{
     }
 
     @Override
-    public Iterator listar() throws Exception {
-        String sql = "SELECT * FROM movimentacao;";
+    public Iterator getMovimentacoes(int idConta) throws Exception {
+        String sql = "SELECT * FROM movimentacao where id_conta = ?;";
 
         Connection cnn = util.Conexao.getConexao();
-        Statement st = cnn.createStatement();
+        PreparedStatement prd = cnn.prepareStatement(sql);
+        prd.setInt(1, idConta);
 
-        ResultSet rs = st.executeQuery(sql);
+        ResultSet rs = prd.executeQuery(sql);
         ArrayList<Movimentacao> retorno = new ArrayList();
 
         while (rs.next()) {
@@ -66,9 +65,4 @@ public class PMovimentacao implements IMovimentacao{
         return retorno.iterator();
     }
 
-    @Override
-    public Movimentacao consultar(int idConta) throws Exception {
-        return null;
-    }
-    
 }

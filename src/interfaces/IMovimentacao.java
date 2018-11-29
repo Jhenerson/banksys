@@ -15,6 +15,5 @@ import java.util.Iterator;
 public interface IMovimentacao {
     
     public void incluir(Movimentacao movimentacao) throws Exception;
-    public Iterator listar() throws Exception;
-    public Movimentacao consultar(int idConta) throws Exception;
+    public Iterator getMovimentacoes(int idConta) throws Exception;
 }

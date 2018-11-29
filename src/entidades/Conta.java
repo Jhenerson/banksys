@@ -80,4 +80,20 @@ public class Conta {
     public void seteConjunta(boolean eConjunta) {
         this.eConjunta = eConjunta;
     }
+    
+    public void sacar(float valor) throws Exception {
+        if(valor > saldo) {
+            throw new Exception("Saldo disponível menor que o valor a ser sacado.");
+        }
+        this.saldo = saldo - valor;
+    }
+    
+    public void depositar(float valor) throws Exception {
+        if(valor <= 0) {
+            throw new Exception("Valor a ser depositado inválido.");
+        }
+        this.saldo = saldo + valor;
+    }
+    
+    
 }
