@@ -5,18 +5,34 @@
  */
 package apresentacao;
 
+import entidades.Agencia;
+import java.util.Iterator;
+import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import negocio.NAgencia;
+
 /**
  *
  * @author rodolpho.repezza
  */
 public class FrmPesAgencia extends javax.swing.JInternalFrame {
+    
+    JDesktopPane painelPrincipal;
 
     /**
-     * Creates new form FrmPesAgencia2
+     * Creates new form FrmPesAgencia
      */
     public FrmPesAgencia() {
         initComponents();
+        imprimirDadosNaGrid();
     }
+    
+    public FrmPesAgencia(JDesktopPane painelPrincipal) {
+        this();
+        this.painelPrincipal = painelPrincipal;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,21 +64,26 @@ public class FrmPesAgencia extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblResultado);
         if (tblResultado.getColumnModel().getColumnCount() > 0) {
-            tblResultado.getColumnModel().getColumn(0).setMinWidth(40);
-            tblResultado.getColumnModel().getColumn(0).setPreferredWidth(40);
-            tblResultado.getColumnModel().getColumn(0).setMaxWidth(40);
+            tblResultado.getColumnModel().getColumn(0).setMinWidth(30);
+            tblResultado.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tblResultado.getColumnModel().getColumn(0).setMaxWidth(30);
             tblResultado.getColumnModel().getColumn(1).setMinWidth(100);
             tblResultado.getColumnModel().getColumn(1).setPreferredWidth(100);
             tblResultado.getColumnModel().getColumn(1).setMaxWidth(100);
         }
 
         btnFechar.setText("Fechar");
+        btnFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFecharActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnFechar))
@@ -70,18 +91,55 @@ public class FrmPesAgencia extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnFechar)
-                .addContainerGap())
+                .addGap(0, 19, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblResultadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblResultadoMousePressed
-        // TODO add your handling code here:
+        try {
+            int linhaSelecionada = tblResultado.getSelectedRow();
+            String id = tblResultado.getValueAt(linhaSelecionada, 0).toString();
+            FrmCadAgencia frmCadAgencia = new FrmCadAgencia(painelPrincipal, id);
+            painelPrincipal.add(frmCadAgencia);
+            frmCadAgencia.setVisible(true);
+            this.dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }//GEN-LAST:event_tblResultadoMousePressed
+
+    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnFecharActionPerformed
+
+    private void imprimirDadosNaGrid() {
+        try {
+            
+            NAgencia na = new NAgencia();
+            Iterator dados = na.listar();
+            
+            DefaultTableModel model = (DefaultTableModel) tblResultado.getModel();
+            model.setNumRows(0);
+            while (dados.hasNext()) {
+                String[] linha = new String[3];
+                Agencia agencia = (Agencia) dados.next();
+
+                linha[0] = String.valueOf(agencia.getId());            
+                linha[1] = agencia.getCodigo();
+                linha[2] = agencia.getEndereco();
+
+                model.addRow(linha);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

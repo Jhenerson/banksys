@@ -46,7 +46,7 @@ public class FrmPesFuncionario extends javax.swing.JInternalFrame {
             while (dados.hasNext()) {
                 String[] linha = new String[6];
                 Funcionario funcionario = (Funcionario) dados.next();
-
+                
                 linha[0] = String.valueOf(funcionario.getId());            
                 linha[1] = funcionario.getNome();
                 linha[2] = funcionario.getEndereco();

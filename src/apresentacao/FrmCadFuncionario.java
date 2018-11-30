@@ -32,21 +32,20 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
      */
     public FrmCadFuncionario() {
         initComponents();
-        txtLogradouro.setEnabled(false);
-        txtCidade.setEnabled(false);
-        txtSetor.setEnabled(false);
-        txtUF.setEnabled(false);     
-        txtComplemento.setEnabled(false);
         carregarAgencias();
     }
 
-    FrmCadFuncionario(JDesktopPane painelPrincipal) {
+    public FrmCadFuncionario(JDesktopPane painelPrincipal) {
         this();
         this.painelPrincipal = painelPrincipal;
     }
 
-    FrmCadFuncionario(JDesktopPane painelPrincipal, String id) {
+    public FrmCadFuncionario(JDesktopPane painelPrincipal, String id) {
+        this();
+        this.painelPrincipal = painelPrincipal;
+
         try {
+            
             NFuncionario nf = new NFuncionario();
             Funcionario f = nf.consultar(Integer.parseInt(id));
             
@@ -56,6 +55,7 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
             txtLogin.setText(f.getLogin());
             txtSenha.setText(f.getSenha());
             chkGerente.setSelected(f.isE_gerente());
+            txtTelefone.setText(f.getTelefone());
             
             NAgencia na = new NAgencia();
             Agencia ag = na.consultar(f.getAgencia().getId());
@@ -496,7 +496,7 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
                 f.setId(Integer.parseInt(txtID.getText()));
             }
 
-            String endereco = txtLogradouro.getText() + "," + txtComplemento.getText() + "," + txtCidade.getText() + "," + txtUF.getText();
+            String endereco = txtLogradouro.getText() + "," + txtComplemento.getText() + "," + txtSetor.getText() + "," + txtCidade.getText() + "," + txtUF.getText() + "," +txtCEP.getText();
 
             f.setNome(txtNome.getText());
             f.setTelefone(txtTelefone.getText());

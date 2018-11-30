@@ -50,6 +50,7 @@ public class PFuncionario implements IFuncionario{
         ArrayList<Funcionario> retorno = new ArrayList();
         while (rs.next()) {
             Funcionario funcionario = new Funcionario();
+            funcionario.setId(rs.getInt("id"));
             funcionario.setEmail(rs.getString("email"));
             funcionario.setNome(rs.getString("nome"));
             funcionario.setData_contratacao(rs.getTimestamp("data_contratacao"));
@@ -76,9 +77,10 @@ public class PFuncionario implements IFuncionario{
                 + "telefone = ?,"
                 + "email = ?,"
                 + "data_contratacao = ?,"
-                + "endreco = ?,"
+                + "endereco = ?,"
                 + "senha = ?,"
                 + "login = ?,"
+                + "e_gerente = ?,"
                 + "id_agencia = ?"
                 + "where id = ?";
         Connection cnn = util.Conexao.getConexao();
@@ -91,8 +93,9 @@ public class PFuncionario implements IFuncionario{
         prd.setString(5, funcionario.getEndereco());
         prd.setString(6, funcionario.getSenha());
         prd.setString(7, funcionario.getLogin());
-        prd.setInt(8, funcionario.getAgencia().getId());
-        prd.setInt(9, funcionario.getId());
+        prd.setBoolean(8, funcionario.isE_gerente());
+        prd.setInt(9, funcionario.getAgencia().getId());
+        prd.setInt(10, funcionario.getId());
 
         prd.execute();
         cnn.close();
@@ -110,16 +113,17 @@ public class PFuncionario implements IFuncionario{
 
     @Override
     public Funcionario consultar(int id) throws Exception {
-        String sql = " SELECT * FROM funcionario WHERE cpf = ?;";
+        String sql = "SELECT * FROM funcionario WHERE id = ?;";
 
         Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
         prd.setInt(1, id);
-
+        
         ResultSet rs = prd.executeQuery();
         Funcionario retorno = new Funcionario();
 
         if (rs.next()) {
+            retorno.setId(rs.getInt("id"));
             retorno.setEndereco(rs.getString("endereco"));
             retorno.setNome(rs.getString("nome"));
             retorno.setData_contratacao(rs.getTimestamp("data_contratacao"));
@@ -127,13 +131,13 @@ public class PFuncionario implements IFuncionario{
             retorno.setTelefone(rs.getString("telefone"));
             retorno.setSenha(rs.getString("senha"));
             retorno.setLogin(rs.getString("login"));
+            retorno.setE_gerente(rs.getBoolean("e_gerente"));
             
             PAgencia pa = new PAgencia();
             Agencia agencia = pa.consultar(rs.getInt("id_agencia"));
             
             retorno.setAgencia(agencia);
         }
-        prd.execute();
         cnn.close();
         return retorno;
     }
