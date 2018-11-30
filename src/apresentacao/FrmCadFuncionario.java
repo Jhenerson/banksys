@@ -9,6 +9,7 @@ import entidades.Agencia;
 import entidades.Endereco;
 import entidades.Funcionario;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -47,7 +48,37 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
     FrmCadFuncionario(JDesktopPane painelPrincipal, String id) {
         try {
             NFuncionario nf = new NFuncionario();
+            Funcionario f = nf.consultar(Integer.parseInt(id));
             
+            txtEmail.setText(f.getEmail());
+            txtNome.setText(f.getNome());
+            txtID.setText(String.valueOf(f.getId()));
+            txtLogin.setText(f.getLogin());
+            txtSenha.setText(f.getSenha());
+            chkGerente.setSelected(f.isE_gerente());
+            
+            NAgencia na = new NAgencia();
+            Agencia ag = na.consultar(f.getAgencia().getId());
+            cmbAgencia.setSelectedItem(ag.getCodigo());
+            
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");  
+            String data = dateFormat.format(f.getData_contratacao());
+            txtDataContratacao.setText(data);
+            
+            String endereco = f.getEndereco();
+            String[] enderecoQuebrado = new String[6];
+            enderecoQuebrado = endereco.split(",");            
+            
+            txtLogradouro.setText(enderecoQuebrado[0]);
+            txtComplemento.setText(enderecoQuebrado[1]);
+            txtSetor.setText(enderecoQuebrado[2]);
+            txtCidade.setText(enderecoQuebrado[3]);
+            txtUF.setText(enderecoQuebrado[4]);
+            txtCEP.setText(enderecoQuebrado[5]);
+
+            btnExcluir.setEnabled(true);
+            
+            txtComplemento.setEditable(true);
             
         } catch (Exception e) {
             e.printStackTrace();
