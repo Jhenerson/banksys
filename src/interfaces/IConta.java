@@ -19,6 +19,7 @@ public interface IConta {
     public Iterator listar() throws Exception;
     public void alterar(Conta conta) throws Exception;
     public void excluir(int numeroConta) throws Exception;
-    public Conta consultar(int numeroConta) throws Exception;
+    public Conta consultar(String numeroConta) throws Exception;
+    public Conta consultar(int id) throws Exception;
 
 }

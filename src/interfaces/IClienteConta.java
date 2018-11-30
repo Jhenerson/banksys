@@ -20,6 +20,6 @@ public interface IClienteConta {
     public void alterar(ClienteConta clienteConta) throws Exception;
     public void excluir(int id) throws Exception;
     public ClienteConta consultar(int id) throws Exception;
-    public ClienteConta consultar(int numeroConta, int id_cliente) throws Exception;
+    public ClienteConta consultar(String numeroConta, int id_cliente) throws Exception;
     
 }

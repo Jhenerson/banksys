@@ -9,7 +9,7 @@ import java.sql.Date;
 public class Conta {
 
     private int id;
-    private int numConta;
+    private String numConta;
     private Agencia numAgencia;
     private float saldo;
     private Date dataAberturaConta;
@@ -17,11 +17,11 @@ public class Conta {
     private boolean usaCheque;
     private boolean eConjunta;
 
-    public int getNumConta() {
+    public String getNumConta() {
         return numConta;
     }
 
-    public void setNumConta(int numConta) {
+    public void setNumConta(String numConta) {
         this.numConta = numConta;
     }
 

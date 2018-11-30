@@ -5,6 +5,7 @@
  */
 package persistencia;
 
+import entidades.Cliente;
 import entidades.ClienteConta;
 import entidades.Conta;
 import interfaces.IClienteConta;
@@ -53,7 +54,7 @@ public class PClienteConta implements IClienteConta {
             cc.setConta(conta);
             
             PCliente pcliente = new PCliente();
-            //Cliente cliente = pcliente.
+            //Cliente cliente = pcliente.con
             
             
             retorno.add(cc);
@@ -75,8 +76,33 @@ public class PClienteConta implements IClienteConta {
     }
 
     @Override
-    public ClienteConta consultar(int numeroConta, int id_cliente) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ClienteConta consultar(String numeroConta, int id_cliente) throws Exception {
+        String sql = "SELECT * FROM cliente_conta where id_cliente = ? and id_conta = ?;";
+
+        Connection cnn = util.Conexao.getConexao();
+        PreparedStatement prd = cnn.prepareStatement(sql);
+        prd.setString(1, numeroConta);
+        prd.setInt(2, id_cliente);
+        
+        ResultSet rs = prd.executeQuery();
+        ClienteConta retorno = new ClienteConta();
+        
+        if (rs.next()) {
+            
+            PCliente pcliente = new PCliente();
+            Cliente cliente = pcliente.consultarID(rs.getInt("id_cliente"));
+            retorno.setCliente(cliente);
+            
+            PConta pconta = new PConta();
+            Conta conta = pconta.consultar(numeroConta);
+            retorno.setConta(conta);
+            
+            retorno.setSenha(rs.getString("senha"));
+                        
+        }
+        cnn.close();
+        return retorno;
+        
     }
     
 }

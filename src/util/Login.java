@@ -34,7 +34,7 @@ public class Login {
         return acesso;
     }
     
-    public static boolean loginCliente(String cpf, String senha, int numeroConta) {
+    public static boolean loginCliente(String cpf, String senha, String numeroConta) {
         boolean acesso = false;
         try {
             PCliente pcliente = new PCliente();
@@ -45,7 +45,12 @@ public class Login {
             
             if(cliente != null && conta != null) {
                 PClienteConta pcc = new PClienteConta();
-                //ClienteConta clienteConta = pcc.
+                ClienteConta clienteConta = pcc.consultar(numeroConta, cliente.getId());
+
+                if(senha.equals(clienteConta.getSenha())) {
+                    acesso = true;
+                }
+                
             }
             
         } catch (Exception e) {

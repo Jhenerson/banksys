@@ -8,9 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Iterator;
-import java.util.LinkedList;
 
 /**
  *
@@ -25,7 +23,7 @@ public class PConta implements IConta {
         Connection cnn = util.Conexao.getConexao();
 
         PreparedStatement prd = cnn.prepareStatement(sql);
-        prd.setInt(1, conta.getNumConta());
+        prd.setString(1, conta.getNumConta());
         prd.setFloat(2, conta.getSaldo());
         prd.setDate(3, conta.getDataAberturaConta());
         prd.setInt(4, conta.getTipoConta());
@@ -57,7 +55,7 @@ public class PConta implements IConta {
                 Agencia ag = PAg.consultar(rs.getInt("id_agencia"));
                 conta.setNumAgencia(ag);
 
-                conta.setNumConta(rs.getInt("numero"));
+                conta.setNumConta(rs.getString("numero"));
                 conta.setSaldo(rs.getFloat("saldo"));
                 conta.setTipoConta(rs.getInt("tipo_conta"));
                 conta.setUsaCheque(rs.getBoolean("usa_cheque"));
@@ -91,7 +89,7 @@ public class PConta implements IConta {
         Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
 
-        prd.setInt(1, conta.getNumConta());        
+        prd.setString(1, conta.getNumConta());        
         prd.setDate(2, conta.getDataAberturaConta());
         prd.setInt(3, conta.getTipoConta());
         prd.setBoolean(4, conta.isUsaCheque());
@@ -115,12 +113,12 @@ public class PConta implements IConta {
     }
 
     @Override
-    public Conta consultar(int id) throws Exception {
-        String sql = " SELECT * FROM conta WHERE id = ?;";
+    public Conta consultar(String numConta) throws Exception {
+        String sql = " SELECT * FROM conta WHERE numero = ?;";
 
         Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
-        prd.setLong(1, id);
+        prd.setString(1, numConta);
 
         ResultSet rs = prd.executeQuery();
         Conta conta = new Conta();
@@ -133,7 +131,37 @@ public class PConta implements IConta {
             Agencia ag = PAg.consultar(rs.getInt("id_agencia"));
             conta.setNumAgencia(ag);
 
-            conta.setNumConta(rs.getInt("numero"));
+            conta.setNumConta(rs.getString("numero"));
+            conta.setSaldo(rs.getFloat("saldo"));
+            conta.setTipoConta(rs.getInt("tipo_conta"));
+            conta.setUsaCheque(rs.getBoolean("usa_cheque"));
+            conta.seteConjunta(rs.getBoolean("e_conjunta"));
+        }
+        prd.execute();
+        cnn.close();
+        return conta;
+    }
+
+    @Override
+    public Conta consultar(int id) throws Exception {
+        String sql = " SELECT * FROM conta WHERE id = ?;";
+
+        Connection cnn = util.Conexao.getConexao();
+        PreparedStatement prd = cnn.prepareStatement(sql);
+        prd.setInt(1, id);
+
+        ResultSet rs = prd.executeQuery();
+        Conta conta = new Conta();
+
+        if (rs.next()) {
+            conta.setId(rs.getInt("id"));
+            conta.setDataAberturaConta(rs.getDate("data_abertura"));
+
+            PAgencia PAg = new PAgencia();
+            Agencia ag = PAg.consultar(rs.getInt("id_agencia"));
+            conta.setNumAgencia(ag);
+
+            conta.setNumConta(rs.getString("numero"));
             conta.setSaldo(rs.getFloat("saldo"));
             conta.setTipoConta(rs.getInt("tipo_conta"));
             conta.setUsaCheque(rs.getBoolean("usa_cheque"));
