@@ -9,12 +9,12 @@ package apresentacao;
  *
  * @author rodolpho.repezza
  */
-public class FuncionarioView extends javax.swing.JInternalFrame {
+public class AreaFuncionario extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form FuncionarioView
      */
-    public FuncionarioView() {
+    public AreaFuncionario() {
         initComponents();
     }
 

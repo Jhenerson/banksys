@@ -30,6 +30,16 @@ public class Endereco {
         this.uf = uf;
         this.cep = cep;
     }
+    
+    public Endereco(String enderecoSeparadoPorVirgulas) {
+        String[] pieces = enderecoSeparadoPorVirgulas.split(",");
+        this.logradouro = pieces[0];
+        this.complemento = pieces[1];
+        this.bairro = pieces[2];
+        this.localidade = pieces[3];
+        this.uf = pieces[4];
+        this.cep = pieces[5];
+    }
 
     public String getCep() {
         return cep;
@@ -91,7 +101,7 @@ public class Endereco {
         if(!this.complemento.isEmpty()) {
             retorno += " " + this.complemento;
         }
-        retorno += this.bairro + ", " + this.localidade + "-" + this.uf;
+        retorno += " " + this.bairro + ", " + this.localidade + "-" + this.uf + " - " + this.cep;
         return retorno;
     }
     

@@ -6,6 +6,7 @@
 package apresentacao;
 
 import entidades.Agencia;
+import entidades.Endereco;
 import entidades.Funcionario;
 import java.util.Iterator;
 import javax.swing.JDesktopPane;
@@ -49,7 +50,10 @@ public class FrmPesFuncionario extends javax.swing.JInternalFrame {
                 
                 linha[0] = String.valueOf(funcionario.getId());            
                 linha[1] = funcionario.getNome();
-                linha[2] = funcionario.getEndereco();
+                
+                Endereco end = new Endereco(funcionario.getEndereco());
+                
+                linha[2] = end.toString();
                 linha[3] = funcionario.getTelefone();
                 linha[4] = funcionario.getEmail();
                 

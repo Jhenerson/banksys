@@ -9,12 +9,12 @@ package apresentacao;
  *
  * @author rodolpho.repezza
  */
-public class ClienteView extends javax.swing.JInternalFrame {
+public class AreaCliente extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form ClienteView
      */
-    public ClienteView() {
+    public AreaCliente() {
         initComponents();
     }
 

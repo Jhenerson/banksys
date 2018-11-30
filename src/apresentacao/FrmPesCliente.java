@@ -6,6 +6,7 @@
 package apresentacao;
 
 import entidades.Cliente;
+import entidades.Endereco;
 import java.util.Iterator;
 import java.util.LinkedList;
 import javax.swing.JDesktopPane;
@@ -152,7 +153,10 @@ public class FrmPesCliente extends javax.swing.JInternalFrame {
             linha[2] = cliente.getCpf();
             linha[3] = cliente.getDataNascimento().toString();
             linha[4] = cliente.getEmail();
-            linha[5] = cliente.getEndereco();
+            
+            Endereco end = new Endereco(cliente.getEndereco());
+            
+            linha[5] = end.toString();
             linha[6] = cliente.getTelefone();
 
             model.addRow(linha);

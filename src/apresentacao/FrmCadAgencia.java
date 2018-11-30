@@ -45,8 +45,8 @@ public class FrmCadAgencia extends javax.swing.JInternalFrame {
            
             String endereco = agencia.getEndereco();
             String[] enderecoQuebrado = new String[6];
-            enderecoQuebrado = endereco.split(",");            
-            
+            enderecoQuebrado = endereco.split(",");
+                        
             txtLogradouro.setText(enderecoQuebrado[0]);
             txtComplemento.setText(enderecoQuebrado[1]);
             txtSetor.setText(enderecoQuebrado[2]);

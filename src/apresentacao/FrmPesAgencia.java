@@ -6,6 +6,7 @@
 package apresentacao;
 
 import entidades.Agencia;
+import entidades.Endereco;
 import java.util.Iterator;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
@@ -132,7 +133,10 @@ public class FrmPesAgencia extends javax.swing.JInternalFrame {
 
                 linha[0] = String.valueOf(agencia.getId());            
                 linha[1] = agencia.getCodigo();
-                linha[2] = agencia.getEndereco();
+                
+                Endereco end = new Endereco(agencia.getEndereco());
+                
+                linha[2] = end.toString();
 
                 model.addRow(linha);
             }
