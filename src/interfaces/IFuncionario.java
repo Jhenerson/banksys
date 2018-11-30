@@ -19,4 +19,5 @@ public interface IFuncionario {
     public void alterar(Funcionario funcionario) throws Exception;
     public void excluir(int id) throws Exception;
     public Funcionario consultar(int id) throws Exception;
+    public Funcionario consultar(String login) throws Exception;
 }

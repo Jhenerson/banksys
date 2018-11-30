@@ -141,5 +141,36 @@ public class PFuncionario implements IFuncionario{
         cnn.close();
         return retorno;
     }
+
+    @Override
+    public Funcionario consultar(String login) throws Exception {
+        String sql = "SELECT * FROM funcionario WHERE login = ?;";
+
+        Connection cnn = util.Conexao.getConexao();
+        PreparedStatement prd = cnn.prepareStatement(sql);
+        prd.setString(1, login);
+        
+        ResultSet rs = prd.executeQuery();
+        Funcionario retorno = new Funcionario();
+
+        if (rs.next()) {
+            retorno.setId(rs.getInt("id"));
+            retorno.setEndereco(rs.getString("endereco"));
+            retorno.setNome(rs.getString("nome"));
+            retorno.setData_contratacao(rs.getTimestamp("data_contratacao"));
+            retorno.setEmail(rs.getString("email"));
+            retorno.setTelefone(rs.getString("telefone"));
+            retorno.setSenha(rs.getString("senha"));
+            retorno.setLogin(rs.getString("login"));
+            retorno.setE_gerente(rs.getBoolean("e_gerente"));
+            
+            PAgencia pa = new PAgencia();
+            Agencia agencia = pa.consultar(rs.getInt("id_agencia"));
+            
+            retorno.setAgencia(agencia);
+        }
+        cnn.close();
+        return retorno;
+    }
     
 }

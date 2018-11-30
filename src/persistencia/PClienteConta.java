@@ -73,5 +73,10 @@ public class PClienteConta implements IClienteConta {
     public ClienteConta consultar(int id) throws Exception {
         return null;
     }
+
+    @Override
+    public ClienteConta consultar(int numeroConta, int id_cliente) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

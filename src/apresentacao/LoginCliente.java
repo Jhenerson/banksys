@@ -5,6 +5,10 @@
  */
 package apresentacao;
 
+import entidades.Cliente;
+import entidades.ClienteConta;
+import negocio.NCliente;
+
 /**
  *
  * @author rodolpho.repezza
@@ -43,6 +47,11 @@ public class LoginCliente extends javax.swing.JInternalFrame {
 
         btnAcessar.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnAcessar.setText("Acessar");
+        btnAcessar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAcessarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,6 +91,17 @@ public class LoginCliente extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
+        try {
+            NCliente nc = new NCliente();
+            Cliente c = nc.consultarCPF(txtCpf.getText());
+            if(c != null) {
+                
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnAcessarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
