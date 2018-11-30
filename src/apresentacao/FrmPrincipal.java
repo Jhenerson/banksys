@@ -257,7 +257,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void sair() {
         try {
-            int resposta = JOptionPane.showConfirmDialog(null, "Deseja mesmo sair?", "libraryControl", JOptionPane.YES_NO_OPTION);
+            int resposta = JOptionPane.showConfirmDialog(null, "Deseja mesmo sair?", "banksys", JOptionPane.YES_NO_OPTION);
             if (resposta == JOptionPane.YES_OPTION) {
                 System.exit(0);
             }

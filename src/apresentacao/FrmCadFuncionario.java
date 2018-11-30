@@ -31,12 +31,27 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
      */
     public FrmCadFuncionario() {
         initComponents();
+        txtLogradouro.setEnabled(false);
+        txtCidade.setEnabled(false);
+        txtSetor.setEnabled(false);
+        txtUF.setEnabled(false);     
+        txtComplemento.setEnabled(false);
         carregarAgencias();
     }
 
     FrmCadFuncionario(JDesktopPane painelPrincipal) {
         this();
         this.painelPrincipal = painelPrincipal;
+    }
+
+    FrmCadFuncionario(JDesktopPane painelPrincipal, String id) {
+        try {
+            NFuncionario nf = new NFuncionario();
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -95,6 +110,11 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
         txtID.setEnabled(false);
 
         btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -501,6 +521,18 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        try {
+            FrmPesFuncionario tlPesquisa = new FrmPesFuncionario(painelPrincipal);
+            painelPrincipal.add(tlPesquisa);
+            tlPesquisa.setVisible(true);
+            this.dispose();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnPesquisarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

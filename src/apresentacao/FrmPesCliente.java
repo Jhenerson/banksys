@@ -22,8 +22,6 @@ public class FrmPesCliente extends javax.swing.JInternalFrame {
     JDesktopPane painelPrincipal;
     Iterator dados = new NCliente().listar();
     
-    
-
     /**
      * Creates new form FrmPesCliente
      */

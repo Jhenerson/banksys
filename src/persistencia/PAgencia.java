@@ -82,6 +82,7 @@ public class PAgencia implements IAgencia {
         ResultSet rs = prd.executeQuery();
         Agencia retorno = new Agencia();
         if (rs.next()) {
+            retorno.setId(rs.getInt("id"));
             retorno.setCodigo(rs.getString("codigo"));
             retorno.setEndereco(rs.getString("endereco"));
         }       

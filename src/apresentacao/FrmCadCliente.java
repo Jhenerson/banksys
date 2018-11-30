@@ -5,7 +5,6 @@
  */
 package apresentacao;
 
-import static com.sun.corba.se.impl.util.Utility.printStackTrace;
 import entidades.Cliente;
 import entidades.Endereco;
 import java.text.DateFormat;

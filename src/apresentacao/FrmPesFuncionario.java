@@ -5,19 +5,66 @@
  */
 package apresentacao;
 
+import entidades.Agencia;
+import entidades.Funcionario;
+import java.util.Iterator;
+import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import negocio.NAgencia;
+import negocio.NFuncionario;
+
 /**
  *
  * @author repez
  */
 public class FrmPesFuncionario extends javax.swing.JInternalFrame {
 
+    JDesktopPane painelPrincipal;
+
     /**
      * Creates new form FrmPesFuncionario
      */
     public FrmPesFuncionario() {
         initComponents();
+        imprimirDadosNaGrid();
     }
 
+    FrmPesFuncionario(JDesktopPane painelPrincipal) {
+        this();
+        this.painelPrincipal = painelPrincipal;
+    }
+
+    public void imprimirDadosNaGrid() {
+        try {
+            
+            NFuncionario nf = new NFuncionario();
+            Iterator dados = nf.listar();
+            
+            DefaultTableModel model = (DefaultTableModel) tblResultado.getModel();
+            model.setNumRows(0);
+            while (dados.hasNext()) {
+                String[] linha = new String[6];
+                Funcionario funcionario = (Funcionario) dados.next();
+
+                linha[0] = String.valueOf(funcionario.getId());            
+                linha[1] = funcionario.getNome();
+                linha[2] = funcionario.getEndereco();
+                linha[3] = funcionario.getTelefone();
+                linha[4] = funcionario.getEmail();
+                
+                NAgencia na = new NAgencia();
+                Agencia ag = na.consultar(funcionario.getAgencia().getId());
+                
+                linha[5] = ag.getCodigo();
+
+                model.addRow(linha);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,6 +94,11 @@ public class FrmPesFuncionario extends javax.swing.JInternalFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblResultado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblResultadoMousePressed(evt);
             }
         });
         jScrollPane1.setViewportView(tblResultado);
@@ -102,6 +154,20 @@ public class FrmPesFuncionario extends javax.swing.JInternalFrame {
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnFecharActionPerformed
+
+    private void tblResultadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblResultadoMousePressed
+        try {
+            int linhaSelecionada = tblResultado.getSelectedRow();
+            String id = tblResultado.getValueAt(linhaSelecionada, 0).toString();
+            FrmCadFuncionario frmCadFunc = new FrmCadFuncionario(painelPrincipal, id);
+            painelPrincipal.add(frmCadFunc);
+            frmCadFunc.setVisible(true);
+            this.dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_tblResultadoMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
