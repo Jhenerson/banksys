@@ -52,6 +52,8 @@ public class FrmPesCliente extends javax.swing.JInternalFrame {
         tblResultado = new javax.swing.JTable();
         btnFechar = new javax.swing.JButton();
 
+        setTitle("Clientes Cadastrados");
+
         tblResultado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
