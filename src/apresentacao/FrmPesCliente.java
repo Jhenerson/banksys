@@ -6,14 +6,12 @@
 package apresentacao;
 
 import entidades.Cliente;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import negocio.NCliente;
-import persistencia.PCliente;
 
 /**
  *

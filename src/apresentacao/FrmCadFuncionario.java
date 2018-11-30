@@ -5,13 +5,16 @@
  */
 package apresentacao;
 
+import entidades.Agencia;
 import entidades.Endereco;
 import entidades.Funcionario;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
+import negocio.NAgencia;
 import negocio.NFuncionario;
 import util.BuscaCEP;
 
@@ -28,6 +31,7 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
      */
     public FrmCadFuncionario() {
         initComponents();
+        carregarAgencias();
     }
 
     FrmCadFuncionario(JDesktopPane painelPrincipal) {
@@ -57,6 +61,8 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         txtTelefone = new javax.swing.JFormattedTextField();
         chkGerente = new javax.swing.JCheckBox();
+        jLabel14 = new javax.swing.JLabel();
+        cmbAgencia = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -102,6 +108,8 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
 
         chkGerente.setText("Gerente");
 
+        jLabel14.setText("Agência:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -109,23 +117,26 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel14))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+                    .addComponent(txtNome)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel7))
-                        .addGap(33, 33, 33)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel4)
-                                .addGap(27, 27, 27)
-                                .addComponent(txtDataContratacao, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
-                            .addComponent(txtNome)))
-                    .addComponent(chkGerente))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabel4))
+                            .addComponent(cmbAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chkGerente)
+                            .addComponent(txtDataContratacao, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,9 +155,12 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
                     .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(txtDataContratacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addComponent(chkGerente)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chkGerente)
+                    .addComponent(jLabel14)
+                    .addComponent(cmbAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -351,30 +365,34 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscaCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaCepActionPerformed
-        String cep = txtCEP.getText();
-        Endereco retorno = BuscaCEP.buscarCep(cep);
+        try {
+            String cep = txtCEP.getText();
+            Endereco retorno = BuscaCEP.buscarCep(cep);
 
-        txtLogradouro.setText(retorno.getLogradouro());
-        txtCidade.setText(retorno.getLocalidade());
-        txtSetor.setText(retorno.getBairro());
-        txtUF.setText(retorno.getUf());
-        txtCEP.setText(retorno.getCep());
-        
-        txtLogradouro.setEnabled(true);
-        txtLogradouro.setEditable(false);
-        txtCidade.setEnabled(true);
-        txtCidade.setEditable(false);
-        txtUF.setEnabled(true);
-        txtUF.setEditable(false);
-        txtSetor.setEnabled(true);
-        txtSetor.setEditable(false);
-        txtComplemento.setEnabled(true);
+            txtLogradouro.setText(retorno.getLogradouro());
+            txtCidade.setText(retorno.getLocalidade());
+            txtSetor.setText(retorno.getBairro());
+            txtUF.setText(retorno.getUf());
+            txtCEP.setText(retorno.getCep());
 
-        if(txtSetor.getText().isEmpty()){
-            txtSetor.setEditable(true);
-        }
-        if(txtLogradouro.getText().isEmpty()){
-            txtSetor.setEditable(true);
+            txtLogradouro.setEnabled(true);
+            txtLogradouro.setEditable(false);
+            txtCidade.setEnabled(true);
+            txtCidade.setEditable(false);
+            txtUF.setEnabled(true);
+            txtUF.setEditable(false);
+            txtSetor.setEnabled(true);
+            txtSetor.setEditable(false);
+            txtComplemento.setEnabled(true);
+
+            if(txtSetor.getText().isEmpty()){
+                txtSetor.setEditable(true);
+            }
+            if(txtLogradouro.getText().isEmpty()){
+                txtSetor.setEditable(true);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_btnBuscaCepActionPerformed
 
@@ -416,6 +434,10 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
             if (txtTelefone.getText().isEmpty()) {
                 throw new Exception("O telefone é obrigatório!");
             }
+            
+            if(cmbAgencia.getSelectedIndex() == 0) {
+                throw new Exception("A agência é obrigatória!");
+            }
 
             Funcionario f = new Funcionario();
 
@@ -435,7 +457,11 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
             f.setData_contratacao(dtcont);
             f.setE_gerente(chkGerente.isSelected());
             f.setLogin(txtLogin.getText());
-            f.setSenha(txtSenha.getPassword().toString());
+            f.setSenha(new String(txtSenha.getPassword()));
+            
+            NAgencia na = new NAgencia();
+            Agencia agencia = na.consultar(cmbAgencia.getSelectedItem().toString());
+            f.setAgencia(agencia);
 
             NFuncionario nf = new NFuncionario();
             nf.salvar(f);
@@ -485,11 +511,13 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JCheckBox chkGerente;
+    private javax.swing.JComboBox<String> cmbAgencia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -532,5 +560,23 @@ public class FrmCadFuncionario extends javax.swing.JInternalFrame {
         txtCidade.setText("");
         txtComplemento.setText("");
         chkGerente.setSelected(false);
+    }
+    
+    public void carregarAgencias() {
+        try {
+            NAgencia na = new NAgencia();
+            Iterator agencias = na.listar();
+            
+            cmbAgencia.addItem("Selecione...");
+            
+            while(agencias.hasNext()) {
+                Agencia ag = (Agencia) agencias.next();
+                cmbAgencia.addItem(ag.getCodigo());
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
     }
 }

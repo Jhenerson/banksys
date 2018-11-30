@@ -31,11 +31,12 @@ public class PFuncionario implements IFuncionario{
         prd.setString(1, funcionario.getNome());
         prd.setString(2, funcionario.getLogin());
         prd.setString(3, funcionario.getSenha());
-        prd.setString(4, funcionario.getTelefone());
-        prd.setString(5, funcionario.getEndereco());
-        prd.setTimestamp(6, funcionario.getData_contratacao());
-        prd.setBoolean(7, funcionario.isE_gerente());
-        prd.setInt(8, funcionario.getAgencia().getId());
+        prd.setString(4, funcionario.getEndereco());
+        prd.setString(5, funcionario.getTelefone());
+        prd.setString(6, funcionario.getEmail());
+        prd.setTimestamp(7, funcionario.getData_contratacao());
+        prd.setBoolean(8, funcionario.isE_gerente());
+        prd.setInt(9, funcionario.getAgencia().getId());
         prd.execute();
         cnn.close();
     }

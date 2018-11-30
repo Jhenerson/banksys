@@ -27,21 +27,86 @@ public class FrmPesFuncionario extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblResultado = new javax.swing.JTable();
+        btnFechar = new javax.swing.JButton();
+
+        setToolTipText("Funcionários Cadastrados");
+
+        tblResultado.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nome", "Endereço", "Telefone", "E-mail", "Agência"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblResultado);
+        if (tblResultado.getColumnModel().getColumnCount() > 0) {
+            tblResultado.getColumnModel().getColumn(0).setMinWidth(40);
+            tblResultado.getColumnModel().getColumn(0).setPreferredWidth(40);
+            tblResultado.getColumnModel().getColumn(0).setMaxWidth(40);
+            tblResultado.getColumnModel().getColumn(1).setMinWidth(250);
+            tblResultado.getColumnModel().getColumn(1).setPreferredWidth(250);
+            tblResultado.getColumnModel().getColumn(1).setMaxWidth(250);
+            tblResultado.getColumnModel().getColumn(2).setMinWidth(300);
+            tblResultado.getColumnModel().getColumn(2).setPreferredWidth(300);
+            tblResultado.getColumnModel().getColumn(2).setMaxWidth(300);
+            tblResultado.getColumnModel().getColumn(3).setMinWidth(100);
+            tblResultado.getColumnModel().getColumn(3).setPreferredWidth(100);
+            tblResultado.getColumnModel().getColumn(3).setMaxWidth(100);
+            tblResultado.getColumnModel().getColumn(4).setMinWidth(250);
+            tblResultado.getColumnModel().getColumn(4).setPreferredWidth(250);
+            tblResultado.getColumnModel().getColumn(4).setMaxWidth(250);
+            tblResultado.getColumnModel().getColumn(5).setMinWidth(100);
+            tblResultado.getColumnModel().getColumn(5).setPreferredWidth(100);
+            tblResultado.getColumnModel().getColumn(5).setMaxWidth(100);
+        }
+
+        btnFechar.setText("Fechar");
+        btnFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFecharActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 853, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1025, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnFechar))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 569, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnFechar)
+                .addGap(0, 105, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnFecharActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFechar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblResultado;
     // End of variables declaration//GEN-END:variables
 }

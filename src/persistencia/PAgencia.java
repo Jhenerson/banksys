@@ -90,4 +90,22 @@ public class PAgencia implements IAgencia {
         return retorno;
     }
 
+    @Override
+    public Agencia consultar(String codigo) throws Exception {
+        String sql = " SELECT * FROM agencia WHERE codigo = ?;";
+        Connection cnn = util.Conexao.getConexao();
+        PreparedStatement prd = cnn.prepareStatement(sql);
+        prd.setString(1, codigo);
+        ResultSet rs = prd.executeQuery();
+        Agencia retorno = new Agencia();
+        if (rs.next()) {
+            retorno.setId(rs.getInt("id"));
+            retorno.setCodigo(rs.getString("codigo"));
+            retorno.setEndereco(rs.getString("endereco"));
+        }       
+        prd.execute();
+        cnn.close();
+        return retorno;
+    }
+
 }

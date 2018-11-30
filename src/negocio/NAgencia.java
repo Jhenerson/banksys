@@ -47,6 +47,10 @@ public class NAgencia {
     public Agencia consultar(int parametro) throws SQLException, Exception {
         return persistencia.consultar(parametro);        
     }
+    
+    public Agencia consultar(String parametro) throws SQLException, Exception {
+        return persistencia.consultar(parametro);        
+    }
    
     public Iterator listar() throws SQLException, Exception {
         return persistencia.listar();
