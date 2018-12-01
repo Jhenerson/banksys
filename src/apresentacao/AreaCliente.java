@@ -53,6 +53,11 @@ public class AreaCliente extends javax.swing.JInternalFrame {
         btnRetirarExtrato.setText("Retirar Extrato");
 
         btnSacar.setText("Sacar");
+        btnSacar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSacarActionPerformed(evt);
+            }
+        });
 
         btnExibirExtrato.setText("Exibir Extrato");
 
@@ -121,6 +126,14 @@ public class AreaCliente extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacarActionPerformed
+        try {
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnSacarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

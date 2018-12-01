@@ -74,14 +74,15 @@ public class PClienteConta implements IClienteConta {
     public ClienteConta consultar(int id) throws Exception {
         return null;
     }
-
+    
+    /*
     @Override
-    public ClienteConta consultar(String numeroConta, int id_cliente) throws Exception {
-        String sql = "SELECT * FROM cliente_conta where id_cliente = ? and id_conta = ?;";
+    public ClienteConta consultar(int id_conta, int id_cliente) throws Exception {
+        String sql = "SELECT * FROM cliente_conta where id_conta = ? and id_cliente = ?;";
 
         Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
-        prd.setString(1, numeroConta);
+        prd.setInt(1, id_conta);
         prd.setInt(2, id_cliente);
         
         ResultSet rs = prd.executeQuery();
@@ -94,7 +95,7 @@ public class PClienteConta implements IClienteConta {
             retorno.setCliente(cliente);
             
             PConta pconta = new PConta();
-            Conta conta = pconta.consultar(numeroConta);
+            Conta conta = pconta.consultar(id_conta);
             retorno.setConta(conta);
             
             retorno.setSenha(rs.getString("senha"));
@@ -103,6 +104,33 @@ public class PClienteConta implements IClienteConta {
         cnn.close();
         return retorno;
         
+    }
+    */
+
+    @Override
+    public ClienteConta consultar(int id_cliente, String senha) throws Exception {
+        String sql = "SELECT * FROM cliente_conta where id_cliente = ? and senha = ?;";
+        Connection cnn = util.Conexao.getConexao();
+        PreparedStatement prd = cnn.prepareStatement(sql);
+        prd.setInt(1, id_cliente);
+        prd.setString(2, senha);
+        ResultSet rs = prd.executeQuery();
+        ClienteConta retorno = new ClienteConta();
+        if (rs.next()) {
+            
+            PCliente pcliente = new PCliente();
+            Cliente cliente = pcliente.consultarID(rs.getInt("id_cliente"));
+            retorno.setCliente(cliente);
+            
+            PConta pconta = new PConta();
+            Conta conta = pconta.consultar(rs.getInt("id_conta"));
+            retorno.setConta(conta);
+            
+            retorno.setSenha(rs.getString("senha"));
+                        
+        }
+        cnn.close();
+        return retorno;
     }
     
 }

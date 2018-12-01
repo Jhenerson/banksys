@@ -1,8 +1,10 @@
 
 package apresentacao;
 
+import entidades.Cliente;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
+import negocio.NCliente;
 import util.Login;
 
 /**
@@ -35,11 +37,9 @@ public class LoginCliente extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtConta = new javax.swing.JTextField();
+        lblSenha = new javax.swing.JLabel();
         btnAcessar = new javax.swing.JButton();
         txtSenha = new javax.swing.JPasswordField();
-        jLabel3 = new javax.swing.JLabel();
         txtCPF = new javax.swing.JTextField();
 
         setTitle("Login Cliente");
@@ -47,8 +47,8 @@ public class LoginCliente extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("CPF:");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("Senha:");
+        lblSenha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblSenha.setText("Senha:");
 
         btnAcessar.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnAcessar.setText("Acessar");
@@ -58,9 +58,6 @@ public class LoginCliente extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setText("Conta:");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,39 +65,33 @@ public class LoginCliente extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(lblSenha))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAcessar, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(76, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtSenha)
-                            .addComponent(txtConta)
-                            .addComponent(txtCPF, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE))
                         .addGap(33, 33, 33))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(lblSenha)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnAcessar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -109,20 +100,28 @@ public class LoginCliente extends javax.swing.JInternalFrame {
     private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
         try {
             String cpf = txtCPF.getText();
-            String conta = txtConta.getText();
             String senha = new String(txtSenha.getPassword());
             
-            boolean acesso = Login.loginCliente(cpf, senha, conta);
+            NCliente nc = new NCliente();
+            Cliente cliente = nc.consultarCPF(cpf);
             
-            if(acesso) {
-                AreaCliente ac = new AreaCliente(painelPrincipal);
-                painelPrincipal.add(ac);
-                ac.setVisible(true);
-                this.dispose();
+            if(cliente != null) {
+                
+                boolean acesso = Login.loginCliente(cpf, senha);
+                
+                if(acesso) {
+                    AreaCliente ac = new AreaCliente(painelPrincipal);
+                    painelPrincipal.add(ac);
+                    ac.setVisible(true);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Acesso negado. Revise os dados e tente novamente.");
+                }
+                
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Acesso negado. Revise os dados e tente novamente.");
+                JOptionPane.showMessageDialog(rootPane, "CPF não encontrado. Tente novamente.");
             }
-            
+                  
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -132,10 +131,8 @@ public class LoginCliente extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcessar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel lblSenha;
     private javax.swing.JTextField txtCPF;
-    private javax.swing.JTextField txtConta;
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
 }

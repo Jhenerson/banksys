@@ -34,23 +34,19 @@ public class Login {
         return acesso;
     }
     
-    public static boolean loginCliente(String cpf, String senha, String numeroConta) {
+    public static boolean loginCliente(String cpf, String senha) {
         boolean acesso = false;
         try {
+            
             PCliente pcliente = new PCliente();
             Cliente cliente = pcliente.consultarCPF(cpf);
             
-            PConta pconta = new PConta();
-            Conta conta = pconta.consultar(numeroConta);
-            
-            if(cliente != null && conta != null) {
+            if(cliente != null) {
                 PClienteConta pcc = new PClienteConta();
-                ClienteConta clienteConta = pcc.consultar(numeroConta, cliente.getId());
-
+                ClienteConta clienteConta = pcc.consultar(cliente.getId(), senha);
                 if(senha.equals(clienteConta.getSenha())) {
                     acesso = true;
                 }
-                
             }
             
         } catch (Exception e) {
@@ -58,4 +54,5 @@ public class Login {
         }
         return acesso;
     }
+
 }

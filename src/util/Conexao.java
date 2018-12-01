@@ -24,7 +24,7 @@ public class Conexao {
         
         try {
             Class.forName("org.postgresql.Driver");
-            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/banksys","postgres","199209");
+            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/banksys","postgres","123456");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Driver JDB não encontrado! Verifique as bibliotecas da aplicação.");
