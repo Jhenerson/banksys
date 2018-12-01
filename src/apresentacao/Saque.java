@@ -1,16 +1,25 @@
 package apresentacao;
 
+import javax.swing.JDesktopPane;
+
 /**
  *
  * @author rodolpho.repezza
  */
 public class Saque extends javax.swing.JInternalFrame {
+    
+    JDesktopPane painelPrincipal;
 
     /**
      * Creates new form Saque
      */
     public Saque() {
         initComponents();
+    }
+
+    Saque(JDesktopPane painelPrincipal) {
+        this();
+        this.painelPrincipal = painelPrincipal;
     }
 
     /**
