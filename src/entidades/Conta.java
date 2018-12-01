@@ -1,6 +1,6 @@
 package entidades;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -11,8 +11,8 @@ public class Conta {
     private int id;
     private String numConta;
     private Agencia numAgencia;
-    private float saldo;
-    private Date dataAberturaConta;
+    private float saldo = 0;
+    private Timestamp dataAberturaConta;
     private int tipoConta;
     private boolean usaCheque;
     private boolean eConjunta;
@@ -41,11 +41,11 @@ public class Conta {
         this.saldo = saldo;
     }
 
-    public Date getDataAberturaConta() {
+    public Timestamp getDataAberturaConta() {
         return dataAberturaConta;
     }
 
-    public void setDataAberturaConta(Date dataAberturaConta) {
+    public void setDataAberturaConta(Timestamp dataAberturaConta) {
         this.dataAberturaConta = dataAberturaConta;
     }
 

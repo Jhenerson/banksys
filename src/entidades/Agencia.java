@@ -11,7 +11,7 @@ package entidades;
  */
 public class Agencia {
 
-    private int id;
+    private int id = 0;
     private String codigo;
     private String endereco;
 

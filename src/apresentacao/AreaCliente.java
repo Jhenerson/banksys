@@ -5,17 +5,26 @@
  */
 package apresentacao;
 
+import javax.swing.JDesktopPane;
+
 /**
  *
  * @author rodolpho.repezza
  */
 public class AreaCliente extends javax.swing.JInternalFrame {
+    
+    JDesktopPane painelPrincipal;
 
     /**
      * Creates new form ClienteView
      */
     public AreaCliente() {
         initComponents();
+    }
+    
+    public AreaCliente(JDesktopPane painelPrincipal) {
+        this();
+        this.painelPrincipal = painelPrincipal;
     }
 
     /**

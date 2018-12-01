@@ -14,7 +14,7 @@ import util.BuscaCEP;
  */
 public class TesteEndereco {
     public static void main(String[] args) {
-        Endereco end = BuscaCEP.buscarCep("74415410");
+        Endereco end = BuscaCEP.buscarCep("74003-010");
         System.out.println(end.toString());
     }
 }

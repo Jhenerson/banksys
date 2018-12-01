@@ -41,6 +41,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         optConta = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        optAreaCliente = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         optSair = new javax.swing.JMenuItem();
 
@@ -117,6 +118,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuItem1.setText("Transações");
         jMenu2.add(jMenuItem1);
+
+        optAreaCliente.setText("Área do Cliente");
+        optAreaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optAreaClienteActionPerformed(evt);
+            }
+        });
+        jMenu2.add(optAreaCliente);
 
         jMenuBar1.add(jMenu2);
 
@@ -202,6 +211,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void optAreaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optAreaClienteActionPerformed
+        try {
+            LoginCliente loginCliente = new LoginCliente(painelPrincipal);
+            painelPrincipal.add(loginCliente);
+            loginCliente.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_optAreaClienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -248,6 +267,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem optAreaCliente;
     private javax.swing.JMenuItem optCliente;
     private javax.swing.JMenuItem optConta;
     private javax.swing.JMenuItem optFuncionario;

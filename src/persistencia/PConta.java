@@ -25,7 +25,7 @@ public class PConta implements IConta {
         PreparedStatement prd = cnn.prepareStatement(sql);
         prd.setString(1, conta.getNumConta());
         prd.setFloat(2, conta.getSaldo());
-        prd.setDate(3, conta.getDataAberturaConta());
+        prd.setTimestamp(3, conta.getDataAberturaConta());
         prd.setInt(4, conta.getTipoConta());
         prd.setBoolean(5, conta.isUsaCheque());
         prd.setBoolean(6, conta.iseConjunta());
@@ -49,7 +49,7 @@ public class PConta implements IConta {
             while (rs.next()) {
                 Conta conta = new Conta();
                 conta.setId(rs.getInt("id"));
-                conta.setDataAberturaConta(rs.getDate("data_abertura"));
+                conta.setDataAberturaConta(rs.getTimestamp("data_abertura"));
 
                 PAgencia PAg = new PAgencia();
                 Agencia ag = PAg.consultar(rs.getInt("id_agencia"));
@@ -90,7 +90,7 @@ public class PConta implements IConta {
         PreparedStatement prd = cnn.prepareStatement(sql);
 
         prd.setString(1, conta.getNumConta());        
-        prd.setDate(2, conta.getDataAberturaConta());
+        prd.setTimestamp(2, conta.getDataAberturaConta());
         prd.setInt(3, conta.getTipoConta());
         prd.setBoolean(4, conta.isUsaCheque());
         prd.setBoolean(5, conta.iseConjunta());
@@ -125,7 +125,7 @@ public class PConta implements IConta {
 
         if (rs.next()) {
             conta.setId(rs.getInt("id"));
-            conta.setDataAberturaConta(rs.getDate("data_abertura"));
+            conta.setDataAberturaConta(rs.getTimestamp("data_abertura"));
 
             PAgencia PAg = new PAgencia();
             Agencia ag = PAg.consultar(rs.getInt("id_agencia"));
@@ -155,7 +155,7 @@ public class PConta implements IConta {
 
         if (rs.next()) {
             conta.setId(rs.getInt("id"));
-            conta.setDataAberturaConta(rs.getDate("data_abertura"));
+            conta.setDataAberturaConta(rs.getTimestamp("data_abertura"));
 
             PAgencia PAg = new PAgencia();
             Agencia ag = PAg.consultar(rs.getInt("id_agencia"));
