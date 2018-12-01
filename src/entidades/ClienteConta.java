@@ -11,10 +11,11 @@ package entidades;
  */
 public class ClienteConta {
     
+    private int id;
     private Cliente cliente;
     private Conta conta;
     private String senha;
-   
+
     /**
      * @return the cliente
      */
@@ -55,5 +56,19 @@ public class ClienteConta {
      */
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 }
