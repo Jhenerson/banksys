@@ -11,7 +11,7 @@ import java.util.Iterator;
 
 /**
  *
- * @author jhene
+ * @author repez
  */
 public interface IFuncionario {
     public void incluir(Funcionario funcionario) throws Exception;

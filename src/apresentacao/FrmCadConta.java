@@ -26,7 +26,7 @@ import util.ValidaCPF;
 
 /**
  *
- * @author repez
+ * @author jhene
  */
 public class FrmCadConta extends javax.swing.JInternalFrame {
 
@@ -890,6 +890,7 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
             }
             
             JOptionPane.showMessageDialog(rootPane, "Conta cadastrada com sucesso!");
+            limpar();
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());

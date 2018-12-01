@@ -16,7 +16,7 @@ import negocio.NCliente;
 
 /**
  *
- * @author repez
+ * @author jhene
  */
 public class FrmPesCliente extends javax.swing.JInternalFrame {
 

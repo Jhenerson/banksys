@@ -16,7 +16,7 @@ import java.util.Iterator;
 
 /**
  *
- * @author jhene
+ * @author repez
  */
 public class PAgencia implements IAgencia {
 

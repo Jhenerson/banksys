@@ -13,7 +13,7 @@ import persistencia.PCliente;
 
 /**
  *
- * @author repez
+ * @author jhene
  */
 public class NCliente {
     
