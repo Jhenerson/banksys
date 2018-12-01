@@ -807,6 +807,8 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
             
             NCliente nc = new NCliente();
             Cliente titular1 = nc.consultarCPF(txtCPFTitular.getText());
+            
+            System.out.println(titular1.getId());
                         
             //Agencia
             NAgencia na = new NAgencia();
@@ -864,10 +866,13 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
             NConta nconta = new NConta();
             nconta.salvar(conta);
             
+            //Pegando a conta que acabou de ser salva
+            Conta atual = nconta.consultar(conta.getNumConta());
+            
             //Cliente Conta
             ClienteConta clienteConta1 = new ClienteConta();
             clienteConta1.setCliente(titular1);
-            clienteConta1.setConta(conta);
+            clienteConta1.setConta(atual);
             clienteConta1.setSenha(senhaTitular1);
             
             NClienteConta ncc = new NClienteConta();
@@ -878,7 +883,7 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
             if(e_conjunta) {
                 clienteConta2 = new ClienteConta();
                 clienteConta2.setCliente(titular2);
-                clienteConta2.setConta(conta);
+                clienteConta2.setConta(atual);
                 clienteConta2.setSenha(senhaTitular2);
                 
                 ncc.salvar(clienteConta2);

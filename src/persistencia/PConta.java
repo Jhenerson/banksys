@@ -137,7 +137,7 @@ public class PConta implements IConta {
             conta.setUsaCheque(rs.getBoolean("usa_cheque"));
             conta.seteConjunta(rs.getBoolean("e_conjunta"));
         }
-        prd.execute();
+        
         cnn.close();
         return conta;
     }
@@ -167,7 +167,7 @@ public class PConta implements IConta {
             conta.setUsaCheque(rs.getBoolean("usa_cheque"));
             conta.seteConjunta(rs.getBoolean("e_conjunta"));
         }
-        prd.execute();
+        
         cnn.close();
         return conta;
     }

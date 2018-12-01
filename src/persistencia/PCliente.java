@@ -124,6 +124,7 @@ public class PCliente implements ICliente {
         Cliente retorno = new Cliente();
 
         if (rs.next()) {
+            retorno.setId(rs.getInt("id"));
             retorno.setCpf(rs.getString("cpf"));
             retorno.setNome(rs.getString("nome"));
             retorno.setDataNascimento(rs.getDate("data_de_nascimento"));
@@ -172,6 +173,7 @@ public class PCliente implements ICliente {
         Cliente retorno = new Cliente();
 
         if (rs.next()) {
+            retorno.setId(rs.getInt("id"));
             retorno.setCpf(rs.getString("cpf"));
             retorno.setNome(rs.getString("nome"));
             retorno.setDataNascimento(rs.getDate("data_de_nascimento"));

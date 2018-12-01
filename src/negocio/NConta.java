@@ -3,7 +3,6 @@ package negocio;
 import entidades.Conta;
 import java.sql.SQLException;
 import java.util.Iterator;
-import persistencia.PCliente;
 import persistencia.PConta;
 
 /**
@@ -19,11 +18,11 @@ public class NConta {
     }
 
     public void salvar(Conta parametro) throws SQLException, Exception {
-
-        if (parametro.getNumAgencia().getId() == 0) {
+        
+        if (parametro.getNumAgencia().getCodigo().isEmpty()) {
             throw new Exception("É necessário informar a agência");
         }
-
+       
         if (parametro.getId() == 0) {
             persistencia.incluir(parametro);
         } else {
@@ -39,6 +38,11 @@ public class NConta {
     public Conta consultarID(int parametro) throws SQLException, Exception {
         return persistencia.consultar(parametro);
     }
+    
+    public Conta consultar(String parametro) throws SQLException, Exception {
+        return persistencia.consultar(parametro);
+    }
+    
 
     public Iterator listar() throws SQLException, Exception {
         return persistencia.listar();

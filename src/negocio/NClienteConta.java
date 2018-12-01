@@ -22,12 +22,12 @@ public class NClienteConta {
     }
     
     public void salvar(ClienteConta parametro) throws SQLException, Exception {
-
-        if (parametro.getCliente().getId() == 0) {
+        
+        if (parametro.getCliente().getNome().isEmpty()) {
             throw new Exception("É necessário informar o cliente.");
         }
         
-        if (parametro.getConta().getId() == 0) {
+        if (parametro.getConta().getNumConta().isEmpty()) {
             throw new Exception("É necessário informar a conta.");
         }
         
