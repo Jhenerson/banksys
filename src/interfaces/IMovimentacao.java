@@ -6,6 +6,7 @@
 package interfaces;
 
 import entidades.Movimentacao;
+import java.sql.Date;
 import java.util.Iterator;
 
 /**
@@ -16,4 +17,5 @@ public interface IMovimentacao {
     
     public void incluir(Movimentacao movimentacao) throws Exception;
     public Iterator getMovimentacoes(int idConta) throws Exception;
+    public Iterator getMovimentacoes(Date inicio, Date fim) throws Exception;
 }

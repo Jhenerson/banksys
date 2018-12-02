@@ -6,6 +6,7 @@
 package negocio;
 
 import entidades.Movimentacao;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Iterator;
 import persistencia.PMovimentacao;
@@ -50,6 +51,10 @@ public class NMovimentacao {
     
     public Iterator listar(int id_conta) throws SQLException, Exception {
         return persistencia.getMovimentacoes(id_conta);
+    }
+    
+    public Iterator listar(Date inicio, Date fim) throws SQLException, Exception {
+        return persistencia.getMovimentacoes(inicio, fim);
     }
              
 }

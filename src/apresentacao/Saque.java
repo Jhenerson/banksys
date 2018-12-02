@@ -129,10 +129,9 @@ public class Saque extends javax.swing.JInternalFrame {
                 mov.setValor(valor);
 
                 Date dataAtual = new Date();
-                //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                Timestamp ts = new Timestamp(dataAtual.getTime());
-
-                mov.setData_hora(ts);
+                java.sql.Date data_mov = new java.sql.Date(dataAtual.getTime());
+               
+                mov.setData_hora(data_mov);
 
                 nm.salvar(mov);
 

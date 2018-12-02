@@ -5,7 +5,7 @@
  */
 package entidades;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 /**
  *
@@ -16,7 +16,7 @@ public class Movimentacao {
     private int id;
     private float valor;
     private int tipoMovimentacao;
-    private Timestamp data_hora;
+    private Date data_hora;
     private Conta conta;
     private Cliente cliente;
 
@@ -79,14 +79,14 @@ public class Movimentacao {
     /**
      * @return the data_hora
      */
-    public Timestamp getData_hora() {
+    public Date getData_hora() {
         return data_hora;
     }
 
     /**
      * @param data_hora the data_hora to set
      */
-    public void setData_hora(Timestamp data_hora) {
+    public void setData_hora(Date data_hora) {
         this.data_hora = data_hora;
     }
 

@@ -3,8 +3,10 @@ package apresentacao;
 
 import entidades.Cliente;
 import entidades.Movimentacao;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
@@ -27,17 +29,6 @@ public class Relatorio extends javax.swing.JInternalFrame {
      */
     public Relatorio() {
         initComponents();
-        
-        try {
-            NMovimentacao nm = new NMovimentacao();
-            Iterator dados = nm.listar(id_conta);
-            
-            imprimirDadosNaGrid(dados);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e.getMessage());
-        }
-
-        
     }
     
     public Relatorio(JDesktopPane painelPrincipal) {
@@ -61,7 +52,7 @@ public class Relatorio extends javax.swing.JInternalFrame {
                 String[] linha = new String[4];
                 Movimentacao mov = (Movimentacao) dados.next();
                 
-                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");  
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");  
                 String data = dateFormat.format(mov.getData_hora());
                 
                 linha[0] = String.valueOf(data);            
@@ -103,8 +94,6 @@ public class Relatorio extends javax.swing.JInternalFrame {
         tblResultado = new javax.swing.JTable();
         btnFechar = new javax.swing.JButton();
         btnPesquisar = new javax.swing.JButton();
-        cmbFiltro = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
 
         jLabel1.setText("Período:");
 
@@ -128,10 +117,11 @@ public class Relatorio extends javax.swing.JInternalFrame {
         });
 
         btnPesquisar.setText("Pesquisar");
-
-        cmbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Data", "Cliente", "Valor", "Tipo" }));
-
-        jLabel3.setText("Ordenar por:");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -148,13 +138,10 @@ public class Relatorio extends javax.swing.JInternalFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtData2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cmbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPesquisar))
-                    .addComponent(jScrollPane1)
+                        .addComponent(btnPesquisar)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnFechar)))
@@ -169,9 +156,7 @@ public class Relatorio extends javax.swing.JInternalFrame {
                     .addComponent(txtData1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(txtData2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisar)
-                    .addComponent(cmbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(btnPesquisar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -186,14 +171,31 @@ public class Relatorio extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_btnFecharActionPerformed
 
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            
+            Date data1 = sdf.parse(txtData1.getText());
+            Date data2 = sdf.parse(txtData2.getText());
+            
+            java.sql.Date inicio = new java.sql.Date(data1.getTime());
+            java.sql.Date fim = new java.sql.Date(data2.getTime());
+            
+            NMovimentacao nmov = new NMovimentacao();
+            Iterator dados = nmov.listar(inicio, fim);
+            
+            imprimirDadosNaGrid(dados);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnPesquisar;
-    private javax.swing.JComboBox<String> cmbFiltro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblResultado;
     private javax.swing.JTextField txtData1;
