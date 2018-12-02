@@ -5,7 +5,16 @@
  */
 package apresentacao;
 
+import entidades.Cliente;
+import entidades.Conta;
+import entidades.Movimentacao;
+import java.sql.Timestamp;
+import java.util.Date;
 import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
+import negocio.NCliente;
+import negocio.NConta;
+import negocio.NMovimentacao;
 
 /**
  *
@@ -105,7 +114,39 @@ public class Deposito extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositarActionPerformed
-        // TODO add your handling code here:
+        try {
+            float valor = Float.parseFloat(txtValor.getText());
+            if(valor > 0) {
+                NConta nc = new NConta();
+                Conta c = nc.consultarID(id_conta);
+                c.depositar(valor);
+                nc.salvar(c);
+                
+                NCliente ncli = new NCliente();
+                Cliente cli = ncli.consultarID(id_cliente);
+                
+                NMovimentacao nm = new NMovimentacao();
+                Movimentacao mov = new Movimentacao();
+                mov.setCliente(cli);
+                mov.setConta(c);
+                mov.setTipoMovimentacao(2);
+                mov.setValor(valor);
+                
+                Date dataAtual = new Date();
+                //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                Timestamp ts = new Timestamp(dataAtual.getTime());
+                
+                mov.setData_hora(ts);
+                
+                nm.salvar(mov);
+                
+                JOptionPane.showMessageDialog(rootPane, "Depósito no valor de R$" + valor + " efetuado com sucesso!");
+                
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnDepositarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

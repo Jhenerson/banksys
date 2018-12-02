@@ -42,4 +42,8 @@ public class NClienteConta {
         }
 
     }
+    
+    public ClienteConta consultar(int id_cliente, String senha) throws SQLException, Exception  {
+        return persistencia.consultar(id_cliente, senha);
+    }
 }

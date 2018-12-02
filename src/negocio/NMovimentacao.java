@@ -5,6 +5,8 @@
  */
 package negocio;
 
+import entidades.Movimentacao;
+import java.sql.SQLException;
 import persistencia.PMovimentacao;
 
 /**
@@ -18,7 +20,31 @@ public class NMovimentacao {
     public NMovimentacao() {
         persistencia = new PMovimentacao();
     }
-    
-    
-          
+
+    public void salvar(Movimentacao parametro) throws SQLException, Exception {
+        
+        if(parametro.getCliente() == null)  {
+            throw new Exception("É necessário informar o cliente.");
+        }
+        
+        if(parametro.getConta() == null)  {
+            throw new Exception("É necessário informar a conta.");
+        }
+        
+        if(parametro.getData_hora() == null)  {
+            throw new Exception("É necessário informar a data e hora da movimentação.");
+        }
+        
+        if(parametro.getTipoMovimentacao() == 0)  {
+            throw new Exception("É necessário informar o tipo da movimentação.");
+        }
+        
+        if(parametro.getValor() == 0)  {
+            throw new Exception("É necessário informar o valor da movimentação.");
+        }
+        
+        persistencia.incluir(parametro);
+       
+    }
+             
 }

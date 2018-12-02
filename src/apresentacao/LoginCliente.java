@@ -2,9 +2,11 @@
 package apresentacao;
 
 import entidades.Cliente;
+import entidades.ClienteConta;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import negocio.NCliente;
+import negocio.NClienteConta;
 import util.Login;
 
 /**
@@ -105,21 +107,18 @@ public class LoginCliente extends javax.swing.JInternalFrame {
             NCliente nc = new NCliente();
             Cliente cliente = nc.consultarCPF(cpf);
             
-            if(cliente != null) {
+            NClienteConta ncc =  new NClienteConta();
+            ClienteConta cc = ncc.consultar(cliente.getId(), senha);
+            
+            boolean acesso = Login.loginCliente(cpf, senha);
                 
-                boolean acesso = Login.loginCliente(cpf, senha);
-                
-                if(acesso) {
-                    AreaCliente ac = new AreaCliente(painelPrincipal);
-                    painelPrincipal.add(ac);
-                    ac.setVisible(true);
-                    this.dispose();
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "Acesso negado. Revise os dados e tente novamente.");
-                }
-                
+            if(acesso) {
+                AreaCliente ac = new AreaCliente(painelPrincipal, cc.getCliente().getId(), cc.getConta().getId());
+                painelPrincipal.add(ac);
+                ac.setVisible(true);
+                this.dispose();
             } else {
-                JOptionPane.showMessageDialog(rootPane, "CPF não encontrado. Tente novamente.");
+                JOptionPane.showMessageDialog(rootPane, "Acesso negado. Revise os dados e tente novamente.");
             }
                   
         } catch (Exception e) {
