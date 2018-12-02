@@ -66,18 +66,14 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btnExibirExtrato" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="btnSacar" min="-2" pref="123" max="-2" attributes="0"/>
                           <EmptySpace pref="104" max="32767" attributes="0"/>
                           <Component id="btnDepositar" min="-2" pref="123" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="btnExibirExtrato" min="-2" pref="123" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnRetirarExtrato" min="-2" pref="123" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -92,12 +88,9 @@
                       <Component id="btnSacar" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
                       <Component id="btnDepositar" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnExibirExtrato" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
-                      <Component id="btnRetirarExtrato" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="btnExibirExtrato" min="-2" pref="67" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -111,11 +104,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDepositarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnRetirarExtrato">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Retirar Extrato"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="btnSacar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Sacar"/>
@@ -128,6 +116,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Exibir Extrato"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExibirExtratoActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
