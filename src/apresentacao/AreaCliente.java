@@ -14,6 +14,8 @@ import javax.swing.JDesktopPane;
 public class AreaCliente extends javax.swing.JInternalFrame {
     
     JDesktopPane painelPrincipal;
+    int id_conta;
+    int id_cliente;
 
     /**
      * Creates new form ClienteView
@@ -27,9 +29,11 @@ public class AreaCliente extends javax.swing.JInternalFrame {
         this.painelPrincipal = painelPrincipal;
     }
     
-    public AreaCliente(JDesktopPane painelPrincipal, int id_usuario, int id_conta) {
+    public AreaCliente(JDesktopPane painelPrincipal, int id_cliente, int id_conta) {
         this();
         this.painelPrincipal = painelPrincipal;
+        this.id_cliente = id_cliente;
+        this.id_conta = id_conta;
     }
 
     /**

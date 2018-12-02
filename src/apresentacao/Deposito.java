@@ -5,17 +5,35 @@
  */
 package apresentacao;
 
+import javax.swing.JDesktopPane;
+
 /**
  *
  * @author rodolpho.repezza
  */
 public class Deposito extends javax.swing.JInternalFrame {
+    
+    JDesktopPane painelPrincipal;
+    int id_conta;
+    int id_cliente;
 
     /**
      * Creates new form Deposito
      */
     public Deposito() {
         initComponents();
+    }
+    
+    public Deposito(JDesktopPane painelPrincipal) {
+        this();
+        this.painelPrincipal = painelPrincipal;
+    }
+    
+    public Deposito(JDesktopPane painelPrincipal, int id_conta, int id_cliente) {
+        this();
+        this.painelPrincipal = painelPrincipal;
+        this.id_cliente = id_cliente;
+        this.id_conta = id_conta;
     }
 
     /**

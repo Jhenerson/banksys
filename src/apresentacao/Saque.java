@@ -9,6 +9,8 @@ import javax.swing.JDesktopPane;
 public class Saque extends javax.swing.JInternalFrame {
     
     JDesktopPane painelPrincipal;
+    int id_conta;
+    int id_cliente;
 
     /**
      * Creates new form Saque
@@ -20,6 +22,13 @@ public class Saque extends javax.swing.JInternalFrame {
     Saque(JDesktopPane painelPrincipal) {
         this();
         this.painelPrincipal = painelPrincipal;
+    }
+    
+    Saque(JDesktopPane painelPrincipal, int id_conta, int id_cliente) {
+        this();
+        this.painelPrincipal = painelPrincipal;
+        this.id_cliente = id_cliente;
+        this.id_conta = id_conta;
     }
 
     /**
