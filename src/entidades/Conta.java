@@ -85,14 +85,14 @@ public class Conta {
         if(valor > saldo) {
             throw new Exception("Saldo disponível menor que o valor a ser sacado.");
         }
-        this.saldo = saldo - valor;
+        this.setSaldo(saldo - valor);
     }
     
     public void depositar(float valor) throws Exception {
         if(valor <= 0) {
             throw new Exception("Valor a ser depositado inválido.");
         }
-        this.saldo = saldo + valor;
+        this.setSaldo(saldo + valor);
     }
     
     

@@ -116,12 +116,13 @@ public class Deposito extends javax.swing.JInternalFrame {
     private void btnDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositarActionPerformed
         try {
             float valor = Float.parseFloat(txtValor.getText());
+            NConta nc = new NConta();
+            Conta c = nc.consultarID(id_conta);
             if(valor > 0) {
-                NConta nc = new NConta();
-                Conta c = nc.consultarID(id_conta);
-                c.depositar(valor);
-                nc.salvar(c);
                 
+                c.depositar(valor);
+                nc.salvar(c);                      
+                                
                 NCliente ncli = new NCliente();
                 Cliente cli = ncli.consultarID(id_cliente);
                 
@@ -141,7 +142,10 @@ public class Deposito extends javax.swing.JInternalFrame {
                 nm.salvar(mov);
                 
                 JOptionPane.showMessageDialog(rootPane, "Depósito no valor de R$" + valor + " efetuado com sucesso!");
+                this.dispose();
                 
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Valor inválido. Tente novamente.");
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());

@@ -117,31 +117,33 @@ public class Saque extends javax.swing.JInternalFrame {
                 Conta c = nc.consultarID(id_conta);
                 c.sacar(valor);
                 nc.salvar(c);
-                
+
                 NCliente ncli = new NCliente();
                 Cliente cli = ncli.consultarID(id_cliente);
-                
+
                 NMovimentacao nm = new NMovimentacao();
                 Movimentacao mov = new Movimentacao();
                 mov.setCliente(cli);
                 mov.setConta(c);
                 mov.setTipoMovimentacao(1);
                 mov.setValor(valor);
-                
+
                 Date dataAtual = new Date();
                 //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 Timestamp ts = new Timestamp(dataAtual.getTime());
-                
+
                 mov.setData_hora(ts);
-                
+
                 nm.salvar(mov);
-                
+
                 JOptionPane.showMessageDialog(rootPane, "Saque no valor de R$" + valor + " efetuado com sucesso!");
+                this.dispose();
                 
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Valor inválido. Tente novamente");
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
-            e.printStackTrace();
         }
     }//GEN-LAST:event_btnSacarActionPerformed
 

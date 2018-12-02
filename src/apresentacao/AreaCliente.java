@@ -58,6 +58,11 @@ public class AreaCliente extends javax.swing.JInternalFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnDepositar.setText("Depositar");
+        btnDepositar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDepositarActionPerformed(evt);
+            }
+        });
 
         btnRetirarExtrato.setText("Retirar Extrato");
 
@@ -102,6 +107,11 @@ public class AreaCliente extends javax.swing.JInternalFrame {
         );
 
         btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         welcomeCliente.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
 
@@ -138,13 +148,27 @@ public class AreaCliente extends javax.swing.JInternalFrame {
 
     private void btnSacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacarActionPerformed
         try {
-            Saque saque = new Saque(painelPrincipal);
+            Saque saque = new Saque(painelPrincipal, id_conta, id_cliente);
             painelPrincipal.add(saque);
             saque.setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnSacarActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositarActionPerformed
+        try {
+            Deposito deposito = new Deposito(painelPrincipal, id_conta, id_cliente);
+            painelPrincipal.add(deposito);
+            deposito.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnDepositarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

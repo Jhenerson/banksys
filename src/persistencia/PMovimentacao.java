@@ -23,7 +23,7 @@ public class PMovimentacao implements IMovimentacao{
 
     @Override
     public void incluir(Movimentacao movimentacao) throws Exception {
-        String sql = "INSERT INTO movimentacao (data_hora, valor, tipo_movimentacao, id_conta, id_cliente) VALUES (?,?,?,?,?,?);";
+        String sql = "INSERT INTO movimentacao (data_hora, valor, tipo_movimentacao, id_conta, id_cliente) VALUES (?,?,?,?,?);";
         Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
         prd.setTimestamp(1, movimentacao.getData_hora());

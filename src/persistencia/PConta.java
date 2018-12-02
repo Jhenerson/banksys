@@ -84,7 +84,7 @@ public class PConta implements IConta {
         
         
         
-         String sql = "UPDATE conta SET numero = ?, data_abertura = ?, tipo_conta = ?, usa_cheque = ?, e_conjunta = ?,id_agencia = ? WHERE id = ?";
+         String sql = "UPDATE conta SET numero = ?, data_abertura = ?, tipo_conta = ?, usa_cheque = ?, e_conjunta = ?,id_agencia = ?, saldo = ? WHERE id = ?";
 
         Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -94,8 +94,9 @@ public class PConta implements IConta {
         prd.setInt(3, conta.getTipoConta());
         prd.setBoolean(4, conta.isUsaCheque());
         prd.setBoolean(5, conta.iseConjunta());
-        prd.setObject(6, conta.getNumAgencia().getId());
-        prd.setInt(7, conta.getId());
+        prd.setInt(6, conta.getNumAgencia().getId());
+        prd.setFloat(7, conta.getSaldo());
+        prd.setInt(8, conta.getId());
 
         //executa todo o comando e grava no banco de dados
         prd.execute();
