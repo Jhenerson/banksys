@@ -51,11 +51,6 @@
             <Property name="text" type="java.lang.String" value="Cliente"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Transa&#xe7;&#xf5;es"/>
-              </Properties>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="optAreaCliente">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#xc1;rea do Cliente"/>
