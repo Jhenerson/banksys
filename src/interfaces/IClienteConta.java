@@ -17,6 +17,7 @@ public interface IClienteConta {
     
     public void incluir(ClienteConta clienteConta) throws Exception;
     public Iterator listar() throws Exception;
+    public Iterator listar(int id_conta) throws Exception;
     public void alterar(ClienteConta clienteConta) throws Exception;
     public void excluir(int id) throws Exception;
     public ClienteConta consultar(int id) throws Exception;

@@ -62,6 +62,33 @@ public class PClienteConta implements IClienteConta {
     }
 
     @Override
+    public Iterator listar(int id_conta) throws Exception {
+        String sql = "SELECT * FROM cliente_conta where id_conta = ?";
+
+        Connection cnn = util.Conexao.getConexao();
+        Statement st = cnn.createStatement();
+        PreparedStatement prd = cnn.prepareStatement(sql);
+        prd.setInt(1, id_conta);
+
+        ResultSet rs = st.executeQuery(sql);
+        ArrayList<ClienteConta> retorno = new ArrayList();
+
+        while (rs.next()) {
+            ClienteConta cc = new ClienteConta();
+
+            PConta pconta = new PConta();
+            Conta conta = pconta.consultar(rs.getInt("id_conta"));
+            cc.setConta(conta);
+
+            PCliente pcliente = new PCliente();
+            //Cliente cliente = pcliente.con
+
+            retorno.add(cc);
+        }
+        return retorno.iterator();
+    }
+
+    @Override
     public void alterar(ClienteConta clienteConta) throws Exception {
     }
 

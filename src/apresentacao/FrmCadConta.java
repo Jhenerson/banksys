@@ -93,17 +93,24 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
             chkCheque.setSelected(conta.isUsaCheque());
             chkContaConjunta.setSelected(conta.iseConjunta());
             
-            NClienteConta ncc = new NClienteConta();
-            ClienteConta cc = new ClienteConta();
             
-            cc = ncc.consultar(conta.getId());
+            NClienteConta ncc = new NClienteConta();
+            Iterator lista = ncc.listar(Integer.parseInt(id));
+            ClienteConta clienteconta[] = new ClienteConta[2];
+            int i = 0;
+            while(lista.hasNext()){            
+            ClienteConta cc = (ClienteConta)lista.next();
+            clienteconta[i] = cc;
+            i++;
+            }
+            
             
             NCliente nClienteTitular = new NCliente();
-            Cliente clienteTitular = nClienteTitular.consultarID(cc.getCliente().getId());
+            Cliente clienteTitular = nClienteTitular.consultarID(clienteconta[0].getCliente().getId());
             
             txtCPFTitular.setText(clienteTitular.getCpf());
             txtNomeTitular.setText(clienteTitular.getNome());
-            txtSenhaTitular1.setText(cc.getSenha());
+            txtSenhaTitular1.setText(clienteconta[0].getSenha());
 
             btnExcluir.setEnabled(true);
 

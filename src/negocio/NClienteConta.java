@@ -7,6 +7,7 @@ package negocio;
 
 import entidades.ClienteConta;
 import java.sql.SQLException;
+import java.util.Iterator;
 import persistencia.PClienteConta;
 
 /**
@@ -49,5 +50,9 @@ public class NClienteConta {
 
     public ClienteConta consultar(int id_conta) throws SQLException, Exception {
         return persistencia.consultar(id_conta);
+    }
+    
+    public Iterator listar(int id_conta) throws SQLException, Exception {
+        return persistencia.listar(id_conta);
     }
 }
