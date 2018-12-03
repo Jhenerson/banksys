@@ -68,6 +68,10 @@ public class NFuncionario {
         return persistencia.consultar(parametro);        
     }
     
+    public Funcionario consultar(String login) throws SQLException, Exception {
+        return persistencia.consultar(login);        
+    }
+    
     public Iterator listar() throws SQLException, Exception {
         return persistencia.listar();
     }

@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  *
@@ -43,7 +44,7 @@ public class PMovimentacao implements IMovimentacao{
         PreparedStatement prd = cnn.prepareStatement(sql);
         prd.setInt(1, idConta);
         ResultSet rs = prd.executeQuery();
-        ArrayList<Movimentacao> retorno = new ArrayList();
+        LinkedList<Movimentacao> retorno = new LinkedList();
 
         while (rs.next()) {
             Movimentacao mov = new Movimentacao();
@@ -74,7 +75,7 @@ public class PMovimentacao implements IMovimentacao{
         prd.setDate(1, inicio);
         prd.setDate(2, fim);
         ResultSet rs = prd.executeQuery();
-        ArrayList<Movimentacao> retorno = new ArrayList();
+        LinkedList<Movimentacao> retorno = new LinkedList();
 
         while (rs.next()) {
             Movimentacao mov = new Movimentacao();
