@@ -44,8 +44,8 @@ public class NFuncionario {
             throw new Exception("É necessário informar o telefone");
         } 
         
-        if (parametro.getLogin().isEmpty()) {
-            throw new Exception("É necessário informar o login");
+        if (parametro.getCpf().isEmpty()) {
+            throw new Exception("É necessário informar o cpf");
         } 
         
         if (parametro.getSenha().isEmpty()) {
@@ -68,8 +68,8 @@ public class NFuncionario {
         return persistencia.consultar(parametro);        
     }
     
-    public Funcionario consultar(String login) throws SQLException, Exception {
-        return persistencia.consultar(login);        
+    public Funcionario consultar(String cpf) throws SQLException, Exception {
+        return persistencia.consultar(cpf);        
     }
     
     public Iterator listar() throws SQLException, Exception {

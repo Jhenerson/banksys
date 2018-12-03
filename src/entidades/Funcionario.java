@@ -10,7 +10,7 @@ public class Funcionario {
 
     private int id;
     private String nome;
-    private String login;
+    private String cpf;
     private String senha;
     private String endereco;
     private String telefone;
@@ -36,17 +36,17 @@ public class Funcionario {
     }
 
     /**
-     * @return the login
+     * @return the cpf
      */
-    public String getLogin() {
-        return login;
+    public String getCpf() {
+        return cpf;
     }
 
     /**
-     * @param login the login to set
+     * @param cpf the login to set
      */
-    public void setLogin(String login) {
-        this.login = login;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     /**

@@ -7,11 +7,9 @@ package util;
 
 import entidades.Cliente;
 import entidades.ClienteConta;
-import entidades.Conta;
 import entidades.Funcionario;
 import persistencia.PCliente;
 import persistencia.PClienteConta;
-import persistencia.PConta;
 import persistencia.PFuncionario;
 
 /**

@@ -24,12 +24,12 @@ public class PFuncionario implements IFuncionario{
     @Override
     public void incluir(Funcionario funcionario) throws Exception {
         String sql = "INSERT INTO funcionario "
-                + "(nome,login,senha,endereco,telefone,email,data_contratacao,e_gerente,id_agencia)"
+                + "(nome,cpf,senha,endereco,telefone,email,data_contratacao,e_gerente,id_agencia)"
                 + " VALUES (?,?,?,?,?,?,?,?,?);";
         Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
         prd.setString(1, funcionario.getNome());
-        prd.setString(2, funcionario.getLogin());
+        prd.setString(2, funcionario.getCpf());
         prd.setString(3, funcionario.getSenha());
         prd.setString(4, funcionario.getEndereco());
         prd.setString(5, funcionario.getTelefone());
@@ -56,7 +56,7 @@ public class PFuncionario implements IFuncionario{
             funcionario.setData_contratacao(rs.getTimestamp("data_contratacao"));
             funcionario.setEndereco(rs.getString("endereco"));
             funcionario.setTelefone(rs.getString("telefone"));
-            funcionario.setLogin(rs.getString("login"));
+            funcionario.setCpf(rs.getString("cpf"));
             funcionario.setSenha(rs.getString("senha"));
             funcionario.setE_gerente(rs.getBoolean("e_gerente"));
             
@@ -79,7 +79,7 @@ public class PFuncionario implements IFuncionario{
                 + "data_contratacao = ?,"
                 + "endereco = ?,"
                 + "senha = ?,"
-                + "login = ?,"
+                + "cpf = ?,"
                 + "e_gerente = ?,"
                 + "id_agencia = ?"
                 + "where id = ?";
@@ -92,7 +92,7 @@ public class PFuncionario implements IFuncionario{
         prd.setTimestamp(4, funcionario.getData_contratacao());
         prd.setString(5, funcionario.getEndereco());
         prd.setString(6, funcionario.getSenha());
-        prd.setString(7, funcionario.getLogin());
+        prd.setString(7, funcionario.getCpf());
         prd.setBoolean(8, funcionario.isE_gerente());
         prd.setInt(9, funcionario.getAgencia().getId());
         prd.setInt(10, funcionario.getId());
@@ -130,7 +130,7 @@ public class PFuncionario implements IFuncionario{
             retorno.setEmail(rs.getString("email"));
             retorno.setTelefone(rs.getString("telefone"));
             retorno.setSenha(rs.getString("senha"));
-            retorno.setLogin(rs.getString("login"));
+            retorno.setCpf(rs.getString("cpf"));
             retorno.setE_gerente(rs.getBoolean("e_gerente"));
             
             PAgencia pa = new PAgencia();
@@ -143,12 +143,12 @@ public class PFuncionario implements IFuncionario{
     }
 
     @Override
-    public Funcionario consultar(String login) throws Exception {
-        String sql = "SELECT * FROM funcionario WHERE login = ?;";
+    public Funcionario consultar(String cpf) throws Exception {
+        String sql = "SELECT * FROM funcionario WHERE cpf = ?;";
 
         Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
-        prd.setString(1, login);
+        prd.setString(1, cpf);
         
         ResultSet rs = prd.executeQuery();
         Funcionario retorno = new Funcionario();
@@ -161,7 +161,7 @@ public class PFuncionario implements IFuncionario{
             retorno.setEmail(rs.getString("email"));
             retorno.setTelefone(rs.getString("telefone"));
             retorno.setSenha(rs.getString("senha"));
-            retorno.setLogin(rs.getString("login"));
+            retorno.setCpf(rs.getString("cpf"));
             retorno.setE_gerente(rs.getBoolean("e_gerente"));
             
             PAgencia pa = new PAgencia();
