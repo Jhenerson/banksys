@@ -3,36 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package util;
+package login;
 
 import entidades.Cliente;
 import entidades.ClienteConta;
-import entidades.Funcionario;
 import persistencia.PCliente;
 import persistencia.PClienteConta;
-import persistencia.PFuncionario;
 
 /**
  *
  * @author rodolpho.repezza
  */
-public class Login {
-    
-    public static boolean loginFuncionario(String login, String senha) {
-        boolean acesso = false;
-        try {
-            PFuncionario pf = new PFuncionario();
-            Funcionario f = pf.consultar(login);
-            if(f.getSenha().equals(senha)) {
-                acesso = true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return acesso;
-    }
-    
-    public static boolean loginCliente(String cpf, String senha) {
+public class LoginCliente extends Login {
+
+    @Override
+    public boolean logar(String cpf, String senha) {
         boolean acesso = false;
         try {
             
@@ -52,5 +37,4 @@ public class Login {
         }
         return acesso;
     }
-
 }

@@ -5,9 +5,10 @@ import entidades.Cliente;
 import entidades.ClienteConta;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
+import login.Login;
+import login.LoginFactory;
 import negocio.NCliente;
 import negocio.NClienteConta;
-import util.Login;
 
 /**
  *
@@ -110,7 +111,10 @@ public class LoginCliente extends javax.swing.JInternalFrame {
             NClienteConta ncc =  new NClienteConta();
             ClienteConta cc = ncc.consultar(cliente.getId(), senha);
             
-            boolean acesso = Login.loginCliente(cpf, senha);
+            LoginFactory lf = new LoginFactory();
+            Login login = lf.getLogin("Cliente");
+            
+            boolean acesso = login.logar(cpf, senha);
                 
             if(acesso) {
                 AreaCliente ac = new AreaCliente(painelPrincipal, cc.getCliente().getId(), cc.getConta().getId());

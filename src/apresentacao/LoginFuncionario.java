@@ -8,8 +8,9 @@ package apresentacao;
 import entidades.Funcionario;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
+import login.Login;
+import login.LoginFactory;
 import negocio.NFuncionario;
-import util.Login;
 
 /**
  *
@@ -44,13 +45,13 @@ public class LoginFuncionario extends javax.swing.JInternalFrame {
         lblSenha = new javax.swing.JLabel();
         btnAcessar = new javax.swing.JButton();
         txtSenha = new javax.swing.JPasswordField();
-        txtLogin = new javax.swing.JTextField();
+        txtCPF = new javax.swing.JTextField();
 
         setTitle("Login Funcionário");
         setToolTipText("");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Login:");
+        jLabel1.setText("CPF:");
 
         lblSenha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblSenha.setText("Senha:");
@@ -80,7 +81,7 @@ public class LoginFuncionario extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE))
+                            .addComponent(txtCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE))
                         .addGap(33, 33, 33))))
         );
         layout.setVerticalGroup(
@@ -89,7 +90,7 @@ public class LoginFuncionario extends javax.swing.JInternalFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSenha)
@@ -104,15 +105,16 @@ public class LoginFuncionario extends javax.swing.JInternalFrame {
 
     private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
         try {
-            String login = txtLogin.getText();
+            String cpf = txtCPF.getText();
             String senha = new String(txtSenha.getPassword());
 
             NFuncionario nf = new NFuncionario();
-            Funcionario funcionario = nf.consultar(login);
+            Funcionario funcionario = nf.consultar(cpf);
 
+            LoginFactory lf = new LoginFactory();
+            Login login = lf.getLogin("Funcionário");
             
-
-            boolean acesso = Login.loginFuncionario(login, senha);
+            boolean acesso = login.logar(cpf, senha);
 
             if(acesso) {
                 AreaFuncionario af = new AreaFuncionario(painelPrincipal, funcionario.getId());
@@ -133,7 +135,7 @@ public class LoginFuncionario extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnAcessar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblSenha;
-    private javax.swing.JTextField txtLogin;
+    private javax.swing.JTextField txtCPF;
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
 }
