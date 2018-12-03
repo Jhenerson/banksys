@@ -3,13 +3,11 @@ package apresentacao;
 
 import entidades.Cliente;
 import entidades.Movimentacao;
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import javax.swing.JDesktopPane;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import negocio.NCliente;
 import negocio.NMovimentacao;
