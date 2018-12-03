@@ -3,6 +3,8 @@ package apresentacao;
 import entidades.Agencia;
 import entidades.Conta;
 import entidades.Endereco;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
@@ -137,7 +139,11 @@ public class FrmPesConta extends javax.swing.JInternalFrame {
 
                 linha[0] = String.valueOf(conta.getId());
                 linha[1] = conta.getNumConta();
-                linha[2] = conta.getDataAberturaConta().toString();
+
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                String data = dateFormat.format(conta.getDataAberturaConta());
+
+                linha[2] = String.valueOf(data);
                 linha[3] = Integer.toString(conta.getTipoConta());
                 if (conta.isUsaCheque()) {
                     linha[4] = "sim";

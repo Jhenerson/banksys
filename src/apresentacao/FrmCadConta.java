@@ -70,16 +70,14 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
 
         try {
 
-            NCliente nc = new NCliente();
-            Cliente cliente = nc.consultarID(Integer.parseInt(id));
+            NClienteConta ncc = new NClienteConta();
+            NConta nc = new NConta();
+            Conta conta = nc.consultarID(Integer.parseInt(id));
+            
 
-            txtIDConta.setText(String.valueOf(cliente.getId()));
-            txtNomeTitular.setText(cliente.getNome());
-            txtCPFTitular.setText(cliente.getCpf());
-
-            String endereco = cliente.getEndereco();
-            String[] enderecoQuebrado = new String[6];
-            enderecoQuebrado = endereco.split(",");
+            //txtIDConta.setText(String.valueOf(cliente.getId()));
+            //txtNomeTitular.setText(cliente.getNome());
+            //txtCPFTitular.setText(cliente.getCpf());            
 
             btnExcluir.setEnabled(true);
 

@@ -7,6 +7,8 @@ package apresentacao;
 
 import entidades.Cliente;
 import entidades.Endereco;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.LinkedList;
 import javax.swing.JDesktopPane;
@@ -22,12 +24,12 @@ public class FrmPesCliente extends javax.swing.JInternalFrame {
 
     JDesktopPane painelPrincipal;
     Iterator dados = new NCliente().listar();
-    
+
     /**
      * Creates new form FrmPesCliente
      */
     public FrmPesCliente() throws Exception {
-        initComponents();        
+        initComponents();
         imprimirDadosNaGrid(dados);
     }
 
@@ -83,6 +85,9 @@ public class FrmPesCliente extends javax.swing.JInternalFrame {
             tblResultado.getColumnModel().getColumn(3).setMinWidth(120);
             tblResultado.getColumnModel().getColumn(3).setPreferredWidth(120);
             tblResultado.getColumnModel().getColumn(3).setMaxWidth(120);
+            tblResultado.getColumnModel().getColumn(4).setMinWidth(250);
+            tblResultado.getColumnModel().getColumn(4).setPreferredWidth(250);
+            tblResultado.getColumnModel().getColumn(4).setMaxWidth(250);
             tblResultado.getColumnModel().getColumn(6).setMinWidth(120);
             tblResultado.getColumnModel().getColumn(6).setPreferredWidth(120);
             tblResultado.getColumnModel().getColumn(6).setMaxWidth(120);
@@ -146,35 +151,39 @@ public class FrmPesCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTable tblResultado;
     // End of variables declaration//GEN-END:variables
 
-   private void imprimirDadosNaGrid(Iterator conjunto) {
+    private void imprimirDadosNaGrid(Iterator conjunto) {
         DefaultTableModel model = (DefaultTableModel) tblResultado.getModel();
         model.setNumRows(0);
         while (conjunto.hasNext()) {
             String[] linha = new String[7];
             Cliente cliente = (Cliente) conjunto.next();
-            
-            linha[0] = String.valueOf(cliente.getId());            
+
+            linha[0] = String.valueOf(cliente.getId());
             linha[1] = cliente.getNome();
             linha[2] = cliente.getCpf();
-            linha[3] = cliente.getDataNascimento().toString();
+
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            String data = dateFormat.format(cliente.getDataNascimento());
+
+            linha[3] = String.valueOf(data);
             linha[4] = cliente.getEmail();
-            
+
             Endereco end = new Endereco(cliente.getEndereco());
-            
+
             linha[5] = end.toString();
             linha[6] = cliente.getTelefone();
 
             model.addRow(linha);
         }
     }
-   
-   private LinkedList<Cliente> ordenar(Iterator conjunto){
-       LinkedList<Cliente> lista = new LinkedList<>();
-       while(conjunto.hasNext()){
-           Cliente cliente = (Cliente) conjunto.next();
-           lista.add(cliente);
-       }     
-           
-       return lista;
-   }
+
+    private LinkedList<Cliente> ordenar(Iterator conjunto) {
+        LinkedList<Cliente> lista = new LinkedList<>();
+        while (conjunto.hasNext()) {
+            Cliente cliente = (Cliente) conjunto.next();
+            lista.add(cliente);
+        }
+
+        return lista;
+    }
 }
