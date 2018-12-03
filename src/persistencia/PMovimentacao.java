@@ -5,6 +5,8 @@
  */
 package persistencia;
 
+import comparators.Comparacao;
+import comparators.OrdenarPorTipoEData;
 import entidades.Cliente;
 import entidades.Conta;
 import entidades.Movimentacao;
@@ -13,7 +15,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -95,6 +96,8 @@ public class PMovimentacao implements IMovimentacao{
             retorno.add(mov);
         }
         cnn.close();
+        OrdenarPorTipoEData ordenacao = new OrdenarPorTipoEData();
+        ordenacao.ordenar(retorno);
         return retorno.iterator();
     }
 
