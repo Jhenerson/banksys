@@ -100,21 +100,33 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Cadastrar Cliente"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadClienteActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnCadAgencia">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cadastrar Ag&#xea;ncia"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadAgenciaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnCadFuncionario">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cadastrar Funcion&#xe1;rio"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadFuncionarioActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnCadConta">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cadastrar Conta"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadContaActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

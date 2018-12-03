@@ -55,12 +55,32 @@ public class AreaFuncionario extends javax.swing.JInternalFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnCadCliente.setText("Cadastrar Cliente");
+        btnCadCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadClienteActionPerformed(evt);
+            }
+        });
 
         btnCadAgencia.setText("Cadastrar Agência");
+        btnCadAgencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadAgenciaActionPerformed(evt);
+            }
+        });
 
         btnCadFuncionario.setText("Cadastrar Funcionário");
+        btnCadFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadFuncionarioActionPerformed(evt);
+            }
+        });
 
         btnCadConta.setText("Cadastrar Conta");
+        btnCadConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadContaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -120,6 +140,46 @@ public class AreaFuncionario extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCadAgenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadAgenciaActionPerformed
+        try {
+            FrmCadAgencia frmAgencia = new FrmCadAgencia(painelPrincipal);
+            painelPrincipal.add(frmAgencia);
+            frmAgencia.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnCadAgenciaActionPerformed
+
+    private void btnCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadClienteActionPerformed
+        try {
+            FrmCadCliente frmCliente = new FrmCadCliente(painelPrincipal);
+            painelPrincipal.add(frmCliente);
+            frmCliente.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnCadClienteActionPerformed
+
+    private void btnCadContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadContaActionPerformed
+        try {
+            FrmCadConta frmConta = new FrmCadConta(painelPrincipal);
+            painelPrincipal.add(frmConta);
+            frmConta.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnCadContaActionPerformed
+
+    private void btnCadFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadFuncionarioActionPerformed
+        try {
+            FrmCadFuncionario frmFuncionario = new FrmCadFuncionario(painelPrincipal);
+            painelPrincipal.add(frmFuncionario);
+            frmFuncionario.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnCadFuncionarioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
