@@ -735,11 +735,11 @@ public class FrmCadCliente extends javax.swing.JInternalFrame {
             
 
             String endereco = txtLogradouro.getText() + "," + txtComplemento.getText() + "," + txtSetor.getText() + "," + txtCidade.getText() + "," + txtUF.getText() + "," +txtCEP.getText();
-
-            cliente.setNome(txtNome.getText());
+            
+            cliente.setNome(txtNome.getText().toUpperCase());
             cliente.setTelefone(txtFone.getText());
-            cliente.setEmail(txtEmail.getText());
-            cliente.setEndereco(endereco);
+            cliente.setEmail(txtEmail.getText().toUpperCase());
+            cliente.setEndereco(endereco.toUpperCase());
             cliente.setCpf(txtCPF.getText());
             cliente.setDataNascimento(dataNascimento);
 

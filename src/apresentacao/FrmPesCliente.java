@@ -74,13 +74,18 @@ public class FrmPesCliente extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblResultado);
         if (tblResultado.getColumnModel().getColumnCount() > 0) {
-            tblResultado.getColumnModel().getColumn(0).setResizable(false);
-            tblResultado.getColumnModel().getColumn(1).setResizable(false);
-            tblResultado.getColumnModel().getColumn(2).setResizable(false);
-            tblResultado.getColumnModel().getColumn(3).setResizable(false);
-            tblResultado.getColumnModel().getColumn(4).setResizable(false);
-            tblResultado.getColumnModel().getColumn(5).setResizable(false);
-            tblResultado.getColumnModel().getColumn(6).setResizable(false);
+            tblResultado.getColumnModel().getColumn(0).setMinWidth(40);
+            tblResultado.getColumnModel().getColumn(0).setPreferredWidth(40);
+            tblResultado.getColumnModel().getColumn(0).setMaxWidth(40);
+            tblResultado.getColumnModel().getColumn(2).setMinWidth(100);
+            tblResultado.getColumnModel().getColumn(2).setPreferredWidth(100);
+            tblResultado.getColumnModel().getColumn(2).setMaxWidth(100);
+            tblResultado.getColumnModel().getColumn(3).setMinWidth(120);
+            tblResultado.getColumnModel().getColumn(3).setPreferredWidth(120);
+            tblResultado.getColumnModel().getColumn(3).setMaxWidth(120);
+            tblResultado.getColumnModel().getColumn(6).setMinWidth(120);
+            tblResultado.getColumnModel().getColumn(6).setPreferredWidth(120);
+            tblResultado.getColumnModel().getColumn(6).setMaxWidth(120);
         }
 
         btnFechar.setText("Fechar");
@@ -97,7 +102,7 @@ public class FrmPesCliente extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1008, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1236, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnFechar)))

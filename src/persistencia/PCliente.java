@@ -27,7 +27,7 @@ public class PCliente implements ICliente {
 
     @Override
     public void incluir(Cliente cliente) throws Exception {
-        String sql = "INSERT INTO cliente (cpf,nome,data_de_nascimento,telefone,endereco,email) VALUES (?,?,?,?,?,?);";
+        String sql = "INSERT INTO cliente (cpf,nome,data_nascimento,telefone,endereco,email) VALUES (?,?,?,?,?,?);";
         Connection cnn = util.Conexao.getConexao();
 
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -58,7 +58,7 @@ public class PCliente implements ICliente {
                 cliente.setId(rs.getInt("id"));
                 cliente.setCpf(rs.getString("cpf"));
                 cliente.setNome(rs.getString("nome"));
-                cliente.setDataNascimento(rs.getDate("data_de_nascimento"));
+                cliente.setDataNascimento(rs.getDate("data_nascimento"));
                 cliente.setEndereco(rs.getString("endereco"));
                 cliente.setTelefone(rs.getString("telefone"));
                 cliente.setEmail(rs.getString("email"));
@@ -84,7 +84,7 @@ public class PCliente implements ICliente {
 
     @Override
     public void alterar(Cliente cliente) throws Exception {
-        String sql = "UPDATE cliente SET cpf = ?, nome = ?, data_de_nascimento = ?, endereco = ?, telefone = ?, email = ? WHERE id = ?";
+        String sql = "UPDATE cliente SET cpf = ?, nome = ?, data_nascimento = ?, endereco = ?, telefone = ?, email = ? WHERE id = ?";
 
         Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -127,7 +127,7 @@ public class PCliente implements ICliente {
             retorno.setId(rs.getInt("id"));
             retorno.setCpf(rs.getString("cpf"));
             retorno.setNome(rs.getString("nome"));
-            retorno.setDataNascimento(rs.getDate("data_de_nascimento"));
+            retorno.setDataNascimento(rs.getDate("data_nascimento"));
             retorno.setEndereco(rs.getString("endereco"));
             retorno.setTelefone(rs.getString("telefone"));
             retorno.setEmail(rs.getString("email"));
@@ -152,7 +152,7 @@ public class PCliente implements ICliente {
             retorno.setId(rs.getInt("id"));
             retorno.setCpf(rs.getString("cpf"));
             retorno.setNome(rs.getString("nome"));
-            retorno.setDataNascimento(rs.getDate("data_de_nascimento"));
+            retorno.setDataNascimento(rs.getDate("data_nascimento"));
             retorno.setEndereco(rs.getString("endereco"));
             retorno.setTelefone(rs.getString("telefone"));
             retorno.setEmail(rs.getString("email"));
@@ -176,7 +176,7 @@ public class PCliente implements ICliente {
             retorno.setId(rs.getInt("id"));
             retorno.setCpf(rs.getString("cpf"));
             retorno.setNome(rs.getString("nome"));
-            retorno.setDataNascimento(rs.getDate("data_de_nascimento"));
+            retorno.setDataNascimento(rs.getDate("data_nascimento"));
             retorno.setEndereco(rs.getString("endereco"));
             retorno.setTelefone(rs.getString("telefone"));
             retorno.setEmail(rs.getString("email"));
