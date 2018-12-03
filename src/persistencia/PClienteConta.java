@@ -48,15 +48,14 @@ public class PClienteConta implements IClienteConta {
 
         while (rs.next()) {
             ClienteConta cc = new ClienteConta();
-            
+
             PConta pconta = new PConta();
             Conta conta = pconta.consultar(rs.getInt("id_conta"));
             cc.setConta(conta);
-            
+
             PCliente pcliente = new PCliente();
             //Cliente cliente = pcliente.con
-            
-            
+
             retorno.add(cc);
         }
         return retorno.iterator();
@@ -71,43 +70,6 @@ public class PClienteConta implements IClienteConta {
     }
 
     @Override
-    public ClienteConta consultar(int id) throws Exception {
-        return null;
-    }
-    
-    /*
-    @Override
-    public ClienteConta consultar(int id_conta, int id_cliente) throws Exception {
-        String sql = "SELECT * FROM cliente_conta where id_conta = ? and id_cliente = ?;";
-
-        Connection cnn = util.Conexao.getConexao();
-        PreparedStatement prd = cnn.prepareStatement(sql);
-        prd.setInt(1, id_conta);
-        prd.setInt(2, id_cliente);
-        
-        ResultSet rs = prd.executeQuery();
-        ClienteConta retorno = new ClienteConta();
-        
-        if (rs.next()) {
-            
-            PCliente pcliente = new PCliente();
-            Cliente cliente = pcliente.consultarID(rs.getInt("id_cliente"));
-            retorno.setCliente(cliente);
-            
-            PConta pconta = new PConta();
-            Conta conta = pconta.consultar(id_conta);
-            retorno.setConta(conta);
-            
-            retorno.setSenha(rs.getString("senha"));
-                        
-        }
-        cnn.close();
-        return retorno;
-        
-    }
-    */
-
-    @Override
     public ClienteConta consultar(int id_cliente, String senha) throws Exception {
         String sql = "SELECT * FROM cliente_conta where id_cliente = ? and senha = ?;";
         Connection cnn = util.Conexao.getConexao();
@@ -117,20 +79,46 @@ public class PClienteConta implements IClienteConta {
         ResultSet rs = prd.executeQuery();
         ClienteConta retorno = new ClienteConta();
         if (rs.next()) {
-            
+
             PCliente pcliente = new PCliente();
             Cliente cliente = pcliente.consultarID(rs.getInt("id_cliente"));
             retorno.setCliente(cliente);
-            
+
             PConta pconta = new PConta();
             Conta conta = pconta.consultar(rs.getInt("id_conta"));
             retorno.setConta(conta);
-            
+
             retorno.setSenha(rs.getString("senha"));
-                        
+
         }
         cnn.close();
         return retorno;
     }
-    
+
+    @Override
+    public ClienteConta consultar(int id_conta) throws Exception {
+        String sql = "SELECT * FROM cliente_conta where id_conta = ?";
+        Connection cnn = util.Conexao.getConexao();
+        PreparedStatement prd = cnn.prepareStatement(sql);
+        prd.setInt(1, id_conta);
+
+        ResultSet rs = prd.executeQuery();
+        ClienteConta retorno = new ClienteConta();
+        if (rs.next()) {
+
+            PCliente pcliente = new PCliente();
+            Cliente cliente = pcliente.consultarID(rs.getInt("id_cliente"));
+            retorno.setCliente(cliente);
+
+            PConta pconta = new PConta();
+            Conta conta = pconta.consultar(rs.getInt("id_conta"));
+            retorno.setConta(conta);
+
+            retorno.setSenha(rs.getString("senha"));
+
+        }
+        cnn.close();
+        return retorno;
+    }
+
 }

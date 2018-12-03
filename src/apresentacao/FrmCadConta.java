@@ -12,6 +12,7 @@ import entidades.Conta;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -41,12 +42,12 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
         txtNome2Titular.setEnabled(false);
         txtCPF2Titular.setEnabled(false);
         txtSenhaTitular2.setEnabled(false);
-        
+
         chkContaConjunta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JCheckBox ev = (JCheckBox) e.getSource();
-                if(ev.isSelected()) {
+                if (ev.isSelected()) {
                     txtNome2Titular.setEnabled(true);
                     txtCPF2Titular.setEnabled(true);
                     txtSenhaTitular2.setEnabled(true);
@@ -70,14 +71,39 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
 
         try {
 
-            NClienteConta ncc = new NClienteConta();
             NConta nc = new NConta();
             Conta conta = nc.consultarID(Integer.parseInt(id));
-            
 
-            //txtIDConta.setText(String.valueOf(cliente.getId()));
-            //txtNomeTitular.setText(cliente.getNome());
-            //txtCPFTitular.setText(cliente.getCpf());            
+            txtIDConta.setText(Integer.toString(conta.getId()));
+            txtNumeroConta.setText(conta.getNumConta());
+
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            String data = dateFormat.format(conta.getDataAberturaConta());
+            txtDataAbertura.setText(data);
+            cmbAgencia.setSelectedItem(conta.getNumAgencia().getCodigo());
+
+            //1 = Corrente
+            //2 = Poupanca
+            if (conta.getTipoConta() == 1) {
+                cmbTipoConta.setSelectedItem("Corrente");
+            } else {
+                cmbTipoConta.setSelectedItem("Poupança");
+            }
+
+            chkCheque.setSelected(conta.isUsaCheque());
+            chkContaConjunta.setSelected(conta.iseConjunta());
+            
+            NClienteConta ncc = new NClienteConta();
+            ClienteConta cc = new ClienteConta();
+            
+            cc = ncc.consultar(conta.getId());
+            
+            NCliente nClienteTitular = new NCliente();
+            Cliente clienteTitular = nClienteTitular.consultarID(cc.getCliente().getId());
+            
+            txtCPFTitular.setText(clienteTitular.getCpf());
+            txtNomeTitular.setText(clienteTitular.getNome());
+            txtSenhaTitular1.setText(cc.getSenha());
 
             btnExcluir.setEnabled(true);
 
@@ -87,25 +113,24 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
         }
     }
 
-    
     public void carregarAgencias() {
         try {
             NAgencia na = new NAgencia();
             Iterator agencias = na.listar();
-            
+
             cmbAgencia.addItem("Selecione...");
-            
-            while(agencias.hasNext()) {
+
+            while (agencias.hasNext()) {
                 Agencia ag = (Agencia) agencias.next();
                 cmbAgencia.addItem(ag.getCodigo());
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
-   
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -768,7 +793,7 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         try {
-            
+
             //Titular 1
             if (txtNomeTitular.getText().isEmpty()) {
                 throw new Exception("O nome do titular é obrigatório!");
@@ -777,61 +802,61 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
             if (txtCPFTitular.getText().isEmpty()) {
                 throw new Exception("O CPF do titular é obrigatório!");
             }
-            
+
             String senhaTitular1 = new String(txtSenhaTitular1.getPassword());
             if (senhaTitular1.isEmpty()) {
                 throw new Exception("A senha do titular é obrigatória!");
             }
-            
-            if(cmbTipoConta.getSelectedIndex() == 0) {
+
+            if (cmbTipoConta.getSelectedIndex() == 0) {
                 throw new Exception("O tipo da conta é obrigatório!");
             }
-            
-            if(txtNumeroConta.getText().isEmpty()) {
+
+            if (txtNumeroConta.getText().isEmpty()) {
                 throw new Exception("O número da conta é obrigatório!");
             }
-            
-            if(txtDataAbertura.getText().isEmpty()) {
+
+            if (txtDataAbertura.getText().isEmpty()) {
                 throw new Exception("A data da abertura é obrigatória!");
             }
-            
-            if(cmbAgencia.getSelectedIndex() == 0) {
+
+            if (cmbAgencia.getSelectedIndex() == 0) {
                 throw new Exception("A agência é obrigatória!");
             }
-            
-            if(cmbTipoConta.getSelectedIndex() == 0) {
+
+            if (cmbTipoConta.getSelectedIndex() == 0) {
                 throw new Exception("O tipo da conta é obrigatório!");
             }
-            
+
             NCliente nc = new NCliente();
             Cliente titular1 = nc.consultarCPF(txtCPFTitular.getText());
-            
+
             System.out.println(titular1.getId());
-                        
+
             //Agencia
             NAgencia na = new NAgencia();
             Agencia ag = na.consultar(cmbAgencia.getSelectedItem().toString());
-            
+
             //Data abertura
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             Date data = sdf.parse(txtDataAbertura.getText());
             Timestamp data_abertura = new Timestamp(data.getTime());
-            
+
             //Numero da Conta
             String numeroConta = txtNumeroConta.getText();
-            
+
             //Tipo Conta 
             //1 = conta corrente
             //2 = conta poupanca
             int tipo_conta = cmbTipoConta.getSelectedIndex();
-            
+
             //Conta conjunta
             boolean e_conjunta = chkContaConjunta.isSelected();
-            
+
             //caso seja conta conjunta, exige a inserção dos dados do segundo titular
             Cliente titular2 = null;
             String senhaTitular2 = "";
-            if(e_conjunta) {
+            if (e_conjunta) {
                 //Titular 1
                 if (txtNome2Titular.getText().isEmpty()) {
                     throw new Exception("O nome do segunto titular é obrigatório!");
@@ -840,18 +865,18 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
                 if (txtCPF2Titular.getText().isEmpty()) {
                     throw new Exception("O CPF do segunto titular é obrigatório!");
                 }
-                
+
                 senhaTitular2 = new String(txtSenhaTitular2.getPassword());
                 if (senhaTitular2.isEmpty()) {
                     throw new Exception("A senha do segundo titular é obrigatória!");
                 }
-                
+
                 titular2 = nc.consultarCPF(txtCPF2Titular.getText());
             }
-            
+
             //Usa Cheque
             boolean usa_cheque = chkCheque.isSelected();
-                        
+
             //Conta
             Conta conta = new Conta();
             conta.setDataAberturaConta(data_abertura);
@@ -860,33 +885,33 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
             conta.setUsaCheque(usa_cheque);
             conta.seteConjunta(e_conjunta);
             conta.setNumConta(numeroConta);
-            
+
             NConta nconta = new NConta();
             nconta.salvar(conta);
-            
+
             //Pegando a conta que acabou de ser salva
             Conta atual = nconta.consultar(conta.getNumConta());
-            
+
             //Cliente Conta
             ClienteConta clienteConta1 = new ClienteConta();
             clienteConta1.setCliente(titular1);
             clienteConta1.setConta(atual);
             clienteConta1.setSenha(senhaTitular1);
-            
+
             NClienteConta ncc = new NClienteConta();
-            ncc.salvar(clienteConta1);  
-            
+            ncc.salvar(clienteConta1);
+
             //Cliente Conta 2 (caso seja conta conjunta)
             ClienteConta clienteConta2 = null;
-            if(e_conjunta) {
+            if (e_conjunta) {
                 clienteConta2 = new ClienteConta();
                 clienteConta2.setCliente(titular2);
                 clienteConta2.setConta(atual);
                 clienteConta2.setSenha(senhaTitular2);
-                
+
                 ncc.salvar(clienteConta2);
             }
-            
+
             JOptionPane.showMessageDialog(rootPane, "Conta cadastrada com sucesso!");
             limpar();
 

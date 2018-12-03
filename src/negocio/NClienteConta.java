@@ -14,24 +14,24 @@ import persistencia.PClienteConta;
  * @author repez
  */
 public class NClienteConta {
-    
+
     PClienteConta persistencia;
-    
+
     public NClienteConta() {
         persistencia = new PClienteConta();
     }
-    
+
     public void salvar(ClienteConta parametro) throws SQLException, Exception {
-        
+
         if (parametro.getCliente().getNome().isEmpty()) {
             throw new Exception("É necessário informar o cliente.");
         }
-        
+
         if (parametro.getConta().getNumConta().isEmpty()) {
             throw new Exception("É necessário informar a conta.");
         }
-        
-        if (parametro.getSenha().isEmpty()){
+
+        if (parametro.getSenha().isEmpty()) {
             throw new Exception("É necessário informar a senha.");
         }
 
@@ -42,8 +42,12 @@ public class NClienteConta {
         }
 
     }
-    
-    public ClienteConta consultar(int id_cliente, String senha) throws SQLException, Exception  {
+
+    public ClienteConta consultar(int id_cliente, String senha) throws SQLException, Exception {
         return persistencia.consultar(id_cliente, senha);
+    }
+
+    public ClienteConta consultar(int id_conta) throws SQLException, Exception {
+        return persistencia.consultar(id_conta);
     }
 }
