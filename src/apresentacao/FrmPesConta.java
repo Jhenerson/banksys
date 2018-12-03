@@ -1,19 +1,21 @@
 package apresentacao;
 
 import entidades.Agencia;
+import entidades.Conta;
 import entidades.Endereco;
 import java.util.Iterator;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import negocio.NAgencia;
+import negocio.NConta;
 
 /**
  *
  * @author jhene
  */
 public class FrmPesConta extends javax.swing.JInternalFrame {
-    
+
     JDesktopPane painelPrincipal;
 
     /**
@@ -23,12 +25,11 @@ public class FrmPesConta extends javax.swing.JInternalFrame {
         initComponents();
         imprimirDadosNaGrid();
     }
-    
+
     public FrmPesConta(JDesktopPane painelPrincipal) {
         this();
         this.painelPrincipal = painelPrincipal;
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -108,9 +109,9 @@ public class FrmPesConta extends javax.swing.JInternalFrame {
         try {
             int linhaSelecionada = tblResultado.getSelectedRow();
             String id = tblResultado.getValueAt(linhaSelecionada, 0).toString();
-            FrmCadAgencia frmCadAgencia = new FrmCadAgencia(painelPrincipal, id);
-            painelPrincipal.add(frmCadAgencia);
-            frmCadAgencia.setVisible(true);
+            FrmCadConta frmCadConta = new FrmCadConta(painelPrincipal, id);
+            painelPrincipal.add(frmCadConta);
+            frmCadConta.setVisible(true);
             this.dispose();
         } catch (Exception e) {
             e.printStackTrace();
@@ -124,22 +125,32 @@ public class FrmPesConta extends javax.swing.JInternalFrame {
 
     private void imprimirDadosNaGrid() {
         try {
-            
-            NAgencia na = new NAgencia();
-            Iterator dados = na.listar();
-            
+
+            NConta nc = new NConta();
+            Iterator dados = nc.listar();
+
             DefaultTableModel model = (DefaultTableModel) tblResultado.getModel();
             model.setNumRows(0);
             while (dados.hasNext()) {
-                String[] linha = new String[3];
-                Agencia agencia = (Agencia) dados.next();
+                String[] linha = new String[7];
+                Conta conta = (Conta) dados.next();
 
-                linha[0] = String.valueOf(agencia.getId());            
-                linha[1] = agencia.getCodigo();
-                
-                Endereco end = new Endereco(agencia.getEndereco());
-                
-                linha[2] = end.toString();
+                linha[0] = String.valueOf(conta.getId());
+                linha[1] = conta.getNumConta();
+                linha[2] = conta.getDataAberturaConta().toString();
+                linha[3] = Integer.toString(conta.getTipoConta());
+                if (conta.isUsaCheque()) {
+                    linha[4] = "sim";
+                } else {
+                    linha[4] = "não";
+                }
+                if (conta.iseConjunta()) {
+                    linha[5] = "sim";
+                } else {
+                    linha[5] = "não";
+                }
+
+                linha[6] = Integer.toString(conta.getNumAgencia().getId());
 
                 model.addRow(linha);
             }

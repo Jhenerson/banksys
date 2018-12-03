@@ -56,9 +56,9 @@ public class Relatorio extends javax.swing.JInternalFrame {
                 linha[0] = String.valueOf(data);            
                 linha[1] = String.valueOf(mov.getValor());
                 
-                String tipo = "Saque";
+                String tipo = "Depósito";
                 if(mov.getTipoMovimentacao() == 1) {
-                    tipo = "Depósito";
+                    tipo = "Saque";
                 }
                 
                 linha[2] = tipo;

@@ -900,7 +900,7 @@ public class FrmCadConta extends javax.swing.JInternalFrame {
 
     private void btnPesquisarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarContaActionPerformed
         try {
-            FrmPesCliente tlPesquisa = new FrmPesCliente(painelPrincipal);
+            FrmPesConta tlPesquisa = new FrmPesConta(painelPrincipal);
             painelPrincipal.add(tlPesquisa);
             tlPesquisa.setVisible(true);
             this.dispose();
