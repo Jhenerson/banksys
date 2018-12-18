@@ -96,8 +96,12 @@ public class PMovimentacao implements IMovimentacao{
             retorno.add(mov);
         }
         cnn.close();
-        OrdenarPorTipoEData ordenacao = new OrdenarPorTipoEData();
-        ordenacao.ordenar(retorno);
+//        OrdenarPorTipoEData ordenacao = new OrdenarPorTipoEData();
+//        ordenacao.ordenar(retorno);
+
+
+        //Utilizando lambda para fazer comparação
+        retorno.sort((m1, m2) -> m1.getData_hora().compareTo(m2.getData_hora()));
         return retorno.iterator();
     }
 
