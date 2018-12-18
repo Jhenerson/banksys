@@ -20,6 +20,8 @@ public class Conexao {
     
     private static Connection conexao;
     
+    private Conexao(){}
+    
     private static Connection connect(){
         
         try {
